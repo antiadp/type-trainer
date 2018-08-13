@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+// import logo from './logo.svgimport './App.css';
+import Metrics from './components/Metrics'
+import SideNav from './components/SideNav'
+import Header from './components/Header'
 
 class App extends Component {
+  
   render() {
+  var temp = 'This is the temporary <text></text>'
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Header/>
+        <SideNav style={{position:'relative', left:'0px'}}/>
+        <Metrics/>
+        <textarea placeholder = {temp}name="Type" id="type" cols="60" rows="20" style={{ width: '500px' }}></textarea>
       </div>
     );
   }
