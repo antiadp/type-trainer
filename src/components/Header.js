@@ -1,5 +1,5 @@
 import React from 'react'
-import '../App.css'
+// import '../App.css'
 function Header () {
     return(
         <div className="header">
@@ -9,3 +9,9 @@ function Header () {
     )
 }
 export default Header
+
+
+
+// Array.split('')
+
+// ['1','[',']','\'',]
