@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 // import './App.css';
-import Typing from './Components-folder/Typing'
-import SideNav from './Components-folder/SideNav'
+import Typing from './Components/Typing'
+import SideNav from './Components/SideNav'
 
 class App extends Component {
   constructor(){
