@@ -3,7 +3,7 @@ const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const massive = require('massive');
-// const ctrl = require('./server-controllers');
+const ctrl = require('./server-controllers');
 // const axios = require('axios');
 
 const app = express();
@@ -28,7 +28,8 @@ massive(CONNECTION_STRING).then(db => {
 });
 
 
-
+//endpoints
+// app.post('/api/users', ctrl.createUser)
 
 
 app.listen(SERVER_PORT, () => console.log(`Listening in on ${SERVER_PORT}`));
