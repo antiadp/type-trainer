@@ -29,7 +29,8 @@ massive(CONNECTION_STRING).then(db => {
 
 
 //endpoints
-// app.post('/api/users', ctrl.createUser)
+app.get('/api/all-users', ctrl.getAllUsers);
+app.post('/api/new-user', ctrl.createUser);
 
 
 app.listen(SERVER_PORT, () => console.log(`Listening in on ${SERVER_PORT}`));
