@@ -5,4 +5,12 @@ class Profile extends Component {
         super()
         this.state = {}
     }
+
+    render(){
+        return(
+            <div className="">
+
+            </div>
+        )
+    }
 }
