@@ -14,6 +14,7 @@ class Metrics extends Component {
                 <div className="WPM">
                     <h1>{this.props.WPM}</h1>
                     <h4>WPM</h4>
+                    {/* WPM: calc  */}
                 </div>
                 <div className="CPM">
                     <h1>{this.props.CPM}</h1>
