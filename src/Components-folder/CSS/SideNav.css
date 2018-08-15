@@ -1,0 +1,45 @@
+.nav-wrapper{
+    border:1px solid red;
+    width:20%;
+    height:100%;
+    position: absolute;
+    top:0px;
+}
+
+.nav-wrapper{
+    display:grid;
+    grid-template-areas:
+        'login-button'
+        'scripts'
+        'scripts'
+        'leaderboard'
+        'leaderboard'
+        'leaderboard'
+        'leaderboard'
+        'leaderboard'
+        'logout';
+}
+.login{
+    grid-area: login-button;
+    border:1px solid green;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+#login-button{
+    height:50px;
+    width:100px;
+}
+.script-wrapper{
+    grid-area: scripts;
+    border:1px solid brown;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.logout{
+    grid-area:logout;
+}
+.script{
+    cursor:pointer;
+}
