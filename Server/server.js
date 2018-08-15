@@ -30,6 +30,7 @@ massive(CONNECTION_STRING).then(db => {
 
 //endpoints
 app.get('/api/all-users', ctrl.getAllUsers);
+app.get('/api/user/:id', ctrl.getUserById)
 app.post('/api/new-user', ctrl.createUser);
 
 

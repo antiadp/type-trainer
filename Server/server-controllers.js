@@ -31,5 +31,16 @@ module.exports = {
 				res.status(500).send({ errorMessage: 'This is why we cant have nice things.' });
 				console.log(err);
 			});
+	},
+	getUserById: (req, res) => {
+		const dbi = req.app.get('db');
+		const {id} = req.params;
+
+		dbi.get_user_by_id([id]).then(user => {
+			res.status(200).send(user)
+		}).catch((err) => {
+			res.status(500).send({ errorMessage: 'This is why we cant have nice things.' });
+			console.log(err);
+		});
 	}
 };
