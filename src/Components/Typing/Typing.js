@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import Metrics from './Metrics'
-import Charts from './Charts'
+import Metrics from '../Metrics/Metrics';
+import Charts from '../Charts/Charts';
 
 class Typing extends Component{
     constructor(props){

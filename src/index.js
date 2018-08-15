@@ -6,12 +6,12 @@ import App from './App';
 import './Components/CSS/Reset.css'
 import './index.css';
 import './App.css'
-import './Components/CSS/Charts.css'
-import './Components/CSS/Login.css'
-import './Components/CSS/Metrics.css'
-import './Components/CSS/Profile.css'
-import './Components/CSS/SideNav.css'
-import './Components/CSS/Typing.css'
+import './Components/Charts/Charts.css'
+import './Components/Login/Login.css'
+import './Components/Metrics/Metrics.css'
+import './Components/Profile/Profile.css'
+import './Components/SideNav/SideNav.css'
+import './Components/Typing/Typing.css'
 
 // import registerServiceWorker from './registerServiceWorker';
 ReactDOM.render(<App />, document.getElementById('root'));
