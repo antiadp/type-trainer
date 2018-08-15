@@ -1,0 +1,35 @@
+.metrics-wrapper{
+    display:grid;
+    padding:50px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas:'. CPM WPM ACC .'
+                        ' . . timer . .  ';
+    flex-direction: row;
+    justify-content: space-around;
+
+    border:1px solid pink;
+}
+
+.WPM{
+    border:1px solid pink;
+    grid-area: WPM;
+    cursor:default
+}
+
+.CPM{
+    border:1px solid pink;
+    grid-area:CPM;
+    cursor:default
+}
+
+.ACC{
+    border:1px solid pink;
+    grid-area:ACC;
+    cursor:default
+}
+
+.timer-wrapper{
+    grid-area: timer;
+    border:1px solid pink;
+    cursor:default
+}
