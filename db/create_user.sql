@@ -1,6 +1,6 @@
-insert into User (username, password, img)
+insert into users (username, password, img)
 values ($1, $2, $3)
-returning*;
+returning id, username, img;
 
 
--- This needs to be tested on the database!
+-- Tested with postman by ak
