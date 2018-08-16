@@ -4,7 +4,6 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const massive = require('massive');
 const ctrl = require('./server-controllers');
-// const axios = require('axios');
 
 const app = express();
 
