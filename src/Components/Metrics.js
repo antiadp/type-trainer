@@ -4,6 +4,10 @@ class Metrics extends Component {
     constructor() {
         super()
         this.state = {
+            keyPresses: 0,
+            numErrors: 0,
+            seconds: 0,
+
 
         }
     }
@@ -14,7 +18,11 @@ class Metrics extends Component {
                 <div className="WPM">
                     <h1>{this.props.WPM}</h1>
                     <h4>WPM</h4>
-                    {/* WPM: calc  */}
+                        {function calcNetWPM(){
+                            var grossWPM = (this.state.keyPresses / 5) / (this.state.seconds / 10 / 60);
+                            var netWPM = grossWPM - (this.state.numErrors / this.state.seconds / 10 / 60);
+                        return Math.round(netWPM * 100) / 100}
+                        }
                 </div>
                 <div className="CPM">
                     <h1>{this.props.CPM}</h1>
