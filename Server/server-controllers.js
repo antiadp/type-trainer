@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt-nodejs');
 
 module.exports = {
-	//user table
+	//users table
 	createUser: (req, res) => {
 		const dbi = req.app.get('db');
 		const { username, password, img } = req.body;
@@ -11,7 +11,7 @@ module.exports = {
 			dbi
 				.create_user([ username, hash, img ])
 				.then((createdUser) => {
-					req.session.userid = createdUser[0].id;
+					req.session.userid = createdUser[0].user_id;
 					res.status(200).send(createdUser);
 				})
 				.catch((err) => {
@@ -34,13 +34,34 @@ module.exports = {
 	},
 	getUserById: (req, res) => {
 		const dbi = req.app.get('db');
-		const {id} = req.params;
+		const { id: user_id } = req.params;
 
-		dbi.get_user_by_id([id]).then(user => {
-			res.status(200).send(user)
-		}).catch((err) => {
-			res.status(500).send({ errorMessage: 'This is why we cant have nice things.' });
-			console.log(err);
-		});
+		dbi
+			.get_user_by_id([ user_id ])
+			.then((user) => {
+				res.status(200).send(user);
+			})
+			.catch((err) => {
+				res.status(500).send({ errorMessage: 'This is why we cant have nice things.' });
+				console.log(err);
+			});
+	},
+	logout: (req, res) => {
+		req.session.destroy();
+		res.sendStatus(200);
+	},
+
+	//test_results
+	getAllResults: (req, res) => {
+		const dbi = req.app.get('db');
+		dbi
+			.get_all_results()
+			.then((results) => {
+				res.status(200).send(results);
+			})
+			.catch((err) => {
+				res.status(500).send({ errorMessage: 'This is why we cant have nice things.' });
+				console.log(err);
+			});
 	}
 };

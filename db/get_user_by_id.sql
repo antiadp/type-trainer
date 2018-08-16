@@ -1,2 +1,2 @@
-select id, username, img from users
-where id = $1;
+select user_id, username, img from users
+where user_id = $1;

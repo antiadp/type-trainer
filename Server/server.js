@@ -28,10 +28,14 @@ massive(CONNECTION_STRING).then(db => {
 });
 
 
-//endpoints
+// users endpoints
 app.get('/api/all-users', ctrl.getAllUsers);
-app.get('/api/user/:id', ctrl.getUserById)
+app.get('/api/user/:id', ctrl.getUserById);
 app.post('/api/new-user', ctrl.createUser);
+app.get('/api/logout', ctrl.logout);
+
+//test_results endpoints
+app.get('/api/all-results', ctrl.getAllResults);
 
 
 app.listen(SERVER_PORT, () => console.log(`Listening in on ${SERVER_PORT}`));

@@ -1,7 +1,7 @@
 import React from 'react'
 
 function SideNav (props){
-    
+
 
     var setLanguage = (e)=>{
         props.setLanguage(e)
