@@ -9,14 +9,24 @@ import SideNav from './Components/SideNav/SideNav';
 
 class App extends Component {
 	constructor() {
-		super();
+		super()
 		this.state = {
 			menu: true,
 			language: 'HTML',
 			loggedIn: false,
-			timer: 60
-		};
+			// timer: 60
+		}
 	}
+	tempChangeLogin = () => {
+		this.setState({
+			loggedIn: !this.state.loggedIn
+		})
+	}
+	setLanguage = (e) => {
+		this.setState({ language: e })
+	}
+
+
 	componentDidMount = () => {
 		axios
 			.get('/api/all-results')
@@ -31,9 +41,7 @@ class App extends Component {
 			loggedIn: !this.state.loggedIn
 		});
 	};
-	setLanguage = (e) => {
-		this.setState({ language: e });
-	};
+
 	render() {
 		return (
 			<div className="App">
@@ -42,8 +50,8 @@ class App extends Component {
 						this.state.menu ? (
 							{ 'text-align': 'left', position: 'absolute', left: 'calc(20% + 5px)' }
 						) : (
-							{ 'text-align': 'left', position: 'absolute', left: '5px' }
-						)
+								{ 'text-align': 'left', position: 'absolute', left: '5px' }
+							)
 					}
 					onClick={() => {
 						this.setState({ menu: !this.state.menu });
@@ -59,8 +67,8 @@ class App extends Component {
 						timer={this.state.timer}
 					/>
 				) : (
-					<div />
-				)}
+						<div />
+					)}
 				<Typing />
 				<h2 className="script">{this.state.language}</h2>
 			</div>
