@@ -77,3 +77,6 @@ class App extends Component {
 }
 
 export default connect(null, { getTestResults })(App);
+
+// onClick ={this.state.login = true}
+// if that this.tate.login === true){style={{display:inline}}}

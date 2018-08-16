@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Metrics from '../Metrics/Metrics';
 import Charts from '../Charts/Charts';
+import MetricsModal from '../MetricsModal/MetricsModal'
 
 class Typing extends Component {
     constructor(props) {
@@ -13,7 +14,8 @@ class Typing extends Component {
             placeholder: `Change log: timer now works on start of typing, and pasting is not allowed.`,
             timerBool: false,
             input: '',
-            asciiArray:''
+            asciiArray:'',
+            date:''
         }
     }
 
@@ -33,10 +35,13 @@ class Typing extends Component {
 
         if (this.state.timer === 0) {
             console.log('hello, i\'m finished')
+            let timestamp = new Date()
             this.setState({
                 timerBool: true,
+                date:timestamp
             })
             this.deselectTypeBox()
+
         }
     }
 
@@ -75,25 +80,30 @@ class Typing extends Component {
         setTimeout(this.clearMe,100)
         return false
     }
+    startNewTest = () =>{
+        this.setState({
+            //set timer back to what it was, 
+            //set the timerBool to what it wasn't !timerBool
+            timerBool:!this.state.timerBool
+        })
+    }
     render() {
         return (
             <div className='typing-wrapper'>
+                <div className="finished-test">
+                   {this.state.timerBool?<MetricsModal ACC={this.state.ACC} WPM={this.state.WPM} CPM={this.state.CPM} startNewTest={this.startNewTest}/>:<div></div>} 
+                </div>
                 <Metrics
                     WPM={this.state.WPM}
                     CPM={this.state.CPM}
                     ACC={this.state.ACC}
                     timer={this.state.timer}
+                    
                 />
-                {/* <textarea data-gramm_editor="false" autoComplete='off' spellCheck='false' name="Main Typing input" id="text-input" cols="30" rows="10" placeholder = {this.state.placeholder} maxLength='500' readOnly={this.state.timer === 0? true:false} onChange={(e)=>{this.updateState(e.target.value)}} /> */}
-                {/* <br/> */}
-                {/* <button onClick={this.startTimer}>Start timer</button> */}
-                {/* <br/> */}
                 <textarea value={this.state.input} onChange={(e) => { this.updateUserInput(e.target.value) }} data-gramm_editor="false" autoComplete='off' spellCheck='false' name="Main Typing input" id="text-input" cols="30" rows="10" placeholder={this.state.placeholder} maxLength='500' readOnly={this.state.timer !== 0 ? false : true} onCopy={this.clearInput} onDrag={this.clearInput} onDrop={this.clearInput} onPaste={this.clearInput} />
                 <br />
                 <br />
                 {this.state.asciiArray}
-                {/* </textarea> */}
-
 
                 <Charts />
             </div>

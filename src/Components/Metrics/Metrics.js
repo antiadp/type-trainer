@@ -10,7 +10,7 @@ class Metrics extends Component {
     render() {
         return (
             // <div className="metrics-wrapper">
-            <div className="metrics-wrapper">
+            <div className="metrics-wrapper metrics">
                 <div className="WPM">
                     <h1>{this.props.WPM}</h1>
                     <h4>WPM</h4>
