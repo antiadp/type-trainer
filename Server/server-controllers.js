@@ -63,5 +63,15 @@ module.exports = {
 				res.status(500).send({ errorMessage: 'This is why we cant have nice getAllResults.' });
 				console.log(err);
 			});
+	},
+
+	getSnippet: (req, res) => {
+		req.app.get('db').get_snippet().then(response => {
+			console.log('snippit is', response)
+			res.status(200).send(response)
+		}).catch((err) => {
+			res.status(500).send({ errorMessage: 'This is why we cant have nice things.' });
+			console.log(err);
+		})
 	}
 };

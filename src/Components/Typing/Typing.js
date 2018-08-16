@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import Metrics from '../Metrics/Metrics';
 import Charts from '../Charts/Charts';
+import axios from 'axios'
 
 class Typing extends Component {
     constructor(props) {
         super()
-        this.state = {
+        this.state ={
             WPM: 8,
             CPM: 40,
             ACC: '100%',
@@ -13,7 +14,8 @@ class Typing extends Component {
             placeholder: `Change log: timer now works on start of typing, and pasting is not allowed.`,
             timerBool: false,
             input: '',
-            asciiArray:''
+            asciiArray: [],
+            lettersArray: []
         }
     }
 
@@ -25,12 +27,37 @@ class Typing extends Component {
         this.startTimer()
     }
 
+    componentDidMount(){
+        axios.get('/api/get-snippet').then(res => {
+            console.log(res, 'front end res')
+            let snippet = res.data[0].snippet;
+            let snippetArray = snippet.split(',').map((current) => {
+                return Number(current)
+            })
+
+            let lettersArray = [];
+
+            for(let i = 0; i < snippetArray.length; i++){
+                lettersArray.push(String.fromCharCode(snippetArray[i]))
+                console.log(String.fromCharCode(snippetArray[i]))
+            }
+
+            console.log(lettersArray, 'lettersArray')
+
+            this.setState({
+                lettersArray: lettersArray
+            })
+        })
+    }
+
     startTimer = () => {
         console.log('clicked')
         if (this.state.timer > 0) {
             setTimeout(this.everySecond, 1000)
         }
-
+    }
+    
+    updateUserInput(value){
         if (this.state.timer === 0) {
             console.log('hello, i\'m finished')
             this.setState({
@@ -88,7 +115,8 @@ class Typing extends Component {
                 {/* <br/> */}
                 {/* <button onClick={this.startTimer}>Start timer</button> */}
                 {/* <br/> */}
-                <textarea value={this.state.input} onChange={(e) => { this.updateUserInput(e.target.value) }} data-gramm_editor="false" autoComplete='off' spellCheck='false' name="Main Typing input" id="text-input" cols="30" rows="10" placeholder={this.state.placeholder} maxLength='500' readOnly={this.state.timer !== 0 ? false : true} onCopy={this.clearInput} onDrag={this.clearInput} onDrop={this.clearInput} onPaste={this.clearInput} />
+                {/* value={this.state.input} */}
+                <textarea value={this.state.lettersArray} onChange={(e) => { this.updateUserInput(e.target.value) }} data-gramm_editor="false" autoComplete='off' spellCheck='false' name="Main Typing input" id="text-input" cols="30" rows="10" placeholder={this.state.placeholder} maxLength='500' readOnly={this.state.timer !== 0 ? false : true} onCopy={this.clearInput} onDrag={this.clearInput} onDrop={this.clearInput} onPaste={this.clearInput} />
                 <br />
                 <br />
                 {this.state.asciiArray}
