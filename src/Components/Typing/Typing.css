@@ -1,3 +1,4 @@
+
 #text-input{
     width:60%;
     min-width:60%;
@@ -8,6 +9,7 @@
     background-color: rgba(255, 0, 0, 0);
     z-index: 10;
     color:rgba(255, 255, 255, 0);
+
 }
 .script{
     cursor:default;

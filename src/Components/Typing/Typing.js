@@ -1,7 +1,9 @@
+
 import React, { Component } from 'react';
 import Metrics from '../Metrics/Metrics';
 import Charts from '../Charts/Charts';
 import DisplayText from '../DisplayText/DisplayText'
+import MetricsModal from '../MetricsModal/MetricsModal'
 import axios from 'axios'
 
 class Typing extends Component {
@@ -13,7 +15,7 @@ class Typing extends Component {
             ACC: '100%',
             timer: 5,
             // placeholder: `Change log: timer now works on start of typing, and pasting is not allowed.`,
-            timerBool: false,
+            timerBool: true,
             input: '',
             asciiArray: [],
             lettersArray: []
@@ -99,9 +101,17 @@ class Typing extends Component {
         setTimeout(this.clearMe, 100)
         return false
     }
+    startNewTest = () =>{
+        this.setState({
+            //set timer back to what it was, 
+            //set the timerBool to what it wasn't !timerBool
+            timerBool:!this.state.timerBool
+        })
+    }
     render() {
         return (
             <div className='typing-wrapper'>
+ {this.state.timerBool?<MetricsModal ACC={this.state.ACC} WPM={this.state.WPM} CPM={this.state.CPM} startNewTest={this.startNewTest}/>:<div></div>} 
 
                 <Metrics
                     WPM={this.state.WPM}

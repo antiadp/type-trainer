@@ -5,7 +5,7 @@ function DisplayText(props) {
 
         <div className="display-wrapper">
             <div className="display">
-                <p>
+                <p id = 'childrenprops'>
                     {props.children}
                 </p>
 
