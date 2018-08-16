@@ -1,4 +1,7 @@
 import React, {Component} from 'react'
+import axios from 'axios';
+import { connect } from 'react-redux';
+import {getUser} from './../../ducks/reducer';
 
 class Profile extends Component {
     constructor(){
@@ -17,6 +20,10 @@ class Profile extends Component {
 
     componentDidMount(){
         // get username, userImg, tipOfDay, wpmHist, accHist
+        axios.get(`/api/user/${5}`).then(res => {
+            console.log('data on front end', res.data)
+            this.props.getUser(res.data)
+        }).catch((error) => console.log('Oi! Somethings gone wrong!', error));
     }
 
     handleCloseModal(){
@@ -48,3 +55,5 @@ class Profile extends Component {
         )
     }
 }
+
+export default connect(null, {getUser})(Profile);
