@@ -58,7 +58,7 @@ class Typing extends Component {
         let asciiArray = tempArray.toString()
         // console.log('asciiArray', asciiArray)
         this.setState({
-            asciiArray:asciiArray
+            asciiArray:asciiArray,
         })
     }
     deselectTypeBox = () =>{
@@ -67,7 +67,8 @@ class Typing extends Component {
     clearMe = () =>{
         console.log('No pasting allowed')
         this.setState({
-            input:''
+            input:'',
+            asciiArray:''
         })
     }
     clearInput=()=>{
