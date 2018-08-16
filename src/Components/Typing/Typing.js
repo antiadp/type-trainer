@@ -10,7 +10,7 @@ class Typing extends Component {
             CPM: 40,
             ACC: '100%',
             timer: 5,
-            placeholder: `Change log: when timer is 60, text input is disabled. login changes + logout appears, Menu Toggles, Script type changes with click, Mouse is now always default when over text.`,
+            placeholder: `Change log: timer now works on start of typing, and pasting is not allowed.`,
             timerBool: false,
             input: '',
             asciiArray:''
@@ -36,12 +36,12 @@ class Typing extends Component {
             this.setState({
                 timerBool: true,
             })
-
+            this.deselectTypeBox()
         }
     }
 
 
-    updateUserInput(value) {
+    updateUserInput = (value)=> {
 
         this.setState({
             input: value
@@ -61,7 +61,19 @@ class Typing extends Component {
             asciiArray:asciiArray
         })
     }
+    deselectTypeBox = () =>{
 
+    }
+    clearMe = () =>{
+        console.log('No pasting allowed')
+        this.setState({
+            input:''
+        })
+    }
+    clearInput=()=>{
+        setTimeout(this.clearMe,100)
+        return false
+    }
     render() {
         return (
             <div className='typing-wrapper'>
@@ -75,7 +87,7 @@ class Typing extends Component {
                 {/* <br/> */}
                 {/* <button onClick={this.startTimer}>Start timer</button> */}
                 {/* <br/> */}
-                <textarea onChange={(e) => { this.updateUserInput(e.target.value) }} data-gramm_editor="false" autoComplete='off' spellCheck='false' name="Main Typing input" id="text-input" cols="30" rows="10" placeholder={this.state.placeholder} maxLength='500' readOnly={this.state.timer !== 0 ? false : true} />
+                <textarea value={this.state.input} onChange={(e) => { this.updateUserInput(e.target.value) }} data-gramm_editor="false" autoComplete='off' spellCheck='false' name="Main Typing input" id="text-input" cols="30" rows="10" placeholder={this.state.placeholder} maxLength='500' readOnly={this.state.timer !== 0 ? false : true} onCopy={this.clearInput} onDrag={this.clearInput} onDrop={this.clearInput} onPaste={this.clearInput} />
                 <br />
                 <br />
                 {this.state.asciiArray}
