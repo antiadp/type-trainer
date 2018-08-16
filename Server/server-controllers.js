@@ -15,7 +15,7 @@ module.exports = {
 					res.status(200).send(createdUser);
 				})
 				.catch((err) => {
-					res.status(500).send({ errorMessage: 'This is why we cant have nice things.' });
+					res.status(500).send({ errorMessage: 'This is why we cant have createUser.' });
 					console.log(err);
 				});
 		});
@@ -28,7 +28,7 @@ module.exports = {
 				res.status(200).send(users);
 			})
 			.catch((err) => {
-				res.status(500).send({ errorMessage: 'This is why we cant have nice things.' });
+				res.status(500).send({ errorMessage: 'This is why we cant have nice getAllUsers.' });
 				console.log(err);
 			});
 	},
@@ -42,7 +42,7 @@ module.exports = {
 				res.status(200).send(user);
 			})
 			.catch((err) => {
-				res.status(500).send({ errorMessage: 'This is why we cant have nice things.' });
+				res.status(500).send({ errorMessage: 'This is why we cant have nice getUserById.' });
 				console.log(err);
 			});
 	},
@@ -60,7 +60,7 @@ module.exports = {
 				res.status(200).send(results);
 			})
 			.catch((err) => {
-				res.status(500).send({ errorMessage: 'This is why we cant have nice things.' });
+				res.status(500).send({ errorMessage: 'This is why we cant have nice getAllResults.' });
 				console.log(err);
 			});
 	}
