@@ -4,7 +4,6 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const massive = require('massive');
 const ctrl = require('./server-controllers');
-// const axios = require('axios');
 
 const app = express();
 
@@ -28,10 +27,18 @@ massive(CONNECTION_STRING).then(db => {
 });
 
 
-//endpoints
-// app.post('/api/users', ctrl.createUser)
+// users endpoints
+app.get('/api/all-users', ctrl.getAllUsers);
+app.get('/api/user/:id', ctrl.getUserById);
+app.post('/api/new-user', ctrl.createUser);
+app.get('/api/logout', ctrl.logout);
 
-app.get('/api/getsnippet', ctrl.getSnippet)
+//test_results endpoints
+app.get('/api/all-results', ctrl.getAllResults);
+
+//typing endpoint
+app.get('/api/get-snippet', ctrl.getSnippet)
+
 
 
 app.listen(SERVER_PORT, () => console.log(`Listening in on ${SERVER_PORT}`));

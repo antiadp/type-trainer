@@ -1,2 +1,2 @@
 select * from snippets
-where snippet_language = 6;
+where id = 24;
