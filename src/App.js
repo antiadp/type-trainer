@@ -30,9 +30,9 @@ class App extends Component {
 	componentDidMount = () => {
 		axios
 			.get('/api/all-results')
-			.then((response) => {
-				console.log('testResults from db', response.data);
-				this.props.getTestResults(response.data);
+			.then((testResults) => {
+				console.log('testResults from db', testResults.data);
+				this.props.getTestResults(testResults.data);
 			})
 			.catch((error) => console.log('Oi! Somethings gone wrong!', error));
 	};
@@ -48,9 +48,9 @@ class App extends Component {
 				<button
 					style={
 						this.state.menu ? (
-							{ 'text-align': 'left', position: 'absolute', left: 'calc(20% + 5px)' }
+							{ 'textAlign': 'left', position: 'absolute', left: 'calc(20% + 5px)' }
 						) : (
-								{ 'text-align': 'left', position: 'absolute', left: '5px' }
+								{ 'textAlign': 'left', position: 'absolute', left: '5px' }
 							)
 					}
 					onClick={() => {

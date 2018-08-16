@@ -36,6 +36,8 @@ app.get('/api/logout', ctrl.logout);
 //test_results endpoints
 app.get('/api/all-results', ctrl.getAllResults);
 
+//typing endpoint
+app.get('/api/get-snippet', ctrl.getSnippet)
 
 
 
