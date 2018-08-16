@@ -14,6 +14,8 @@ import './Components/Metrics/Metrics.css';
 import './Components/Profile/Profile.css';
 import './Components/SideNav/SideNav.css';
 import './Components/Typing/Typing.css';
+import './Components/DisplayText/DisplayText.css'
+import './Components/MetricsModal/MetricsModal.css'
 
 // import registerServiceWorker from './registerServiceWorker';
 ReactDOM.render(

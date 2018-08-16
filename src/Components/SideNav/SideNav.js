@@ -17,7 +17,7 @@ class SideNav extends Component{
             <div key={user.test_id}>
             <h4>{user.username}</h4>
             <h4>wpm:{user.wpm} cpm:{user.cpm} accuracy:{user.accuracy}</h4>
-            <img style={{width: "150px", height: "150px", borderRadius: "15px", backgroundColor: "blue"}} src={user.img} alt="user"/>
+            <img style={{width: "50px", height: "50px", borderRadius: "15px", backgroundColor: "blue"}} src={user.img} alt="user"/>
             </div>
         )
     })
@@ -28,10 +28,10 @@ class SideNav extends Component{
                 }
             </div>
             <div className="script-wrapper">
-                <h4 onClick={()=>{this.setLanguage('HTML')}} className='script'>HTML</h4>
-                <h4 onClick={()=>{this.setLanguage('CSS')}} className='script'>CSS</h4>
-                <h4 onClick={()=>{this.setLanguage('JavaScript')}} className='script'>JavaScript</h4>
-                <h4 onClick={()=>{this.setLanguage('Special')}} className='script'>Special</h4>
+                <h4 onClick={()=>{this.setLanguage('HTML')}} className='script click'>HTML</h4>
+                <h4 onClick={()=>{this.setLanguage('CSS')}} className='script click'>CSS</h4>
+                <h4 onClick={()=>{this.setLanguage('JavaScript')}} className='script click'>JavaScript</h4>
+                <h4 onClick={()=>{this.setLanguage('Special')}} className='script click'>Special</h4>
             </div>
             <div className="nav-leader-board">
                 <h1>LEADERBOARD</h1>
