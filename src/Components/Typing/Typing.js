@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import Metrics from './Metrics'
-import Charts from './Charts'
+import Metrics from '../Metrics/Metrics';
+import Charts from '../Charts/Charts';
 
 class Typing extends Component{
     constructor(props){
@@ -38,13 +38,18 @@ class Typing extends Component{
             
         }
     }
-    updateState = (e) =>{
-        this.setState({
-            input:e
-        })
-        if(this.state.input.length === 1){
-            this.startTimer()
-        }
+ 
+
+    updateUserInput(value){
+
+        let tempArray = []
+
+        for(let i = 0; i < value.length; i++){
+            tempArray.push(value.charCodeAt(i))
+          }
+          
+          let asciiArray = tempArray.toString() 
+          console.log('asciiArray', asciiArray)
     }
 
     render(){
@@ -56,11 +61,15 @@ class Typing extends Component{
                 ACC = {this.state.ACC}
                 timer = {this.state.timer}
                 />
-                <textarea data-gramm_editor="false" autoComplete='off' spellCheck='false' name="Main Typing input" id="text-input" cols="30" rows="10" placeholder = {this.state.placeholder} maxLength='500' readOnly={this.state.timer === 0? true:false} onChange={(e)=>{this.updateState(e.target.value)}} />
-                <br/>
+                {/* <textarea data-gramm_editor="false" autoComplete='off' spellCheck='false' name="Main Typing input" id="text-input" cols="30" rows="10" placeholder = {this.state.placeholder} maxLength='500' readOnly={this.state.timer === 0? true:false} onChange={(e)=>{this.updateState(e.target.value)}} /> */}
+                {/* <br/> */}
                 {/* <button onClick={this.startTimer}>Start timer</button> */}
-                <br/>
+                {/* <br/> */}
                 {this.state.input}
+                <textarea onChange={(e) => {this.updateUserInput(e.target.value)}} data-gramm_editor="false" autoComplete='off' spellCheck='false' name="Main Typing input" id="text-input" cols="30" rows="10" placeholder = {this.state.placeholder} maxLength='500' readOnly={this.state.timer!==0?false:true}/>
+                {/* </textarea> */}
+
+                
                 <Charts/>
             </div>
         )
