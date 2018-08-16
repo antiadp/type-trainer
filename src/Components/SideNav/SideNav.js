@@ -1,31 +1,53 @@
-import React from 'react'
+import React, {Component} from 'react'
+import {connect} from 'react-redux';
 
-function SideNav (props){
+class SideNav extends Component{
 
 
-    var setLanguage = (e)=>{
-        props.setLanguage(e)
+    setLanguage = (e)=>{
+        this.props.setLanguage(e)
     }
-    var tempChangeLogin = () =>{
-        props.tempChangeLogin()
+    tempChangeLogin = () =>{
+        this.props.tempChangeLogin()
     }
+    render(){
+    const {testResults} = this.props;
+    let leaderBoard = testResults.map(user =>{
+        return (
+            <div key={user.test_id}>
+            <h4>{user.username}</h4>
+            <h4>wpm:{user.wpm} cpm:{user.cpm} accuracy:{user.accuracy}</h4>
+            <img style={{width: "150px", height: "150px", borderRadius: "15px", backgroundColor: "blue"}} src={user.img} alt="user"/>
+            </div>
+        )
+    })
     return(
         <div className="nav-wrapper">
             <div className="login">
-                {props.loggedIn?<h4>true</h4>:<button id='login-button' onClick={tempChangeLogin}>Login / Regester</button>
+                {this.props.loggedIn?<h4>true</h4>:<button id='login-button' onClick={this.tempChangeLogin}>Login / Register</button>
                 }
             </div>
             <div className="script-wrapper">
-                <h4 onClick={()=>{setLanguage('HTML')}} className='script'>HTML</h4>
-                <h4 onClick={()=>{setLanguage('CSS')}} className='script'>CSS</h4>
-                <h4 onClick={()=>{setLanguage('JavaScript')}} className='script'>JavaScript</h4>
-                <h4 onClick={()=>{setLanguage('Special')}} className='script'>Special</h4>
+                <h4 onClick={()=>{this.setLanguage('HTML')}} className='script'>HTML</h4>
+                <h4 onClick={()=>{this.setLanguage('CSS')}} className='script'>CSS</h4>
+                <h4 onClick={()=>{this.setLanguage('JavaScript')}} className='script'>JavaScript</h4>
+                <h4 onClick={()=>{this.setLanguage('Special')}} className='script'>Special</h4>
+            </div>
+            <div className="nav-leader-board">
+                <h1>LEADERBOARD</h1>
+                {leaderBoard}
             </div>
             <div className="logout">
-                {props.loggedIn?<button onClick={tempChangeLogin}>Logout</button>:''}
+                {this.props.loggedIn?<button onClick={this.tempChangeLogin}>Logout</button>:''}
             </div>
         </div>
     )
+    }
+}
+const mapStateToProps = (state) => {
+    return {
+        testResults: state.results
+    }
 }
 
-export default SideNav
+export default connect(mapStateToProps,{})(SideNav);
