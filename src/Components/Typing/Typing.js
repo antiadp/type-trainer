@@ -12,7 +12,8 @@ class Typing extends Component {
             timer: 5,
             placeholder: `Change log: when timer is 60, text input is disabled. login changes + logout appears, Menu Toggles, Script type changes with click, Mouse is now always default when over text.`,
             timerBool: false,
-            input: ''
+            input: '',
+            asciiArray:''
         }
     }
 
@@ -55,7 +56,10 @@ class Typing extends Component {
         }
 
         let asciiArray = tempArray.toString()
-        console.log('asciiArray', asciiArray)
+        // console.log('asciiArray', asciiArray)
+        this.setState({
+            asciiArray:asciiArray
+        })
     }
 
     render() {
@@ -74,7 +78,7 @@ class Typing extends Component {
                 <textarea onChange={(e) => { this.updateUserInput(e.target.value) }} data-gramm_editor="false" autoComplete='off' spellCheck='false' name="Main Typing input" id="text-input" cols="30" rows="10" placeholder={this.state.placeholder} maxLength='500' readOnly={this.state.timer !== 0 ? false : true} />
                 <br />
                 <br />
-                {this.state.input}
+                {this.state.asciiArray}
                 {/* </textarea> */}
 
 
