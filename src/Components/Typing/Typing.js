@@ -28,8 +28,9 @@ class Typing extends Component {
     }
 
     componentDidMount(){
+        
         axios.get('/api/get-snippet').then(res => {
-            console.log(res, 'front end res')
+            // console.log(res, 'front end res')
             let snippet = res.data[0].snippet;
             let snippetArray = snippet.split(',').map((current) => {
                 return Number(current)
@@ -39,10 +40,10 @@ class Typing extends Component {
 
             for(let i = 0; i < snippetArray.length; i++){
                 lettersArray.push(String.fromCharCode(snippetArray[i]))
-                console.log(String.fromCharCode(snippetArray[i]))
+                // console.log(String.fromCharCode(snippetArray[i]))
             }
 
-            console.log(lettersArray, 'lettersArray')
+            // console.log(lettersArray, 'lettersArray')
 
             this.setState({
                 lettersArray: lettersArray
@@ -102,6 +103,9 @@ class Typing extends Component {
         setTimeout(this.clearMe,100)
         return false
     }
+
+    
+
     render() {
         return (
             <div className='typing-wrapper'>
@@ -116,11 +120,13 @@ class Typing extends Component {
                 {/* <button onClick={this.startTimer}>Start timer</button> */}
                 {/* <br/> */}
                 {/* value={this.state.input} */}
-                <textarea value={this.state.lettersArray} onChange={(e) => { this.updateUserInput(e.target.value) }} data-gramm_editor="false" autoComplete='off' spellCheck='false' name="Main Typing input" id="text-input" cols="30" rows="10" placeholder={this.state.placeholder} maxLength='500' readOnly={this.state.timer !== 0 ? false : true} onCopy={this.clearInput} onDrag={this.clearInput} onDrop={this.clearInput} onPaste={this.clearInput} />
+                {/* placeholder={this.state.lettersArray} */}
+                <textarea value={this.state.lettersArray} onChange={(e) => { this.updateUserInput(e.target.value) }} data-gramm_editor="false" autoComplete='off' spellCheck='false' name="Main Typing input" id="text-input" cols="30" rows="10"  maxLength='500' readOnly={this.state.timer !== 0 ? false : true} onCopy={this.clearInput} onDrag={this.clearInput} onDrop={this.clearInput} onPaste={this.clearInput} />
                 <br />
                 <br />
                 {this.state.asciiArray}
                 {/* </textarea> */}
+
 
 
                 <Charts />
