@@ -15,7 +15,7 @@ class Typing extends Component {
             ACC: '100%',
             timer: 5,
             // placeholder: `Change log: timer now works on start of typing, and pasting is not allowed.`,
-            timerBool: true,
+            timerBool: false,
             input: '',
             asciiArray: [],
             lettersArray: []
