@@ -48,9 +48,9 @@ class App extends Component {
 				<button
 					style={
 						this.state.menu ? (
-							{ 'text-align': 'left', position: 'absolute', left: 'calc(20% + 5px)' }
+							{ 'textAlign': 'left', position: 'absolute', left: 'calc(20% + 5px)' }
 						) : (
-								{ 'text-align': 'left', position: 'absolute', left: '5px' }
+								{ 'textAlign': 'left', position: 'absolute', left: '5px' }
 							)
 					}
 					onClick={() => {
