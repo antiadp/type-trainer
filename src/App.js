@@ -25,7 +25,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <button style={this.state.menu?{'text-align':'left', position:'absolute', left:'calc(20% + 5px)'}:{'text-align':'left', position:'absolute', left:'5px'}} onClick={()=>{this.setState({menu:!this.state.menu})}}>Toggle Menu</button>
+      <button style={this.state.menu?{'textAlign':'left', position:'absolute', left:'calc(20% + 5px)'}:{'textAlign':'left', position:'absolute', left:'5px'}} onClick={()=>{this.setState({menu:!this.state.menu})}}>Toggle Menu</button>
         {this.state.menu?<SideNav setLanguage={this.setLanguage} loggedIn={this.state.loggedIn} tempChangeLogin={this.tempChangeLogin} timer={this.state.timer}/>:<div></div>}
         <Typing/>
         <h2 className='script'>
