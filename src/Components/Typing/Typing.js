@@ -29,6 +29,12 @@ class Typing extends Component {
         })
         this.startTimer()
     }
+    startTimer = () => {
+        console.log('clicked')
+        if (this.state.timer > 0) {
+            setTimeout(this.everySecond, 1000)
+        }
+    }
 
     componentDidMount() {
         axios.get('/api/get-snippet').then(res => {
@@ -53,12 +59,6 @@ class Typing extends Component {
         })
     }
 
-    startTimer = () => {
-        console.log('clicked')
-        if (this.state.timer > 0) {
-            setTimeout(this.everySecond, 1000)
-        }
-    }
 
 
     updateUserInput = (value) => {
