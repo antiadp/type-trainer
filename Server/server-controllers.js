@@ -19,4 +19,10 @@ module.exports = {
 	// 			});
 	// 	});
 	// }
+
+	getSnippet: function(req, res){
+		req.app.get('db').get_snippet().then(res => {
+			console.log('here is the snippet', res)
+		})
+	}
 };
