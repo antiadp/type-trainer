@@ -5,19 +5,27 @@ module.exports = {
 	createUser: (req, res) => {
 		const dbi = req.app.get('db');
 		const { username, password, img } = req.body;
-
-		//Encrypt password
-		bcrypt.hash(password, null, null, function(err, hash) {
-			dbi
-				.create_user([ username, hash, img ])
-				.then((createdUser) => {
-					req.session.userid = createdUser[0].user_id;
-					res.status(200).send(createdUser);
-				})
-				.catch((err) => {
-					res.status(500).send({ errorMessage: 'This is why we cant have createUser.' });
-					console.log(err);
+		dbi.find_user([ username ]).then((userExists) => {
+			console.log('user', userExists)
+			if (userExists[0]) {
+				req.session.user = userExists[0].user_id;
+				res.status(200).send(userExists[0]);
+			} else {
+				//create new user
+				//Encrypt password
+				bcrypt.hash(password, null, null, function(err, hash) {
+					dbi
+						.create_user([ username, hash, img ])
+						.then((createdUser) => {
+							req.session.userid = createdUser[0].user_id;
+							res.status(200).send(createdUser);
+						})
+						.catch((err) => {
+							res.status(500).send({ errorMessage: 'This is why we cant have createUser.' });
+							console.log(err);
+						});
 				});
+			}
 		});
 	},
 	getAllUsers: (req, res) => {
@@ -65,13 +73,17 @@ module.exports = {
 			});
 	},
 
+	//snippets
 	getSnippet: (req, res) => {
-		req.app.get('db').get_snippet().then(response => {
-			console.log('snippit is', response)
-			res.status(200).send(response)
-		}).catch((err) => {
-			res.status(500).send({ errorMessage: 'This is why we cant have nice things.' });
-			console.log(err);
-		})
+		req.app
+			.get('db')
+			.get_snippet()
+			.then((response) => {
+				res.status(200).send(response);
+			})
+			.catch((err) => {
+				res.status(500).send({ errorMessage: 'This is why we cant have nice getSnippet.' });
+				console.log(err);
+			});
 	}
 };

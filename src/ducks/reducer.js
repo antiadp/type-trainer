@@ -8,6 +8,7 @@ export default function reducer(state=initialState, action){
         case GET_TEST_RESULTS:
             return Object.assign({}, state, {results: action.payload})
         case GET_USER:
+            console.log('newly created user', action.payload)
             return Object.assign({}, state, {user: action.payload})
         default: return state;
     }
