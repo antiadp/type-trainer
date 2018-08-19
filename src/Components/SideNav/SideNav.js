@@ -2,14 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import swal from 'sweetalert';
-import Login from './../Login/Login';
-import { getTestResults, getUser } from './../../ducks/reducer';
+import { getTestResults, getUser, removeUser } from './../../ducks/reducer';
+import Modal from 'react-responsive-modal';
 
 class SideNav extends Component {
 	constructor() {
 		super();
 		this.state = {
-			login: false
+			open: false,
+			username: '',
+			password: '',
+			loggedIn: false
 		};
 	}
 
@@ -18,60 +21,67 @@ class SideNav extends Component {
 			axios
 				.get('/api/all-results')
 				.then((testResults) => {
-					console.log('testResults from db', testResults.data);
 					this.props.getTestResults(testResults.data);
 				})
 				.catch((error) => console.log('Oi! Somethings gone wrong!', error));
-        }
-        if(this.props.user.length === 0){
-            axios.get('/api/user-data').then(currentUser => {
-                this.props.getUser(currentUser.data);
-            })
-        }
+		}
+	};
+	handleUsernameChange = (val) => {
+		this.setState({ username: val });
+	};
+
+	handlePasswordChange = (val) => {
+		this.setState({ password: val });
+	};
+
+	handleLoginRegRequest = () => {
+		const { username, password } = this.state;
+		const img = `https://robohash.org/${username}`;
+		axios.post('/api/new-user', { username, password, img }).then((newUser) => {
+			console.log('new user front end', newUser.data);
+			this.props.getUser(newUser.data);
+			console.log(this.state.loggedIn);
+			swal({
+				title: 'Success!',
+				text: 'Now get typing!',
+				icon: 'success',
+				button: 'Cool!'
+			});
+			this.hideLoginModal();
+		});
 	};
 
 	setLanguage = (e) => {
 		this.props.setLanguage(e);
 	};
-	tempChangeLogin = () => {
-		this.props.tempChangeLogin();
-	};
+
 	showLoginModal = () => {
-		this.setState({ login: true });
+		this.setState({ open: true });
 	};
+
 	hideLoginModal = () => {
-		this.setState({ login: false });
+		this.setState({ open: false, loggedIn: !this.state.loggedIn });
 	};
+
 	logout = () => {
-		axios.get('/api/logout').then((res) => {
-			if (res.data) {
-				return swal({
-					title: 'Logged out!',
-					text: 'Come back soon!',
-					icon: 'success',
-					button: 'Cool!'
-				});
-			} else {
-				return swal({
-					title: 'Error',
-					text: 'Something went wrong...try again',
-					icon: 'error',
-					button: 'Oops!'
-				});
-			}
+		axios.get('/api/logout').then(() => {
+			swal({
+				title: 'Logged out!',
+				text: 'Come back soon!',
+				icon: 'success',
+				button: 'Cool!'
+			});
+			this.props.removeUser();
+			this.setState({ loggedIn: !this.state.loggedIn });
 		});
 	};
+
 	render() {
 		const { testResults, user } = this.props;
-		console.log('current user', user);
 		let leaderBoard = testResults.map((user) => {
 			return (
 				<div key={user.test_id}>
-					<img
-						style={{ width: '50px', height: '50px', borderRadius: '25px', backgroundColor: 'blue' }}
-						src={user.img}
-						alt="user"
-					/>
+					<img src={user.img} alt="user" />
 					<h4>{user.username}</h4>
 					<h4>
 						wpm:{user.wpm} cpm:{user.cpm} accuracy:{user.accuracy}
@@ -83,17 +93,49 @@ class SideNav extends Component {
 			<div className="nav-wrapper">
 				<div className="login">
 					{!user.user_id && (
-						<button id="login-button" onClick={this.showLoginModal}>
-							Login / Register
-						</button>
+						<div>
+							<button id="login-button" onClick={this.showLoginModal}>
+								Login / Register
+							</button>
+						</div>
 					)}
-					<Login
-						show={this.state.login}
-						handleClose={this.hideLoginModal}
-						style={{ width: '100%', height: '100vh' }}
+					{user.user_id && (
+						<div>
+							<h3>Hello {user.username}</h3>
+							<img src={user.img} alt="user" />
+						</div>
+					)}
+					<Modal
+						open={this.state.open}
+						onClose={this.hideLoginModal}
+						classNames={{ modal: 'custom-modal' }}
+						center
 					>
-						<h1>Please enter a username and password</h1>
-					</Login>
+						<div className="side-nav-login-modal">
+							<div className="login-input">
+								<input
+									onChange={(e) => this.handleUsernameChange(e.target.value)}
+									placeholder="username"
+									className="loginReg-username-input"
+									type="text"
+								/>
+							</div>
+							<div className="login-input">
+								<input
+									onChange={(e) => this.handlePasswordChange(e.target.value)}
+									placeholder="password"
+									className="loginReg-password-input"
+									type="password"
+								/>
+							</div>
+							<div className="modal-btn">
+								<button onClick={this.handleLoginRegRequest}>Login / Register</button>
+							</div>
+							<div className="modal-btn">
+								<button onClick={this.hideLoginModal}>Cancel</button>
+							</div>
+						</div>
+					</Modal>
 				</div>
 
 				<div className="script-wrapper">
@@ -134,11 +176,11 @@ class SideNav extends Component {
 					<h1>LEADERBOARD</h1>
 					{leaderBoard}
 				</div>
-				{user.user_id ?
+				{user.user_id && (
 					<div className="logout">
 						<button onClick={this.logout}>Logout</button>
-					</div> : ''
-				}
+					</div>
+				)}
 			</div>
 		);
 	}
@@ -150,4 +192,4 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps, { getTestResults, getUser })(SideNav);
+export default connect(mapStateToProps, { getTestResults, getUser, removeUser })(SideNav);

@@ -5,11 +5,11 @@ module.exports = {
 	createUser: (req, res) => {
 		const dbi = req.app.get('db');
 		const { username, password, img } = req.body;
+		//see if username exists
 		dbi.find_user([ username ]).then((userExists) => {
-			console.log('user', userExists)
 			if (userExists[0]) {
-				req.session.user = userExists[0].user_id;
-				res.status(200).send(userExists[0]);
+				req.session.user = userExists[0];
+				res.status(200).send(req.session.user);
 			} else {
 				//create new user
 				//Encrypt password
@@ -17,8 +17,8 @@ module.exports = {
 					dbi
 						.create_user([ username, hash, img ])
 						.then((createdUser) => {
-							req.session.userid = createdUser[0].user_id;
-							res.status(200).send(createdUser);
+							req.session.user = createdUser[0];
+							res.status(200).send(req.session.user);
 						})
 						.catch((err) => {
 							res.status(500).send({ errorMessage: 'This is why we cant have createUser.' });
@@ -56,7 +56,7 @@ module.exports = {
 	},
 	logout: (req, res) => {
 		req.session.destroy();
-		res.sendStatus(200);
+		res.redirect('/');
 	},
 
 	//test_results

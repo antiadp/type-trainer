@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import swal from 'sweetalert';
 import {connect} from 'react-redux';
-import axios from 'axios';
 import {getUser} from './../../ducks/reducer';
+import swal from 'sweetalert';
+import axios from 'axios';
 import PropTypes from 'prop-types';
+import Modal from 'react-responsive-modal';
 import './Login.css';
 
 class Login extends Component {
@@ -11,7 +12,8 @@ class Login extends Component {
 		super();
 		this.state = {
 			username: '',
-			password: ''
+			password: '',
+			loggeIn: false
 		};
 
 		this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -37,7 +39,7 @@ class Login extends Component {
         this.setState({username: '', password: ''})
         this.props.handleClose()
         swal({
-            title: "User created!",
+            title: "Success!",
             text: "Now get typing!",
             icon: "success",
             button: "Cool!",
@@ -46,7 +48,7 @@ class Login extends Component {
 
 	render() {
 		// Render nothing if the "show" prop is false
-		if (!this.props.show) {
+		if (!this.props.open) {
 			return null;
 		}
 		// The gray background
@@ -71,7 +73,7 @@ class Login extends Component {
 		};
 		return (
 			<div className="backdrop" style={{ backdropStyle }}>
-				<div className="modal" style={{ modalStyle }}>
+				<Modal className="modal" style={{ modalStyle }} open={this.props.show} onclose={this.props.hide} >
 					{this.props.children}
 					<div className="loginReg-container">
 						<div className="loginReg-username">
@@ -98,9 +100,9 @@ class Login extends Component {
 					</div>
 
 					<div className="footer">
-						<button onClick={this.props.handleClose}>Close</button>
+						<button onClick={this.props.onClose}>Close</button>
 					</div>
-				</div>
+				</Modal>
 			</div>
 		);
 	}

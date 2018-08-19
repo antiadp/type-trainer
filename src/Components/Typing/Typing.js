@@ -31,6 +31,7 @@ class Typing extends Component {
 		axios.get('/api/get-snippet').then((res) => {
 			let snippet = res.data[0].snippet;
 			let snippetArray = snippet.split(',').map((current) => {
+				// console.log('current',Number(current))
 				return Number(current);
 			});
 
