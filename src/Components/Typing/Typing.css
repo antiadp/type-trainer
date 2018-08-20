@@ -1,3 +1,4 @@
+
 #text-input{
     width:60%;
     min-width:60%;
@@ -5,6 +6,10 @@
     height:400px;
     min-height:400px;
     max-height:400px;
+    background-color: rgba(255, 0, 0, 0);
+    z-index: 10;
+    color:rgba(255, 255, 255, 0);
+
 }
 .script{
     cursor:default;

@@ -4,6 +4,7 @@
     height:100%;
     position: absolute;
     top:0px;
+    left:0px;
 }
 
 .nav-wrapper{
@@ -29,6 +30,7 @@
 #login-button{
     height:50px;
     width:100px;
+    z-index: 10;
 }
 .script-wrapper{
     grid-area: scripts;
@@ -36,9 +38,11 @@
     display:flex;
     flex-direction: column;
     justify-content: space-around;
+    z-index: 10;
 }
 .logout{
     grid-area:logout;
+    z-index: 10;
 }
 img {
     width: 50px;
@@ -59,4 +63,7 @@ img {
 }
 .modal-btn {
     margin: 20px auto;
+}
+.click{
+    z-index: 10;
 }

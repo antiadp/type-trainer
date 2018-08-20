@@ -36,9 +36,9 @@ class App extends Component {
 				<button
 					style={
 						this.state.menu ? (
-							{ 'textAlign': 'left', position: 'absolute', left: 'calc(20% + 5px)' }
+							{ 'textAlign': 'left', position: 'absolute', left: 'calc(20% + 5px)', 'zIndex':10}
 						) : (
-								{ 'textAlign': 'left', position: 'absolute', left: '5px' }
+								{ 'textAlign': 'left', position: 'absolute', left: '5px','zIndex':10 }
 							)
 					}
 					onClick={() => {
@@ -53,6 +53,7 @@ class App extends Component {
 						loggedIn={this.state.loggedIn}
 						tempChangeLogin={this.tempChangeLogin}
 						timer={this.state.timer}
+					
 					/>
 				) : (
 						<div />
