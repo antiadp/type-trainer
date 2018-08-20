@@ -3,12 +3,14 @@ const initialState = {
     user: {}
 }
 
+//As of right now we aren't using the reducer to store leaderboard results.
+//Everything is still set up to store it here though.
+
 export default function reducer(state=initialState, action){
     switch(action.type){
         case GET_TEST_RESULTS:
             return Object.assign({}, state, {results: action.payload})
         case GET_USER:
-            console.log('user on reducer', action.payload)
             return Object.assign({}, state, {user: action.payload})
         case REMOVE_USER:
             return initialState;

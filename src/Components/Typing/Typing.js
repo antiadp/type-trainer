@@ -23,14 +23,14 @@ class Typing extends Component {
     }
 
     everySecond = () => {
-        console.log(this.state.timer)
+        // console.log(this.state.timer)
         this.setState({
             timer: this.state.timer - 1
         })
         this.startTimer()
     }
     startTimer = () => {
-        console.log('clicked')
+        // console.log('clicked')
         if (this.state.timer > 0) {
             setTimeout(this.everySecond, 1000)
         }
@@ -38,7 +38,7 @@ class Typing extends Component {
 
     componentDidMount() {
         axios.get('/api/get-snippet').then(res => {
-            console.log(res, 'front end res')
+            // console.log(res, 'front end res')
             let snippet = res.data[0].snippet;
             let snippetArray = snippet.split(',').map((current) => {
                 return Number(current)
@@ -63,7 +63,7 @@ class Typing extends Component {
 
     updateUserInput = (value) => {
         if (this.state.timer === 0) {
-            console.log('hello, i\'m finished')
+            // console.log('hello, i\'m finished')
             this.setState({
                 timerBool: true,
             })

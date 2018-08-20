@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import swal from 'sweetalert';
-import { getTestResults, getUser, removeUser } from './../../ducks/reducer';
+import { getUser, removeUser } from './../../ducks/reducer';
 import Modal from 'react-responsive-modal';
 
 class SideNav extends Component {
@@ -12,21 +12,20 @@ class SideNav extends Component {
 			open: false,
 			username: '',
 			password: '',
-			loggedIn: false
+			loggedIn: false,
+			leaderBoardRes: []
 		};
 	}
 
 	componentDidMount = () => {
-		if (this.props.testResults.length === 0) {
-			axios
-				.get('/api/all-results')
-				.then((testResults) => {
-					this.props.getTestResults(testResults.data);
-				})
-				.catch((error) => console.log('Oi! Somethings gone wrong!', error));
-		}
-		if(!this.props.user.user_id){
-			axios.get('/api/user-data').then(userOnSesh => this.props.getUser(userOnSesh.data))
+		axios
+			.get('/api/all-results')
+			.then((testResults) => {
+				this.setState({ leaderBoardRes: testResults.data });
+			})
+			.catch((error) => console.log('Oi! Somethings gone wrong!', error));
+		if (!this.props.user.user_id) {
+			axios.get('/api/user-data').then((userOnSesh) => this.props.getUser(userOnSesh.data));
 		}
 	};
 	handleUsernameChange = (val) => {
@@ -41,9 +40,7 @@ class SideNav extends Component {
 		const { username, password } = this.state;
 		const img = `https://robohash.org/${username}`;
 		axios.post('/api/new-user', { username, password, img }).then((newUser) => {
-			console.log('new user front end', newUser.data);
 			this.props.getUser(newUser.data);
-			console.log(this.state.loggedIn);
 			swal({
 				title: 'Success!',
 				text: 'Now get typing!',
@@ -80,8 +77,8 @@ class SideNav extends Component {
 	};
 
 	render() {
-		const { testResults, user } = this.props;
-		let leaderBoard = testResults.map((user) => {
+		const { user } = this.props;
+		let leaderBoard = this.state.leaderBoardRes.map((user) => {
 			return (
 				<div key={user.test_id}>
 					<img src={user.img} alt="user" />
@@ -92,6 +89,7 @@ class SideNav extends Component {
 				</div>
 			);
 		});
+		console.log("leaderboard restult", leaderBoard)
 		return (
 			<div className="nav-wrapper">
 				<div className="login">
@@ -195,4 +193,4 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps, { getTestResults, getUser, removeUser })(SideNav);
+export default connect(mapStateToProps, { getUser, removeUser })(SideNav);
