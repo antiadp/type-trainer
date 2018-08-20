@@ -17,19 +17,22 @@ class Metrics extends Component {
         }
     }
     componentDidUpdate(){
-        this.setState({
-            keyPresses: this.state.keyPresses,
-            numErrors: this.state.keyPresses,
-            totalChars: this.state.totalChars,
-            currentTime: this.state.currentTime,
-            DEM: ((this.state.accuracy/100) * (this.state.WPM - this.state.numErrors))
-        })
+        // this.setState({
+        //     keyPresses: this.state.keyPresses,
+        //     numErrors: this.state.keyPresses,
+        //     totalChars: this.state.totalChars,
+        //     currentTime: this.state.currentTime,
+        //     DEM: ((this.state.accuracy/100) * (this.state.WPM - this.state.numErrors))
+        // })
     }
-
     
-
-
+    
+    
+    
     render() {
+        
+        
+
         return (
             // <div className="metrics-wrapper">
             <div className="metrics-wrapper">

@@ -9,7 +9,6 @@ import './Components/CSS/Reset.css';
 import './index.css';
 import './App.css';
 import './Components/Charts/Charts.css';
-import './Components/Login/Login.css';
 import './Components/Metrics/Metrics.css';
 import './Components/Profile/Profile.css';
 import './Components/SideNav/SideNav.css';

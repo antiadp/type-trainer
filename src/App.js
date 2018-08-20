@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 // import './App.css';
-import axios from 'axios';
-import { connect } from 'react-redux';
-import { getTestResults } from './ducks/reducer';
 import Typing from './Components/Typing/Typing';
 import SideNav from './Components/SideNav/SideNav';
 
@@ -13,34 +10,14 @@ class App extends Component {
 		this.state = {
 			menu: true,
 			language: 'HTML',
-			loggedIn: false,
-			// timer: 60
+			timer: 60
 		}
 	}
-	tempChangeLogin = () => {
-		this.setState({
-			loggedIn: !this.state.loggedIn
-		})
-	}
+
 	setLanguage = (e) => {
 		this.setState({ language: e })
 	}
 
-
-	componentDidMount = () => {
-		axios
-			.get('/api/all-results')
-			.then((testResults) => {
-				console.log('testResults from db', testResults.data);
-				this.props.getTestResults(testResults.data);
-			})
-			.catch((error) => console.log('Oi! Somethings gone wrong!', error));
-	};
-	tempChangeLogin = () => {
-		this.setState({
-			loggedIn: !this.state.loggedIn
-		});
-	};
 
 	render() {
 		return (
@@ -76,4 +53,4 @@ class App extends Component {
 	}
 }
 
-export default connect(null, { getTestResults })(App);
+export default App;
