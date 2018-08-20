@@ -12,7 +12,7 @@ class Typing extends Component {
         this.state = {
             WPM: 8,
             CPM: 40,
-            ACC: '100%',
+            ACC: 100,
             timer: 5,
             // placeholder: `Change log: timer now works on start of typing, and pasting is not allowed.`,
             timerBool: false,
@@ -48,10 +48,10 @@ class Typing extends Component {
 
             for (let i = 0; i < snippetArray.length; i++) {
                 lettersArray.push(String.fromCharCode(snippetArray[i]))
-                console.log(String.fromCharCode(snippetArray[i]))
+                // console.log(String.fromCharCode(snippetArray[i]))
             }
 
-            console.log(lettersArray, 'lettersArray')
+            // console.log(lettersArray, 'lettersArray')
 
             this.setState({
                 lettersArray: lettersArray
@@ -67,7 +67,7 @@ class Typing extends Component {
             this.setState({
                 timerBool: true,
             })
-            this.deselectTypeBox()
+            // this.deselectTypeBox()
         }
         this.setState({
             input: value
@@ -87,9 +87,9 @@ class Typing extends Component {
             asciiArray: asciiArray,
         })
     }
-    deselectTypeBox = () => {
+    // deselectTypeBox = () => {
 
-    }
+    // }
     clearMe = () => {
         console.log('No pasting allowed')
         this.setState({

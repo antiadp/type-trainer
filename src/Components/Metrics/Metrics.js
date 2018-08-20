@@ -30,7 +30,7 @@ class Metrics extends Component {
     
     
     render() {
-        
+        console.log(this.props.timer)
         
 
         return (
