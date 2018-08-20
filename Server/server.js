@@ -4,6 +4,7 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const massive = require('massive');
 const ctrl = require('./server-controllers');
+const mid = require('./middleware');
 
 const app = express();
 
@@ -27,7 +28,18 @@ massive(CONNECTION_STRING).then(db => {
 });
 
 
+//this keep the fake user logged in during development
+//comment out the line below to disable
+app.use(mid.bypassAuthInDevelopment)
+
 // users endpoints
+app.get('/api/user-data', (req, res) => {
+    if(req.session.user){
+        res.status(200).send(req.session.user)
+    } else {
+        res.status(401).send('Access Denied')
+    }
+});
 app.get('/api/all-users', ctrl.getAllUsers);
 app.get('/api/user/:id', ctrl.getUserById);
 app.post('/api/new-user', ctrl.createUser);
