@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Bar, Line} from 'react-chartjs-2'
+import {Line} from 'react-chartjs-2'
 
 export default class Charts extends Component{
     constructor(){
@@ -13,7 +13,7 @@ export default class Charts extends Component{
                         label: 'WPM',
                         data:[
                             65,
-                            50,
+                            100,
                             43,
                             60,
                             70
