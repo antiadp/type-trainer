@@ -87,7 +87,9 @@ class Typing extends Component {
                 
 
 
-                <Charts />
+                <div className="charts">
+                    <Charts />
+                </div>
             </div>
         )
     }

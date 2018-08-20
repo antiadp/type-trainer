@@ -39,8 +39,9 @@ class App extends Component {
 				{this.state.menu ? (
 					<SideNav
 						setLanguage={this.setLanguage}
-						timer={this.state.timer}
-
+						loggedIn={this.state.loggedIn}
+						tempChangeLogin={this.tempChangeLogin}
+						timer={this.state.timer}					
 					/>
 				) : (
 						<div />
