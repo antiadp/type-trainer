@@ -133,7 +133,9 @@ class Typing extends Component {
                 {/* </textarea> */}
 
 
-                <Charts />
+                <div className="charts">
+                    <Charts />
+                </div>
             </div>
         )
     }

@@ -64,8 +64,7 @@ class App extends Component {
 						setLanguage={this.setLanguage}
 						loggedIn={this.state.loggedIn}
 						tempChangeLogin={this.tempChangeLogin}
-						timer={this.state.timer}
-					
+						timer={this.state.timer}					
 					/>
 				) : (
 						<div />
