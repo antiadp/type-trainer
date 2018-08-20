@@ -138,5 +138,4 @@ class Typing extends Component {
         )
     }
 }
-export default Typing
-
+export default Typing;
