@@ -8,7 +8,7 @@ export default function reducer(state=initialState, action){
         case GET_TEST_RESULTS:
             return Object.assign({}, state, {results: action.payload})
         case GET_USER:
-            console.log('newly created user reducer', action.payload)
+            console.log('user on reducer', action.payload)
             return Object.assign({}, state, {user: action.payload})
         case REMOVE_USER:
             return initialState;
