@@ -89,7 +89,7 @@ class SideNav extends Component {
 				</div>
 			);
 		});
-		console.log("leaderboard restult", leaderBoard)
+		// console.log("leaderboard restult", leaderBoard)
 		return (
 			<div className="nav-wrapper">
 				<div className="login">
