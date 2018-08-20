@@ -25,11 +25,14 @@ class Metrics extends Component {
         //     DEM: ((this.state.accuracy/100) * (this.state.WPM - this.state.numErrors))
         // })
     }
-
     
-
-
+    
+    
+    
     render() {
+        
+        
+
         return (
             // <div className="metrics-wrapper">
             <div className="metrics-wrapper">
