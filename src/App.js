@@ -10,25 +10,25 @@ class App extends Component {
 		this.state = {
 			menu: true,
 			language: 'HTML',
-			loggedIn: false,
+			// loggedIn: false,
 			// timer: 60
 		}
 	}
-	tempChangeLogin = () => {
-		this.setState({
-			loggedIn: !this.state.loggedIn
-		})
-	}
+	// tempChangeLogin = () => {
+	// 	this.setState({
+	// 		loggedIn: !this.state.loggedIn
+	// 	})
+	// }
 	setLanguage = (e) => {
 		this.setState({ language: e })
 	}
 
 
-	tempChangeLogin = () => {
-		this.setState({
-			loggedIn: !this.state.loggedIn
-		});
-	};
+	// tempChangeLogin = () => {
+	// 	this.setState({
+	// 		loggedIn: !this.state.loggedIn
+	// 	});
+	// };
 
 	render() {
 		return (
@@ -50,10 +50,10 @@ class App extends Component {
 				{this.state.menu ? (
 					<SideNav
 						setLanguage={this.setLanguage}
-						loggedIn={this.state.loggedIn}
-						tempChangeLogin={this.tempChangeLogin}
+						// loggedIn={this.state.loggedIn}
+						// tempChangeLogin={this.tempChangeLogin}
 						timer={this.state.timer}
-					
+
 					/>
 				) : (
 						<div />
