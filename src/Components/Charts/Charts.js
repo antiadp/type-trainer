@@ -37,9 +37,18 @@ export default class Charts extends Component{
                     data={this.state.chartData}
                     width={100}
                     height={25}
-                    // options={{
-                    //     maintainAspectRatio: false
-                    // }}
+                    options={{
+                        // maintainAspectRatio: false
+                        title:{
+                            display:true,
+                            text: "Words per Minute",
+                            fontSize: 25
+                        },
+                        legend:{
+                            display:false,
+                            position:'right'
+                        }
+                    }}
                 />
             </div>
         )
