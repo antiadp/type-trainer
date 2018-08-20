@@ -48,7 +48,7 @@ img {
     width: 50px;
     height: 50px;
     border-radius: 25px;
-    background-color: blue;
+    background-color: #ffffff;
 }
 .custom-modal {
     width: 500px;
@@ -67,3 +67,59 @@ img {
 .click{
     z-index: 10;
 }
+
+/* Position and sizing of burger button */
+.bm-burger-button {
+    position: fixed;
+    width: 30px;
+    height: 24px;
+    left: 36px;
+    top: 52px;
+  }
+  
+  /* Color/shape of burger icon bars */
+  .bm-burger-bars {
+    background: #373a47;
+  }
+  
+  /* Position and sizing of clickable cross button */
+  .bm-cross-button {
+    height: 24px;
+    width: 24px;
+  }
+  
+  /* Color/shape of close button cross */
+  .bm-cross {
+    background: #ffffff;
+  }
+  
+  /* General sidebar styles */
+  .bm-menu {
+    background: #a5a5af;
+    padding: 2.5em 1.5em 0;
+    font-size: 1.15em;
+    border-radius: 20px;
+    box-shadow: 0 14px 28px 0 rgba(0, 0, 0, 0.66)
+  }
+  
+  /* Morph shape necessary with bubble or elastic */
+  .bm-morph-shape {
+    fill: #373a47;
+  }
+  
+  /* Wrapper for item list */
+  .bm-item-list {
+    color: #ffffff;
+    padding: 0.8em;
+  }
+  
+  /* Individual item */
+  .bm-item {
+    display: inline-block;
+  }
+  
+  /* Styling of overlay */
+  .bm-overlay {
+    background: rgba(0, 0, 0, 0.3);
+  }
+  
