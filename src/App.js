@@ -38,10 +38,8 @@ class App extends Component {
 				</button>
 				{this.state.menu ? (
 					<SideNav
-						setLanguage={this.setLanguage}
-						loggedIn={this.state.loggedIn}
-						tempChangeLogin={this.tempChangeLogin}
-						timer={this.state.timer}					
+						setLanguage={this.setLanguage} 
+						timer={this.state.timer}
 					/>
 				) : (
 						<div />

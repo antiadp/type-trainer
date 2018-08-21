@@ -18,10 +18,10 @@ class Metrics extends Component {
         }
     }
     componentDidMount(){
- 
+
     }
 
- 
+
     everySecond = () => {
         this.setState({
             currentTime: this.state.currentTime - 1
@@ -35,7 +35,7 @@ class Metrics extends Component {
             return
     }
 }
-    
+
 
     render() {
 
@@ -47,17 +47,17 @@ class Metrics extends Component {
             <div className="metrics-wrapper">
                 <div className="WPM">
                     <h1>{this.state.WPM}</h1>
-                   
+
                     <h4>WPM</h4>
                 </div>
                 <div className="CPM">
                     <h1>{this.state.CPM}</h1>
-                    
+
                     <h4>Characters per minute</h4>
                 </div>
                 <div className="ACC">
                     <h1>{this.state.ACC}%</h1>
-                     
+
                     <h4>Accuracy</h4>
                 </div>
                 <div className="timer-wrapper">

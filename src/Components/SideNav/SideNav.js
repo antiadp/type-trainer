@@ -4,6 +4,7 @@ import axios from 'axios';
 import swal from 'sweetalert';
 import { getUser, removeUser } from './../../ducks/reducer';
 import Modal from 'react-responsive-modal';
+import Profile from './../Profile/Profile';
 
 class SideNav extends Component {
 	constructor() {
@@ -13,7 +14,8 @@ class SideNav extends Component {
 			username: '',
 			password: '',
 			loggedIn: false,
-			leaderBoardRes: []
+			leaderBoardRes: [],
+			profile: false
 		};
 	}
 
@@ -62,6 +64,9 @@ class SideNav extends Component {
 	hideLoginModal = () => {
 		this.setState({ open: false, loggedIn: !this.state.loggedIn });
 	};
+	showProfile = () => {
+		this.setState({ profile: !this.state.profile });
+	};
 
 	logout = () => {
 		axios.get('/api/logout').then(() => {
@@ -89,7 +94,6 @@ class SideNav extends Component {
 				</div>
 			);
 		});
-		// console.log("leaderboard restult", leaderBoard)
 		return (
 			<div className="nav-wrapper">
 				<div className="login">
@@ -101,11 +105,12 @@ class SideNav extends Component {
 						</div>
 					)}
 					{user.user_id && (
-						<div>
+						<div onClick={this.showProfile}>
 							<h3>Hello {user.username}</h3>
 							<img src={user.img} alt="user" />
 						</div>
 					)}
+					<Profile show={this.state.profile} close={this.showProfile} />
 					<Modal
 						open={this.state.open}
 						onClose={this.hideLoginModal}
