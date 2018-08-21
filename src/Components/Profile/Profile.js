@@ -1,59 +1,63 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import {getUser} from './../../ducks/reducer';
+import { getUser } from './../../ducks/reducer';
+import Modal from 'react-responsive-modal';
+import Charts from './../Charts/Charts';
 
 class Profile extends Component {
-    constructor(){
-        super()
-        this.state = {
-            username: '',
-            userImg: '',
-            tipOfDay: '',
-            wpmHist: {},
-            accHist: {}
-        }
+	constructor() {
+		super();
+		this.state = {
+			open: false,
+			tipOfDay: '',
+			wpmHist: {},
+			accHist: {}
+		};
+	}
 
-        this.handleCloseModal = this.handleCloseModal.bind(this);
-
-    }
-
-    componentDidMount(){
+	componentDidMount() {
         // get username, userImg, tipOfDay, wpmHist, accHist
-        axios.get(`/api/user/${5}`).then(res => {
-            console.log('data on front end', res.data)
-            this.props.getUser(res.data)
-        }).catch((error) => console.log('Oi! Somethings gone wrong!', error));
+		if (!this.props.user.user_id) {
+			axios
+				.get('/api/user-data')
+				.then((userOnSesh) => this.props.getUser(userOnSesh.data))
+				.catch((error) => console.log('Oi! Somethings gone wrong!', error));
+        }
+    }
+    componentWillReceiveProps(nextProps){
+        this.setState({open: nextProps.show})
     }
 
-    handleCloseModal(){
-        // close profile modal
-    }
+	hideProfileModal = () => {
+        this.props.close()
+		this.setState({ open: false });
+	};
 
+	render() {
+		return (
+			<Modal open={this.state.open} onClose={this.hideProfileModal} classNames={{ modal: 'custom-modal' }} center>
+				<div className="profile-userInfo">
+					<h2>Welcome {this.props.user.username}</h2>
+					<img src={this.props.user.img} alt="" />
+				</div>
 
-    render(){
-        return(
-            <div className="profile">
-                <button onClick={ this.handleCloseModal}
-                        className="profile-close-btn">
-                        X</button>
-                <div className="profile-userInfo">
-                    <h2>Welcome { this.state.username }</h2>
-                    <img src={this.state.userImg} alt=""/>
-                </div>
+				<div className="profile-graphs">
+					<div><Charts /></div>
+				</div>
 
-                <div className="profile-graphs">
-                    <p>Some Graphs & Charts</p>
-                </div>
-
-                <div className="profile-tips">
-                    <h3>Tip Of The Day</h3>
-                    {this.state.tipOfDay}
-                </div>
-
-            </div>
-        )
-    }
+				<div className="profile-tips">
+					<h3>Tip Of The Day</h3>
+					{this.state.tipOfDay}
+				</div>
+			</Modal>
+		);
+	}
 }
+const mapStateToProps = (state) => {
+	return {
+		user: state.user
+	};
+};
 
-export default connect(null, {getUser})(Profile);
+export default connect(mapStateToProps, { getUser })(Profile);

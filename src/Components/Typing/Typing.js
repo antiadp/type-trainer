@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import Metrics from '../Metrics/Metrics';
 import Charts from '../Charts/Charts';
