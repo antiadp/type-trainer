@@ -11,7 +11,7 @@ class Typing extends Component {
             input: '',
             asciiArray: [65],
             lettersArray: ['A'],
-            text: 'thisissometext'
+            timerBool:false,
         }
     }
 
@@ -40,19 +40,20 @@ class Typing extends Component {
 
 
     updateUserInput = (value) => {
-        this.setState({
+        if(!this.state.timerBool){
+            this.setState({
             input: value
         })
-
         let tempArray = []
         for (let i = 0; i < value.length; i++) {
             tempArray.push(value.charCodeAt(i))
         }
-
+        
         let asciiArray = tempArray.toString()
         this.setState({
             asciiArray: asciiArray,
         })
+    }
     }
 
     clearMe = () => {
@@ -62,25 +63,34 @@ class Typing extends Component {
             asciiArray: ''
         })
     }
+    toggleReadOnly = () =>{
+        console.log('fired')
+        this.setState({
+            timerBool:true
+        })
+    }
 
     render() {
         let joined = this.state.lettersArray.join('')
         let input = this.state.input
+        // console.log('ACC',this.state.ACC)
         return (
+
             <div className='typing-wrapper'>
 
                 <Metrics
                     userInput={input}
                     snippet={joined}
-                    text={this.state.text}
+                    toggleReadOnly={this.toggleReadOnly}
 
                 />
 
-                <textarea value={this.state.input} onChange={(e) => { this.updateUserInput(e.target.value) }} data-gramm_editor="false" autoComplete='off' spellCheck='false' name="Main Typing input" id="text-input" cols="30" rows="10" placeholder={this.state.placeholder} maxLength='500' readOnly={this.state.timer !== 0 ? false : true} onCopy={this.clearInput} onDrag={this.clearInput} onDrop={this.clearInput} onPaste={this.clearInput} />
+                <textarea value={this.state.input} onChange={(e) => { this.updateUserInput(e.target.value) }} data-gramm_editor="false" autoComplete='off' spellCheck='false' name="Main Typing input" id="text-input" cols="30" rows="10" placeholder={this.state.placeholder} maxLength='500' readOnly={this.state.timerBool} onCopy={this.clearInput} onDrag={this.clearInput} onDrop={this.clearInput} onPaste={this.clearInput} />
            
                 <div className="display-wrapper">
                     <div className="DisplayText">
-                        {this.state.lettersArray}
+                        <p id= 'snippetDisplay'>{this.state.lettersArray}</p>
+                            
                     </div>
                 </div>
                 <br />

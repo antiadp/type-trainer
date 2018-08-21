@@ -13,7 +13,7 @@ export default class Charts extends Component{
                         label: 'WPM',
                         data:[
                             65,
-                            100,
+                            5,
                             43,
                             60,
                             70
@@ -35,9 +35,6 @@ export default class Charts extends Component{
 					data={this.state.chartData}
 					width={100}
 					height={25}
-					// options={{
-					//     maintainAspectRatio: false
-					// }}
 				/>
 			</div>
 		);
