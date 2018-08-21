@@ -11,8 +11,6 @@
     position: absolute;
     align-self:center;
     z-index:-10;    
-    
-
 }
 
 .display-wrapper{
@@ -25,4 +23,7 @@
     display:flex;
     justify-content:center;
     z-index:-10;
+}
+#snippetDisplay{
+    font-family:'Stalinist One'
 }
