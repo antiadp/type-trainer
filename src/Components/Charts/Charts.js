@@ -28,20 +28,18 @@ export default class Charts extends Component{
             }
         }
     }
-    render(){
-
-        return(
-            <div className="chart">
-
-                <Line
-                    data={this.state.chartData}
-                    width={100}
-                    height={25}
-                    // options={{
-                    //     maintainAspectRatio: false
-                    // }}
-                />
-            </div>
-        )
-    }
+	render() {
+		return (
+			<div className="chart">
+				<Line
+					data={this.state.chartData}
+					width={100}
+					height={25}
+					// options={{
+					//     maintainAspectRatio: false
+					// }}
+				/>
+			</div>
+		);
+	}
 }

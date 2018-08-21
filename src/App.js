@@ -37,12 +37,12 @@ class App extends Component {
         >
           Toggle Menu
 				</button>
-        {this.state.menu 
-          ? (<SideNav setLanguage={this.setLanguage} timer={this.state.timer} />) 
+        {this.state.menu
+          ? (<SideNav setLanguage={this.setLanguage} timer={this.state.timer} />)
           : (<div />)} */}
         <Menu noOverlay>
-          <SideNav setLanguage={this.setLanguage} timer={this.state.timer}/>  
-        </Menu>  
+          <SideNav setLanguage={this.setLanguage} timer={this.state.timer}/>
+        </Menu>
         <Typing />
         <h2 className="script">{this.state.language}</h2>
       </div>
