@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import Metrics from '../Metrics/Metrics';
 import Charts from '../Charts/Charts';
-import DisplayText from '../DisplayText/DisplayText'
 import axios from 'axios'
 
 class Typing extends Component {
@@ -11,13 +10,13 @@ class Typing extends Component {
         this.state = {
 
             input: '',
-            asciiArray: [],
-            lettersArray: [],
-            text:'thisissometext'
+            asciiArray: [65],
+            lettersArray: ['A'],
+            text: 'thisissometext'
         }
     }
 
-    
+
 
     componentDidMount() {
         axios.get('/api/get-snippet').then(res => {
@@ -56,7 +55,7 @@ class Typing extends Component {
             asciiArray: asciiArray,
         })
     }
-    
+
     clearMe = () => {
         console.log('No pasting allowed')
         this.setState({
@@ -64,7 +63,7 @@ class Typing extends Component {
             asciiArray: ''
         })
     }
-    
+
     render() {
         let joined = this.state.lettersArray.join('')
         let input = this.state.input
@@ -74,17 +73,20 @@ class Typing extends Component {
                 <Metrics
                     userInput={input}
                     snippet={joined}
-                    text={this.state.text}    
-                
+                    text={this.state.text}
+
                 />
-                
+
                 <textarea value={this.state.input} onChange={(e) => { this.updateUserInput(e.target.value) }} data-gramm_editor="false" autoComplete='off' spellCheck='false' name="Main Typing input" id="text-input" cols="30" rows="10" placeholder={this.state.placeholder} maxLength='500' readOnly={this.state.timer !== 0 ? false : true} onCopy={this.clearInput} onDrag={this.clearInput} onDrop={this.clearInput} onPaste={this.clearInput} />
-                <DisplayText>
-                    {this.state.lettersArray}
-                </DisplayText>
+           
+                <div className="display-wrapper">
+                    <div className="DisplayText">
+                        {this.state.lettersArray}
+                    </div>
+                </div>
                 <br />
                 <br />
-                
+
 
 
                 <div className="charts">
