@@ -20,6 +20,8 @@ class Metrics extends Component {
             this.letterTest()
         }
     }
+
+
     everySecond = () => {
         this.setState({
             currentTime: this.state.currentTime - 1
@@ -34,6 +36,8 @@ class Metrics extends Component {
         }
     }
   
+
+
     letterTest = () => {
         console.log('letterTest')
         let snippetArray = this.props.snippet.split('')
@@ -47,10 +51,10 @@ class Metrics extends Component {
         if (this.props.userInput.length === this.props.snippet.length || this.state.currentTime === 0 || this.state.currentTime < 0) {
             this.endTest()
         }
-
     }
-    endTest = () => {
 
+
+    endTest = () => {
         console.log('timer is out, or snippet is of equal length')
         if (this.props.userInput.length === this.props.snippet) {
             let snippetArray = this.props.snippet.split('')
@@ -71,27 +75,19 @@ class Metrics extends Component {
         if (this.props.userInput.length === 1) {
             this.startTimer()
         }
-
-
-
-
-
-
         return (
             <div className="metrics-wrapper">
                 <div className="WPM">
                     <h1>{this.state.WPM}</h1>
-
                     <h4>WPM</h4>
                 </div>
                 <div className="CPM">
                     <h1>{this.state.CPM}</h1>
-
-                    <h4>Characters per minute</h4>
+                    <h4>CPM</h4>
+                    {/* <p>Characters per minute</p> */}
                 </div>
                 <div className="ACC">
                     <h1>{this.state.ACC}%</h1>
-
                     <h4>Accuracy</h4>
                 </div>
                 <div className="timer-wrapper">

@@ -1,14 +1,16 @@
 .App {
   text-align: center;
   height:99vh;
-  border:5px solid yellow;
-  background-image: linear-gradient(99deg, #77c9d4, #57bc90 60%);
+  /* border:5px solid yellow; */
+  /* background-image: linear-gradient(99deg, #77c9d4, #57bc90 60%);
+  position: relative;
+  z-index: -2200; */
 
 }
 
 body{
   height:100vh;
-  border:2px solid rebeccapurple;
+  /* border:2px solid rebeccapurple; */
 
 }
 
