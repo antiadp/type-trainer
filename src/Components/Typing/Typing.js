@@ -19,7 +19,7 @@ class Typing extends Component {
 
     componentDidMount() {
         axios.get('/api/get-snippet').then(res => {
-            let snippet = res.data[0].snippet;
+            let snippet = res.data[24].snippet;
             let snippetArray = snippet.split(',').map((current) => {
                 return Number(current)
             })
@@ -71,6 +71,7 @@ class Typing extends Component {
     }
 
     render() {
+        console.log('snippet',this.state.lettersArray)
         let joined = this.state.lettersArray.join('')
         let input = this.state.input
         // console.log('ACC',this.state.ACC)

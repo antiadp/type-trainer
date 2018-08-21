@@ -3,13 +3,14 @@ import React, { Component } from 'react'
 class Metrics extends Component {
     constructor() {
         super()
+        this.allErrs = 0
         this.state = {
             WPM: 0,
             CPM: 0,
             ACC: 100,
             DEM: 0,
-            currentTime: 10,
-            baseTimer: 10,
+            currentTime: 20,
+            baseTimer: 20,
             endErrs: 0,
             allErrs: 0,
             testStart: 0
@@ -44,13 +45,13 @@ class Metrics extends Component {
         this.setState({
             CPM: cpm
         })
-        
+
     }
 
-    ACCCalc = () => {
+    ACCCalc = (errs) => {
         var totalChar = this.props.userInput.length
-
-        var numberCorrect = totalChar-(this.state.allErrs- this.state.endErrs)
+        let errors = (this.allErrs - this.state.endErrs) || errs || 0
+        var numberCorrect = totalChar - (errors)
 
         var acc = numberCorrect / totalChar
 
@@ -74,7 +75,7 @@ class Metrics extends Component {
         this.startTimer()
     }
     startTimer = () => {
-        if (this.state.currentTime > 0) {
+        if (this.state.currentTime >= 0) {
             setTimeout(this.everySecond, 1000)
         } else if (this.state.currentTime === 0 || this.state.currentTime < 0) {
             this.endTest()
@@ -94,19 +95,26 @@ class Metrics extends Component {
         let snippetArray = this.props.snippet.split('')
         let inputArray = this.props.userInput.split('')
         let inputLength = inputArray.length
+        var errs = this.allErrs;
         if (inputArray[inputLength - 1] !== snippetArray[inputLength - 1]) {
-            var errs = this.state.allErrs + 1
-
+            errs = this.allErrs + 1 || 0
+            this.allErrs ++
+            console.log(errs)
             this.setState({
+
                 allErrs: errs
             }, () => { console.log(this.state.allErrs) })
-        }
+            
+        } 
+        // else {
+            // var errs
+        // }
         if (this.props.userInput.length === this.props.snippet.length || this.state.currentTime <= 0) {
             this.endTest()
         }
         this.WPMCalc(typingInstance, errs)
         this.CPMCalc()
-        this.ACCCalc()
+        this.ACCCalc(errs)
     }
 
 
@@ -131,8 +139,8 @@ class Metrics extends Component {
 
 
     render() {
-        let { ACC, WPM, testStart } = this.state
-        console.log({ ACC }, { WPM }, { testStart })
+        // let { ACC, WPM, testStart } = this.state
+        // console.log({ ACC }, { WPM }, { testStart })
         return (
             <div className="metrics-wrapper">
                 <div className="WPM">
