@@ -15,11 +15,9 @@ import './Components/SideNav/SideNav.css';
 import './Components/Typing/Typing.css';
 import './Components/Typing/DisplayText.css'
 
-// import registerServiceWorker from './registerServiceWorker';
 ReactDOM.render(
 	<Provider store={store}>
 		<App />
 	</Provider>,
 	document.getElementById('root')
 );
-// registerServiceWorker();
