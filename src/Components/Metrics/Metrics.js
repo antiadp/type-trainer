@@ -94,8 +94,6 @@ class Metrics extends Component {
         let timer = (typeinstance - timerBegin)
         let wpm = (miniWPM / 5) / (timer / 60000)
 
-        // debugger
-
         wpm = Math.round(wpm)
 
         this.setState({ WPM: wpm })
