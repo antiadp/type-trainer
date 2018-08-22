@@ -10,34 +10,31 @@ class Typing extends Component {
 			input: '',
 			asciiArray: [ 65 ],
 			lettersArray: [ 'A' ],
-			timerBool: false
+            timerBool: false,
+            snippetAscii: []
 		};
 	}
 
 	componentDidMount() {
 		axios.get('/api/get-snippet').then((res) => {
-			console.log('res.data', res.data[0].snippet);
 			let snippet = res.data[0].snippet;
 			let snippetArray = snippet.split(',').map((current) => {
 				return Number(current);
 			});
 
+            this.setState({snippetAscii: snippetArray})
 			let lettersArray = [];
 
 			for (let i = 0; i < snippetArray.length; i++) {
 				// if (snippetArray[i] === 10) {
 				// 	lettersArray.push(<br />);
 				// }
-				// if (snippetArray[i] === 9) {
-				// 	console.log('char9', snippetArray[i]);
-				// 	lettersArray.push('tab');
-				// }
 				lettersArray.push(String.fromCharCode(snippetArray[i]));
 			}
-
+            // letterArray is an array of character strings from the snippet script
 			this.setState({
 				lettersArray: lettersArray
-			});
+            });
 		});
 	}
 	// updateUserInput is converting user input to ascii chars and pushing them into asciiArray
@@ -50,10 +47,9 @@ class Typing extends Component {
 			for (let i = 0; i < value.length; i++) {
 				tempArray.push(value.charCodeAt(i));
 			}
-
-			let asciiArray = tempArray.toString();
+            //  asciiArray is an array of ascii nums
 			this.setState({
-				asciiArray: asciiArray
+                asciiArray: tempArray
 			});
 		}
 	};
@@ -74,25 +70,20 @@ class Typing extends Component {
 
 	render() {
 		let classes;
-		let tabClass = 'tabClass';
 		let snippetWithSpan = this.state.lettersArray.map((letter, i) => {
-			if (letter === 'tab') {
-				classes = tabClass;
-			}
 			return (
-				<span key={i} className={classes}>
-					{letter}
-				</span>
+				<span key={i} className={classes}>{letter}</span>
 			);
-		});
-		let joined = this.state.lettersArray.join('');
+    });
+        // joined is the snippet script string 
+        // let joined = this.state.lettersArray.join('');
+        
 		return (
 			<div className="typing-wrapper">
 				<Metrics
-					userInput={this.state.input}
-					snippet={joined}
-					inputToAscii={this.state.asciiArray}
-					toggleReadOnly={this.toggleReadOnly}
+					userInputAscii = {this.state.asciiArray}
+					snippet = {this.state.snippetAscii}
+					toggleReadOnly = {this.toggleReadOnly}
 				/>
 
 				<textarea
