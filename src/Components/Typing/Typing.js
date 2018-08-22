@@ -7,7 +7,7 @@ class Typing extends Component {
 	constructor(props) {
 		super();
 		this.state = {
-			input: [],
+			input: '',
 			asciiArray: [ 65 ],
 			lettersArray: [ 'A' ],
 			timerBool: false
@@ -68,6 +68,7 @@ class Typing extends Component {
 			}
 
 			let asciiArray = tempArray.toString();
+			console.log('asciiArray',asciiArray)
 			this.setState({
 				asciiArray: asciiArray
 			});
@@ -89,20 +90,20 @@ class Typing extends Component {
 	};
 
 	render() {
-		let correct;
-		let incorrect;
-		let currentChar;
-		let correctedChar;
+		// let correct;
+		// let incorrect;
+		// let currentChar;
+		// let correctedChar;
 		// let classes = `${correct}${incorrect}${currentChar}${correctedChar}`;
 		let classes;
 		let tabClass = 'tabClass'
-		let joined = this.state.lettersArray.map((letters, i) => {
-			if(letters === 'tab'){
+		let joined = this.state.lettersArray.map((letter, i) => {
+			if(letter === 'tab'){
 				classes = tabClass
 			}
 			return (
 				<span key={i} className={classes}>
-					{letters}
+					{letter}
 				</span>
 			);
 		});
