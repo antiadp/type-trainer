@@ -9,8 +9,8 @@ class Metrics extends Component {
             CPM: 0,
             ACC: 100,
             DEM: 0,
-            currentTime: 10,
-            baseTimer: 10,
+            currentTime: 20,
+            baseTimer: 20,
             endErrs: 0,
             allErrs: 0,
             testStart: 0
@@ -69,6 +69,7 @@ class Metrics extends Component {
             var errs = this.state.allErrs + 1
             this.allErrs ++
             this.setState({
+
                 allErrs: errs
             }, () => { console.log(this.state.allErrs) })
         }
@@ -127,7 +128,6 @@ class Metrics extends Component {
         this.props.toggleReadOnly()
 
         console.log('timer is out, or snippet is of equal length')
-
         let snippetArray = this.props.snippet.split('')
         let inputArray = this.props.userInput.split('')
         for (let i = 0; i < inputArray.length; i++) {

@@ -78,6 +78,7 @@ class Typing extends Component {
     // ----------------------------------------------------------------------------------
 
     render() {
+        console.log('snippet',this.state.lettersArray)
         let joined = this.state.lettersArray.join('')
         let input = this.state.input
         return (
