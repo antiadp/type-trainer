@@ -13,14 +13,11 @@ import './Components/Metrics/Metrics.css';
 import './Components/Profile/Profile.css';
 import './Components/SideNav/SideNav.css';
 import './Components/Typing/Typing.css';
-import './Components/DisplayText/DisplayText.css'
-import './Components/MetricsModal/MetricsModal.css'
+import './Components/Typing/DisplayText.css'
 
-// import registerServiceWorker from './registerServiceWorker';
 ReactDOM.render(
 	<Provider store={store}>
 		<App />
 	</Provider>,
 	document.getElementById('root')
 );
-// registerServiceWorker();

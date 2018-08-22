@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Stalinist+One');
-.display{
+.DisplayText{
     top:206px;
-    border:3px dotted purple;
+    /* border:3px dotted yellow; */
     width:60%;
     min-width:60%;
     max-width:60%;
@@ -11,8 +11,6 @@
     position: absolute;
     align-self:center;
     z-index:-10;    
-    
-
 }
 
 .display-wrapper{
@@ -26,8 +24,9 @@
     justify-content:center;
     z-index:-10;
 }
-#childrenprops{
+#snippetDisplay{
+    font-family:'Stalinist One';
     text-align: left;
-font-family:'Stalinist One'
-
+    font-size:50%;
+    
 }

@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Bar, Line} from 'react-chartjs-2'
+import {Line} from 'react-chartjs-2'
 
 export default class Charts extends Component{
     constructor(){
@@ -13,7 +13,7 @@ export default class Charts extends Component{
                         label: 'WPM',
                         data:[
                             65,
-                            50,
+                            5,
                             43,
                             60,
                             70
@@ -28,20 +28,15 @@ export default class Charts extends Component{
             }
         }
     }
-    render(){
-
-        return(
-            <div className="chart">
-
-                <Line
-                    data={this.state.chartData}
-                    width={100}
-                    height={25}
-                    // options={{
-                    //     maintainAspectRatio: false
-                    // }}
-                />
-            </div>
-        )
-    }
+	render() {
+		return (
+			<div className="chart">
+				<Line
+					data={this.state.chartData}
+					width={100}
+					height={25}
+				/>
+			</div>
+		);
+	}
 }
