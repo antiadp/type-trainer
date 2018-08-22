@@ -10,7 +10,8 @@
     max-height:400px;
     position: absolute;
     align-self:center;
-    z-index:-10;    
+    z-index:-10;   
+    padding-left: 2px; 
 }
 
 .display-wrapper{
