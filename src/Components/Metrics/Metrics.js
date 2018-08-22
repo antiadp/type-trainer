@@ -45,7 +45,7 @@ class Metrics extends Component {
         if(timeElapsed === 0){
             wpm = ((this.props.userInputAscii.length/5) - this.allErrors) / 1
         }else {
-            var wpm = (((this.props.userInputAscii.length/5) - this.allErrors) / ((timeElapsed) / 60000))
+             wpm = (((this.props.userInputAscii.length/5) - this.allErrors) / ((timeElapsed) / 60000))
         }
             debugger
         this.setState({
