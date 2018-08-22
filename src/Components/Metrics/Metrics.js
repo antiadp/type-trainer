@@ -6,8 +6,8 @@ class Metrics extends Component {
         this.allErrors = 0;
         this.endErrors = 0;
         this.currentTime = [];
-        this.timeToComplete = this.currentTime[this.currentTime.length -1] - this.currentTime[0]; 
-
+        // this.timeToComplete = this.currentTime[this.currentTime.length -1] - this.currentTime[0]; 
+        // debugger
         this.state = {
             WPM: 0,
             CPM: 0,
@@ -17,7 +17,7 @@ class Metrics extends Component {
     }
 
     componentDidUpdate(prevProps){
-        if ( prevProps.userInput !== this.props.userInput){
+        if ( prevProps.userInputAscii !== this.props.userInputAscii){
             this.everyLetter()
         }
     }
@@ -27,9 +27,10 @@ class Metrics extends Component {
         var timeStamp = date.getTime()
         this.currentTime.push(timeStamp)
 
-        if(this.props.userInput.length === this.props.snippetArray.length){
+        if(this.props.userInputAscii.length === this.props.snippetAscii.length){
             this.endOfSnippet()
-        } else if( this.props.userInput[this.props.userInput.length - 1] !== this.props.snippetArray[this.props.userInput.length - 1]){
+            this.props.toggleReadOnly()
+        } else if( this.props.userInputAscii[this.props.userInputAscii.length - 1] !== this.props.snippetAscii[this.props.userInputAscii.length - 1]){
             this.allErrors++
         }
         this.WPM()
@@ -39,29 +40,44 @@ class Metrics extends Component {
 
     WPM = () => {
         // check multiplying by 60000 for wpm computation ??
-        var wpm = (((this.props.userInput.length/5) - this.allErrors) / (this.timeToComplete / 60000))
-        
+        var wpm;
+        var timeElapsed = this.currentTime[this.currentTime.length -1] - this.currentTime[0]
+        if(timeElapsed === 0){
+            wpm = ((this.props.userInputAscii.length/5) - this.allErrors) / 1
+        }else {
+            var wpm = (((this.props.userInputAscii.length/5) - this.allErrors) / ((timeElapsed) / 60000))
+        }
+            debugger
         this.setState({
             WPM: Math.round(wpm)
         })
+        // debugger
     }
 
     CPM = () => {
-        var cpm = (this.props.userInput.length / (this.timeToComplete / 60000))
+        var cpm;
+        var timeElapsed = (this.currentTime[this.currentTime.length -1] - this.currentTime[0])
+        if(timeElapsed === 0){
+            cpm = (this.props.userInputAscii.length / (1))
+        } else {
+            cpm = (this.props.userInputAscii.length / ((timeElapsed) / 60000))
+        }
+
             this.setState({
                 CPM: Math.round(cpm)
             })
     }
     ACC = () => {
         var acc;
-        if(this.props.userInput.length!==this.props.snippetArray.length){
-            acc =(this.props.userInput.length - this.allErrors)/this.props.userInput.length
-        } else if (this.props.userInput.length === this.props.snippetArray.length){
-            acc =(this.props.userInput.length - this.endErrors)/this.props.userInput.length
+        if(this.props.userInputAscii.length!==this.props.snippetAscii.length){
+            acc =(this.props.userInputAscii.length - this.allErrors)/this.props.userInputAscii.length
+        } else if (this.props.userInputAscii.length === this.props.snippetAscii.length){
+            acc =(this.props.userInputAscii.length - this.endErrors)/this.props.userInputAscii.length
         }
             this.setState({
                 ACC:Math.round(acc * 100)
             })
+        // debugger
     }
     DEM = () => {
         var dem = (this.state.WPM - this.allErrors) * this.state.ACC
@@ -71,11 +87,12 @@ class Metrics extends Component {
     }
 
     endOfSnippet = () => {
-        for(let i = 0; i <= this.props.userInput; i++){
-            if(this.props.userInput[i] !== this.props.snippetArray[i]){
+        for(let i = 0; i <= this.props.userInputAscii; i++){
+            if(this.props.userInputAscii[i] !== this.props.snippetAscii[i]){
                 this.endErrors++
             } 
         }
+        
         this.WPM();
         this.CPM();
         this.ACC();
@@ -84,6 +101,7 @@ class Metrics extends Component {
 
 
     render() {
+        console.log(this.props.userInputAscii)
         return (
             <div className="metrics-wrapper">
                 <div className="WPM">
