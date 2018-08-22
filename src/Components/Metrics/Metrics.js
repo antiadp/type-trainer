@@ -64,7 +64,6 @@ class Metrics extends Component {
             this.setState({ testStart: typingInstance }
             )
         }
-
         if (inputArray[inputLength - 1] !== snippetArray[inputLength - 1]) {
             var errs = this.state.allErrs + 1
             this.allErrs ++
