@@ -1,2 +1,2 @@
 select * from snippets
-where id = 24;
+where id = 21;
