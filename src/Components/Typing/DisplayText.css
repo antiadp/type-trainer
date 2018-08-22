@@ -25,5 +25,8 @@
     z-index:-10;
 }
 #snippetDisplay{
-    font-family:'Stalinist One'
+    font-family:'Stalinist One';
+    text-align: left;
+    font-size:50%;
+    
 }
