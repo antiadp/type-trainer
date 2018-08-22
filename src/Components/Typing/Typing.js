@@ -17,22 +17,6 @@ class Typing extends Component {
 	componentDidMount() {
 		axios.get('/api/get-snippet').then((res) => {
 			console.log('res.data', res.data[0].snippet);
-			// let snippet = '';
-			// let snippetArray = [];
-			// snippet = res.data[0].snippet;
-			// console.log('this snippet',snippet)
-			// for(let i = 0; i < snippet.length; i++){
-			// //  console.log(snippet.charCodeAt(i))
-			//  snippetArray.push(snippet.charCodeAt(i))
-			// }
-			// console.log('snippetArray',snippetArray)
-
-			// let lettersArray = [];
-
-			// for (let i = 0; i < snippetArray.length; i++) {
-			// 	lettersArray.push(String.fromCharCode(snippetArray[i]));
-			// }
-			// console.log('lettersArray',lettersArray)
 			let snippet = res.data[0].snippet;
 			let snippetArray = snippet.split(',').map((current) => {
 				return Number(current);
@@ -41,13 +25,13 @@ class Typing extends Component {
 			let lettersArray = [];
 
 			for (let i = 0; i < snippetArray.length; i++) {
-                if(snippetArray[i] === 10){
-					lettersArray.push(<br></br>)
-				}
-				if(snippetArray[i]===9){
-					console.log('char9',snippetArray[i])
-					lettersArray.push('tab')
-				}
+				// if (snippetArray[i] === 10) {
+				// 	lettersArray.push(<br />);
+				// }
+				// if (snippetArray[i] === 9) {
+				// 	console.log('char9', snippetArray[i]);
+				// 	lettersArray.push('tab');
+				// }
 				lettersArray.push(String.fromCharCode(snippetArray[i]));
 			}
 
@@ -68,7 +52,6 @@ class Typing extends Component {
 			}
 
 			let asciiArray = tempArray.toString();
-			console.log('asciiArray',asciiArray)
 			this.setState({
 				asciiArray: asciiArray
 			});
@@ -90,16 +73,11 @@ class Typing extends Component {
 	};
 
 	render() {
-		// let correct;
-		// let incorrect;
-		// let currentChar;
-		// let correctedChar;
-		// let classes = `${correct}${incorrect}${currentChar}${correctedChar}`;
 		let classes;
-		let tabClass = 'tabClass'
-		let joined = this.state.lettersArray.map((letter, i) => {
-			if(letter === 'tab'){
-				classes = tabClass
+		let tabClass = 'tabClass';
+		let snippetWithSpan = this.state.lettersArray.map((letter, i) => {
+			if (letter === 'tab') {
+				classes = tabClass;
 			}
 			return (
 				<span key={i} className={classes}>
@@ -107,15 +85,7 @@ class Typing extends Component {
 				</span>
 			);
 		});
-		console.log('joined', joined);
-		// let input = this.state.input.map((char, i) => {
-		// 	return (
-		// 		<span key={i} className={classes}>
-		// 			{char}
-		// 		</span>
-		// 	);
-		// });
-		// console.log('input', input);
+		let joined = this.state.lettersArray.join('');
 		return (
 			<div className="typing-wrapper">
 				<Metrics
@@ -148,7 +118,7 @@ class Typing extends Component {
 
 				<div className="display-wrapper">
 					<div className="DisplayText">
-						<div id="snippetDisplay">{joined}</div>
+						<div id="snippetDisplay">{snippetWithSpan}</div>
 					</div>
 				</div>
 				<br />
@@ -162,4 +132,3 @@ class Typing extends Component {
 	}
 }
 export default Typing;
-
