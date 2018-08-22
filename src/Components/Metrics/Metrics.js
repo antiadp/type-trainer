@@ -101,8 +101,8 @@ class Metrics extends Component {
             this.setState({ testStart: typingInstance }
             )
         }
-        let snippetArray = this.props.snippet.split('')
-        let inputArray = this.props.userInput.split('')
+        let snippetArray = this.props.snippet
+        let inputArray = this.props.userInput
         let inputLength = inputArray.length
         if (inputArray[inputLength - 1] !== snippetArray[inputLength - 1]) {
             var errs = this.state.allErrs + 1

@@ -11,6 +11,7 @@
     position: absolute;
     align-self:center;
     z-index:-10;    
+    text-align:left;
 }
 
 .display-wrapper{
