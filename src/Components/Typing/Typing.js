@@ -129,7 +129,7 @@ class Typing extends Component {
                     {this.state.lettersArray}
                 </DisplayText>
                 <br />
-                <br />
+                <br /> 
                 {/* </textarea> */}
 
 
