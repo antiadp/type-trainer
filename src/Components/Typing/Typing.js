@@ -8,8 +8,8 @@ class Typing extends Component {
 		super();
 		this.state = {
 			input: '',
-			asciiArray: [ 65 ],
-			lettersArray: [ 'A' ],
+			asciiArray: [ 32 ],
+			lettersArray: [ ' ' ],
             timerBool: false,
             snippetAscii: []
 		};
@@ -82,7 +82,7 @@ class Typing extends Component {
 			<div className="typing-wrapper">
 				<Metrics
 					userInputAscii = {this.state.asciiArray}
-					snippet = {this.state.snippetAscii}
+					snippetAscii = {this.state.snippetAscii}
 					toggleReadOnly = {this.toggleReadOnly}
 				/>
 
