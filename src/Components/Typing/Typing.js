@@ -11,19 +11,11 @@ class Typing extends Component {
 		this.DEM=0
 		this.state = {
 			input: '',
-<<<<<<< HEAD
 			asciiArray: [ ],
 			lettersArray: [ ' ' ],
             timerBool: false,
 			snippetAscii: [],
 			spanArray: []
-=======
-			asciiArray: [32],
-			lettersArray: [' '],
-			timerBool: false,
-			snippetAscii: [],
-		
->>>>>>> 844439f6cb7be569c71cb4fd093775e9115bc103
 		};
 	}
 
