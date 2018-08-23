@@ -75,9 +75,9 @@ class Typing extends Component {
 				<span key={i} className={classes}>{letter}</span>
 			);
     });
-        // joined is the snippet script string 
+        // joined is the snippet script string
         // let joined = this.state.lettersArray.join('');
-        
+
 		return (
 			<div className="typing-wrapper">
 				<Metrics
