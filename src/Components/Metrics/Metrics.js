@@ -57,7 +57,7 @@ class Metrics extends Component {
         let inputArray = this.props.userInput.split('')
         let inputLength = inputArray.length
 
-        if (this.props.userInput.length === 1) {
+        if (this.props.userInput.length === 1 && this.state.currentTime !== this.state.baseTimer) {
             this.startTimer()
             let now = new Date()
             var typingInstance = now.getTime()
