@@ -4,21 +4,27 @@
     width:60%;
     min-width:60%;
     max-width:60%;
-    height:400px;
-    min-height:400px;
-    max-height:400px;
+    height:150px;
+    min-height:150px;
+    max-height:150px;
     background-color: rgba(0, 0, 0, 0.329);
     z-index: 10;
-    color:rgba(255, 0, 0, 0.966);
+    color:rgb(0, 0, 0);
     /* text-align: left; */
     font-family:'Stalinist One';
     text-align: left;
     font-size:50%;
+    position:relative;
+    z-index: 200;
+    /* padding-left:2px */
+    border:none;
+    border-radius: 5px;
 
 }
 .script{
     cursor:default;
 }
-.tabClass {
-    
+.typing-wraper{
+    position:relative;
+    z-index: -200;
 }

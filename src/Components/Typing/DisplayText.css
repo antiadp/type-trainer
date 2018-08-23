@@ -1,19 +1,23 @@
 
 @import url('https://fonts.googleapis.com/css?family=Stalinist+One');
 .DisplayText{
-    top:206px;
+    top:100px;
     /* border:3px dotted yellow; */
     width:60%;
     min-width:60%;
     max-width:60%;
-    height:400px;
-    min-height:400px;
-    max-height:400px;
+    height:150px;
+    min-height:150px;
+    max-height:150px;
     position: absolute;
     align-self:center;
     z-index:-10;   
-    padding-left: 2px;    
+    padding-left: 1px;    
     text-align:left;
+    padding-top:4px;
+    /* border:1px solid */
+    box-shadow: 1px 1px 20px;
+    border-radius: 5px;
 }
 
 .display-wrapper{
@@ -26,10 +30,14 @@
     display:flex;
     justify-content:center;
     z-index:-10;
+    padding: 0px;
 }
 #snippetDisplay{
     font-family:'Stalinist One';
     text-align: left;
     font-size:50%;
-    
+    margin:0px;
+    position:relative;
+    top:-1px;
+    color:rgba(0, 0, 0, 0.267);
 }
