@@ -42,12 +42,15 @@ class Metrics extends Component {
         // check multiplying by 60000 for wpm computation ??
         var wpm;
         var timeElapsed = this.currentTime[this.currentTime.length -1] - this.currentTime[0]
+        var minutesElapsed = timeElapsed/60000
         if(timeElapsed === 0){
             wpm = ((this.props.userInputAscii.length/5) - this.allErrors) / 1
         }else {
-             wpm = (((this.props.userInputAscii.length/5) - this.allErrors) / ((timeElapsed) / 60000))
+             wpm = (((this.props.userInputAscii.length - this.allErrors)/5) / ((minutesElapsed)))
         }
+        if (this.props.userInputAscii.length === this.props.snippetAscii.length){
             debugger
+        }
         this.setState({
             WPM: Math.round(wpm)
         })
@@ -62,7 +65,7 @@ class Metrics extends Component {
         } else {
             cpm = (this.props.userInputAscii.length / ((timeElapsed) / 60000))
         }
-
+        
             this.setState({
                 CPM: Math.round(cpm)
             })
@@ -105,20 +108,16 @@ class Metrics extends Component {
         return (
             <div className="metrics-wrapper">
                 <div className="WPM">
-                    <h1>{this.state.WPM}</h1>
+                    <h1 className = 'Metric'>{this.state.WPM}</h1>
                     <h4>WPM</h4>
                 </div>
                 <div className="CPM">
-                    <h1>{this.state.CPM}</h1>
+                    <h1 className = 'Metric'>{this.state.CPM}</h1>
                     <h4>CPM</h4>
                 </div>
                 <div className="ACC">
-                    <h1>{this.state.ACC}%</h1>
+                    <h1 className = 'Metric'>{this.state.ACC}%</h1>
                     <h4>Accuracy</h4>
-                </div>
-                <div className="timer-wrapper">
-                    <h1>{this.state.currentTime}</h1>
-                    <h4>Seconds</h4>
                 </div>
             </div>
         )
