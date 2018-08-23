@@ -22,10 +22,6 @@ class Metrics extends Component {
         if ( prevProps.userInputAscii !== this.props.userInputAscii){
             this.everyLetter()
         }
-        
-        this.WPMCalc(typingInstance, errs)
-        this.CPMCalc()
-        this.ACCCalc(errs)
     }
 // -----------------------------------------------------------------------
 // This will fire every time the props updates, called by 'componentDidUpdate'
