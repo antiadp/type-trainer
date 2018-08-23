@@ -1,13 +1,15 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 class Metrics extends Component {
-    constructor(){
+    constructor() {
         super()
         this.allErrors = 0;
         this.endErrors = 0;
         this.currentTime = [];
         // this.timeToComplete = this.currentTime[this.currentTime.length -1] - this.currentTime[0]; 
         // debugger
+        this.WPMArray = []
+        this.ACCArray = []
         this.state = {
             WPM: 0,
             CPM: 0,
@@ -16,8 +18,8 @@ class Metrics extends Component {
         }
     }
 
-    componentDidUpdate(prevProps){
-        if ( prevProps.userInputAscii !== this.props.userInputAscii){
+    componentDidUpdate(prevProps) {
+        if (prevProps.userInputAscii !== this.props.userInputAscii) {
             this.everyLetter()
         }
     }
@@ -27,10 +29,10 @@ class Metrics extends Component {
         var timeStamp = date.getTime()
         this.currentTime.push(timeStamp)
 
-        if(this.props.userInputAscii.length === this.props.snippetAscii.length){
+        if (this.props.userInputAscii.length === this.props.snippetAscii.length) {
             this.endOfSnippet()
             this.props.toggleReadOnly()
-        } else if( this.props.userInputAscii[this.props.userInputAscii.length - 1] !== this.props.snippetAscii[this.props.userInputAscii.length - 1]){
+        } else if (this.props.userInputAscii[this.props.userInputAscii.length - 1] !== this.props.snippetAscii[this.props.userInputAscii.length - 1]) {
             this.allErrors++
         }
         this.WPM()
@@ -41,82 +43,91 @@ class Metrics extends Component {
     WPM = () => {
         // check multiplying by 60000 for wpm computation ??
         var wpm;
-        var timeElapsed = this.currentTime[this.currentTime.length -1] - this.currentTime[0]
-        var minutesElapsed = timeElapsed/60000
-        if(timeElapsed === 0){
-            wpm = ((this.props.userInputAscii.length/5) - this.allErrors) / 1
-        }else {
-             wpm = (((this.props.userInputAscii.length - this.allErrors)/5) / ((minutesElapsed)))
+        var timeElapsed = this.currentTime[this.currentTime.length - 1] - this.currentTime[0]
+        var minutesElapsed = timeElapsed / 60000
+        if (timeElapsed === 0) {
+            wpm = ((this.props.userInputAscii.length / 5) - this.allErrors) / 1
+        } else {
+            wpm = (((this.props.userInputAscii.length - this.allErrors) / 5) / ((minutesElapsed)))
         }
-        if (this.props.userInputAscii.length === this.props.snippetAscii.length){
-            debugger
+        if (this.props.userInputAscii.length === this.props.snippetAscii.length) {
+            // debugger
         }
         this.setState({
             WPM: Math.round(wpm)
         })
+        this.WPMArray.push(wpm)
         // debugger
     }
 
     CPM = () => {
         var cpm;
-        var timeElapsed = (this.currentTime[this.currentTime.length -1] - this.currentTime[0])
-        if(timeElapsed === 0){
+        var timeElapsed = (this.currentTime[this.currentTime.length - 1] - this.currentTime[0])
+        if (timeElapsed === 0) {
             cpm = (this.props.userInputAscii.length / (1))
         } else {
             cpm = (this.props.userInputAscii.length / ((timeElapsed) / 60000))
         }
-        
-            this.setState({
-                CPM: Math.round(cpm)
-            })
+
+        this.setState({
+            CPM: Math.round(cpm)
+        })
     }
     ACC = () => {
         var acc;
-        if(this.props.userInputAscii.length!==this.props.snippetAscii.length){
-            acc =(this.props.userInputAscii.length - this.allErrors)/this.props.userInputAscii.length
-        } else if (this.props.userInputAscii.length === this.props.snippetAscii.length){
-            acc =(this.props.userInputAscii.length - this.endErrors)/this.props.userInputAscii.length
+        if (this.props.userInputAscii.length !== this.props.snippetAscii.length) {
+            acc = (this.props.userInputAscii.length - this.allErrors) / this.props.userInputAscii.length
+        } else if (this.props.userInputAscii.length === this.props.snippetAscii.length) {
+            acc = (this.props.userInputAscii.length - this.endErrors) / this.props.userInputAscii.length
         }
-            this.setState({
-                ACC:Math.round(acc * 100)
-            })
+        this.setState({
+            ACC: Math.round(acc * 100)
+        })
+        this.ACCArray.push(acc)
         // debugger
     }
     DEM = () => {
         var dem = (this.state.WPM - this.allErrors) * this.state.ACC
-            this.setState({
-                DEM: Math.round(dem)
-            })
+        return Math.round(dem)
+        // this.setState({
+        //     DEM: Math.round(dem)
+        // })
     }
 
     endOfSnippet = () => {
-        for(let i = 0; i <= this.props.userInputAscii; i++){
-            if(this.props.userInputAscii[i] !== this.props.snippetAscii[i]){
+        for (let i = 0; i <= this.props.userInputAscii; i++) {
+            if (this.props.userInputAscii[i] !== this.props.snippetAscii[i]) {
                 this.endErrors++
-            } 
+            }
         }
-        
+
         this.WPM();
         this.CPM();
         this.ACC();
-        this.DEM();
+        this.passChartMetrics(this.DEM());
+
+    }
+
+    passChartMetrics = (dem) =>{
+        this.props.passChartMetrics(this.WPMArray, this.ACCArray, dem)
+        console.log('Metrics Passed')
     }
 
 
     render() {
-        console.log(this.props.userInputAscii)
+        // console.log(this.props.userInputAscii)
         return (
             <div className="metrics-wrapper">
                 <div className="WPM">
-                    <h1 className = 'Metric'>{this.state.WPM}</h1>
+                    <h1 className='Metric'>{this.state.WPM}</h1>
                     <h4>WPM</h4>
                 </div>
                 <div className="CPM">
-                    <h1 className = 'Metric'>{this.state.CPM}</h1>
+                    <h1 className='Metric'>{this.state.CPM}</h1>
                     <h4>CPM</h4>
                 </div>
                 <div className="ACC">
-                    <h1 className = 'Metric'>{this.state.ACC}%</h1>
+                    <h1 className='Metric'>{this.state.ACC}%</h1>
                     <h4>Accuracy</h4>
                 </div>
             </div>

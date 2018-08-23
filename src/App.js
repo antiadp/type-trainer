@@ -43,8 +43,8 @@ class App extends Component {
         <Menu noOverlay>
           <SideNav setLanguage={this.setLanguage} timer={this.state.timer}/>
         </Menu>
-        <Typing />
-        <h2 className="script">{this.state.language}</h2>
+        <Typing language = {this.state.language} />
+        {/* <h2 className="script">{this.state.language}</h2> */}
       </div>
     );
   }
