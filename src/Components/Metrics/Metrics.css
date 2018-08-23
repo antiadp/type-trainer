@@ -1,20 +1,19 @@
 .metrics-wrapper{
     display:grid;
-    padding:50px;
+    padding:25px;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-areas:'. CPM WPM ACC .'
-                        ' . . timer . .  ';
+    grid-template-areas:'. CPM WPM ACC .';
     flex-direction: row;
     justify-content: space-around;
     /* border:1px solid pink; */
-    height:200px;
+    height:100px;
 }
 
 .WPM{
     /* border:1px solid pink; */
     grid-area: WPM;
     cursor:default;
-    padding:30px;
+    /* padding:30px; */
 
 }
 
@@ -22,14 +21,14 @@
     /* border:1px solid pink; */
     grid-area:CPM;
     cursor:default;
-    padding:30px;
+    /* padding:30px; */
 }
 
 .ACC{
     /* border:1px solid pink; */
     grid-area:ACC;
     cursor:default;
-    padding:30px;
+    /* padding:30px; */
 }
 
 .Metric{

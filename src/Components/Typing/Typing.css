@@ -4,9 +4,9 @@
     width:60%;
     min-width:60%;
     max-width:60%;
-    height:400px;
-    min-height:400px;
-    max-height:400px;
+    height:150px;
+    min-height:150px;
+    max-height:150px;
     background-color: rgba(0, 0, 0, 0.329);
     z-index: 10;
     color:rgb(0, 0, 0);
@@ -17,6 +17,8 @@
     position:relative;
     z-index: 200;
     /* padding-left:2px */
+    border:none;
+    border-radius: 5px;
 
 }
 .script{
