@@ -55,6 +55,7 @@ class Metrics extends Component {
     letterTest = () => {
         let snippetArray = this.props.snippet.split('')
         let inputArray = this.props.userInput.split('')
+        console.log('inputArray', inputArray)
         let inputLength = inputArray.length
 
         if (this.props.userInput.length === 1) {
@@ -64,7 +65,6 @@ class Metrics extends Component {
             this.setState({ testStart: typingInstance }
             )
         }
-
         if (inputArray[inputLength - 1] !== snippetArray[inputLength - 1]) {
             var errs = this.state.allErrs + 1
             this.allErrs ++
