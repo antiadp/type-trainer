@@ -20,10 +20,6 @@ class Metrics extends Component {
         if ( prevProps.userInputAscii !== this.props.userInputAscii){
             this.everyLetter()
         }
-        
-        this.WPMCalc(typingInstance, errs)
-        this.CPMCalc()
-        this.ACCCalc(errs)
     }
 
     everyLetter = () => {
