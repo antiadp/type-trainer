@@ -79,6 +79,7 @@ module.exports = {
 			.get('db')
 			.get_snippet()
 			.then((response) => {
+				// consol.log()
 				res.status(200).send(response);
 			})
 			.catch((err) => {

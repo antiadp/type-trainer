@@ -8,10 +8,11 @@ class Typing extends Component {
 		super();
 		this.state = {
 			input: '',
-			asciiArray: [ 32 ],
+			asciiArray: [ ],
 			lettersArray: [ ' ' ],
             timerBool: false,
-            snippetAscii: []
+			snippetAscii: [],
+			spanArray: []
 		};
 	}
 
@@ -43,14 +44,37 @@ class Typing extends Component {
 			this.setState({
 				input: value
 			});
-			let tempArray = [];
+
+			let userInputArray = [];
+			let styleArray = [];
+			
 			for (let i = 0; i < value.length; i++) {
-				tempArray.push(value.charCodeAt(i));
+			 userInputArray.push(value.charCodeAt(i));
 			}
-            //  asciiArray is an array of ascii nums
-			this.setState({
-                asciiArray: tempArray
-			});
+            //  asciiArray is an array of ascii nums that the user has input
+			// this.setState({
+            //     asciiArray: userInputArray
+			// });
+
+			for(let i = 0; i < userInputArray.length; i++){
+
+				
+					if(i > 0){
+						this.state.untypedSpanArray[i + 1] = '<span class=cursor></span>'
+					}
+				
+
+				if(userInputArray[i] == this.state.snippetAscii[i]){
+					// console.log(i, 'is the same')
+					this.state.spanArray[i] = '<span class=correct></span>'
+				}else if(userInputArray[i] !== this.state.snippetAscii[i]){
+					// console.log(i, 'not the same')
+					this.state.spanArray[i] = '<span class=incorrect></span>'
+				}
+
+				console.log('spanArray', this.state.spanArray)
+			}
+
 		}
 	};
 
@@ -61,6 +85,7 @@ class Typing extends Component {
 			asciiArray: ''
 		});
 	};
+
 	toggleReadOnly = () => {
 		console.log('fired');
 		this.setState({
@@ -68,15 +93,32 @@ class Typing extends Component {
 		});
 	};
 
-	render() {
-		let classes;
-		let snippetWithSpan = this.state.lettersArray.map((letter, i) => {
+	createUntypedArray = () => {
+		let classes = 'untyped';
+		let untypedSpanArray = this.state.lettersArray.map((letter, i) => {
 			return (
 				<span key={i} className={classes}>{letter}</span>
 			);
-    });
+		});
+
+		this.setState({
+			spanArray: untypedSpanArray
+		})
+
+
+
+	}
+
+	render() {
+
         // joined is the snippet script string 
-        // let joined = this.state.lettersArray.join('');
+		// let joined = this.state.lettersArray.join('');
+		
+		let spans = this.state.spanArray.map((current, index) => {
+			return(
+				current
+			)
+		})
         
 		return (
 			<div className="typing-wrapper">
@@ -109,7 +151,7 @@ class Typing extends Component {
 
 				<div className="display-wrapper">
 					<div className="DisplayText">
-						<div id="snippetDisplay">{snippetWithSpan}</div>
+						<div id="snippetDisplay">{spans}</div>
 					</div>
 				</div>
 				<br />
