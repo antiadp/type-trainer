@@ -12,8 +12,9 @@
     position: absolute;
     align-self:center;
     z-index:-10;   
-    padding-left: 2px;    
+    padding-left: 3px;    
     text-align:left;
+    padding-top:-7px;
 }
 
 .display-wrapper{
@@ -26,10 +27,14 @@
     display:flex;
     justify-content:center;
     z-index:-10;
+    padding: 0px;
 }
 #snippetDisplay{
     font-family:'Stalinist One';
     text-align: left;
     font-size:50%;
-    
+    margin:0px;
+    position:relative;
+    top:-1px;
+    color:rgba(0, 0, 0, 0.267);
 }

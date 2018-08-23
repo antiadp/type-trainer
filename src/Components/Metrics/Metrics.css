@@ -6,30 +6,34 @@
                         ' . . timer . .  ';
     flex-direction: row;
     justify-content: space-around;
-    border:1px solid pink;
+    /* border:1px solid pink; */
     height:200px;
 }
 
 .WPM{
-    border:1px solid pink;
+    /* border:1px solid pink; */
     grid-area: WPM;
-    cursor:default
+    cursor:default;
+    padding:30px;
+
 }
 
 .CPM{
-    border:1px solid pink;
+    /* border:1px solid pink; */
     grid-area:CPM;
-    cursor:default
+    cursor:default;
+    padding:30px;
 }
 
 .ACC{
-    border:1px solid pink;
+    /* border:1px solid pink; */
     grid-area:ACC;
-    cursor:default
+    cursor:default;
+    padding:30px;
 }
 
-.timer-wrapper{
-    grid-area: timer;
-    border:1px solid pink;
-    cursor:default
+.Metric{
+    font-weight: 600;
+    font-size:1.3em;
+    margin-bottom:10px;
 }
