@@ -6,15 +6,15 @@
     width:60%;
     min-width:60%;
     max-width:60%;
-    height:150px;
-    min-height:150px;
-    max-height:150px;
+    height:250px;
+    min-height:250px;
+    max-height:250px;
     position: absolute;
     align-self:center;
     z-index:-10;   
-    padding-left: 1px;    
+    padding-left: 1.5px;    
     text-align:left;
-    padding-top:4px;
+    padding-top:7px;
     /* border:1px solid */
     box-shadow: 1px 1px 20px;
     border-radius: 5px;
@@ -35,7 +35,7 @@
 #snippetDisplay{
     font-family:'Stalinist One';
     text-align: left;
-    font-size:50%;
+    font-size:80%;
     margin:0px;
     position:relative;
     top:-1px;

@@ -10,6 +10,8 @@ class Typing extends Component {
 		this.ACCArray = []
 		this.DEM = 0
 		this.state = {
+			language:'',
+			id:0,
 			input: '',
 			asciiArray: [32],
 			lettersArray: [' '],
@@ -48,8 +50,25 @@ class Typing extends Component {
 	}
 
 	componentDidMount() {
-		axios.get('/api/get-snippet').then((res) => {
+		switch (this.props.language){
+			case 'HTML':
+			this.setState({language:1})
+			break
+			case 'CSS':
+			this.setState({language:2})
+			break
+			case 'JavaScript':
+			this.setState({language:3})
+			break
+			case 'Special Characters':
+			this.setState({language:4})
+			break
+			default:
+			this.setState({langugae:1})
+		}
+		axios.get(`/api/get-snippet/${this.state.language}/${this.state.id}`).then((res) => {
 			let snippet = res.data[0].snippet;
+			//here i'm going to want to take the length of the snippet and make sure that if they click next snippet it will cycle back to the first one....
 			let snippetArray = snippet.split(',').map((current) => {
 				return Number(current);
 			});
@@ -186,8 +205,9 @@ class Typing extends Component {
 					</div>
 				</div>
 				<br />
+				<button>Go Back one Snippet</button>
 				{this.props.language}
-
+				<button>Next Snippet</button>
 				{this.state.timerBool ?
 					<div className="charts">
 						{/* <Charts WPMArray = {this.WPMArray} ACCArray = {this.ACCArray} DEM = {this.DEM} /> */}
