@@ -1,21 +1,49 @@
 import React, { Component } from 'react';
 import Metrics from '../Metrics/Metrics';
-import Charts from '../Charts/Charts';
+import { Line } from 'react-chartjs-2'
 import axios from 'axios';
 
 class Typing extends Component {
 	constructor(props) {
 		super();
-		this.WPMArray=[]
-		this.ACCArray=[]
-		this.DEM=0
+		this.WPMArray = []
+		this.ACCArray = []
+		this.DEM = 0
 		this.state = {
 			input: '',
 			asciiArray: [32],
 			lettersArray: [' '],
 			timerBool: false,
 			snippetAscii: [],
-		
+			DEM: 0,
+			WPMData: {
+				labels: ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%'],
+				datasets: [
+					{
+						label: 'WPM',
+						data:
+							// this.props.WPMArray
+							this.WPMArray
+					}
+				],
+			},
+			ACCData: {
+				labels: ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%'],
+				datasets: [
+					{
+						label: 'Accuracy',
+						data:
+							// this.props.ACCArray
+							this.ACCArray
+
+					}],
+					color:'green',
+					backgroundColor:'blue',
+					borderColor:'red',
+					BorderWidth:5
+
+			},
+
 		};
 	}
 
@@ -73,23 +101,43 @@ class Typing extends Component {
 	};
 	passChartMetrics = (wpm, acc, dem) => {
 		console.log('chartMetrics Fired')
-		
-		let WPM10Percent = Math.floor(wpm.length / 10)
-		let WPMTemp = [wpm[WPM10Percent], wpm[(WPM10Percent * 2)], wpm[(WPM10Percent * 3)], wpm[(WPM10Percent * 4)], wpm[(WPM10Percent * 5)], wpm[(WPM10Percent * 6)], wpm[(WPM10Percent * 7)], wpm[(WPM10Percent * 8)], wpm[(WPM10Percent * 9)], wpm[wpm.length-1]]
-		let WPMPassed = WPMTemp.map(e=>{return Math.round(e)})
 
-		let ACC10Percent = Math.floor(acc.length /10)
-		let ACCTemp = [acc[ACC10Percent], acc[(ACC10Percent*2)], acc[(ACC10Percent*3)], acc[(ACC10Percent*4)], acc[(ACC10Percent*5)], acc[(ACC10Percent*6)], acc[(ACC10Percent*7)], acc[(ACC10Percent*8)], acc[(ACC10Percent*9)], acc[acc.length-1]]
-		let ACCPassed = ACCTemp.map(e=>{return Math.round(e*100)})
-		// debugger
-		this.WPMArray = WPMPassed
-		this.ACCArray = ACCPassed
-		this.DEM = dem
-		// this.setState({
-		// 	WPMArray:WPMPassed,
-		// 	ACCArray:ACCPassed,
-		// 	DEM:dem
-		// })
+		let WPM10Percent = Math.floor(wpm.length / 10)
+		let WPMTemp = [wpm[WPM10Percent], wpm[(WPM10Percent * 2)], wpm[(WPM10Percent * 3)], wpm[(WPM10Percent * 4)], wpm[(WPM10Percent * 5)], wpm[(WPM10Percent * 6)], wpm[(WPM10Percent * 7)], wpm[(WPM10Percent * 8)], wpm[(WPM10Percent * 9)], wpm[wpm.length - 1]]
+		let WPMPassed = WPMTemp.map(e => { return Math.round(e) })
+
+		let ACC10Percent = Math.floor(acc.length / 10)
+		let ACCTemp = [acc[ACC10Percent], acc[(ACC10Percent * 2)], acc[(ACC10Percent * 3)], acc[(ACC10Percent * 4)], acc[(ACC10Percent * 5)], acc[(ACC10Percent * 6)], acc[(ACC10Percent * 7)], acc[(ACC10Percent * 8)], acc[(ACC10Percent * 9)], acc[acc.length - 1]]
+		let ACCPassed = ACCTemp.map(e => { return Math.round(e * 100) })
+
+		this.setState({
+
+			WPMData: {
+				labels: ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%'],
+				datasets: [
+					{
+						label: 'WPM',
+						data:
+							// this.props.WPMArray
+							WPMPassed
+					}
+				]
+			},
+			ACCData: {
+				labels: ['10%', '20%', '30%', '40%', '50%', '60%', '7%', '80%', '90%', '100%'],
+				datasets: [
+					{
+						label: 'Accuracy',
+						data:
+							ACCPassed
+					}],
+					color:'green',
+					backgroundColor:'blue',
+					borderColor:'red',
+					BorderWidth:5
+			},
+			DEM: dem
+		})
 	}
 
 	render() {
@@ -140,14 +188,30 @@ class Typing extends Component {
 				<br />
 				{this.props.language}
 
-				{(this.state.snippetAscii.length === this.state.asciiArray.length)?
-				<div className="charts">
-					<Charts WPMArray = {this.WPMArray} ACCArray = {this.ACCArray} DEM = {this.DEM} />
-				</div>
-				:<div></div>
-				
+				{this.state.timerBool ?
+					<div className="charts">
+						{/* <Charts WPMArray = {this.WPMArray} ACCArray = {this.ACCArray} DEM = {this.DEM} /> */}
+						<div className="chartsWrapper">
+							<div className="chart chartWPM">
+								<Line
+									data={this.state.WPMData}
+									width={100}
+									height={30}
+								/>
+							</div>
+							<div className="chart chartACC">
+								<Line
+									data={this.state.ACCData}
+									width={100}
+									height={30}
+								/>
+							</div>
+						</div>
+					</div>
+					: <div></div>
+
 				}
-				
+
 			</div>
 		);
 	}

@@ -4,34 +4,47 @@ import { Line } from 'react-chartjs-2'
 export default class Charts extends Component {
     constructor(props) {
         super(props)
+        this.state={
+            WPMData:{},
+            ACCData:{}
+        }
         this.WPMData = {
             labels: [1,2,3,4,5,6,7,8,9,10],
             datasets: [
                 {
                     label: 'WPM',
-                    data: this.props.WPMArray
+                    data: 
+                    // this.props.WPMArray
+                    [1,2,3,4,5,6,7,8,9,10]
                 }
             ]
         }
         this.ACCData = {
-            labels: [1,2,3,4,5,6,7,8,9,10],
+            labels: ['1%','2%','3%','4%','5%','6%','7%','8%','9%','10%'],
             datasets: [
                 {
                     label: 'Accuracy',
                     data:
                         // this.props.ACCArray
-                        [1,2,3,4,5]
+                        [1,2,3,4,5,6,7,8,9,10]
 
                 }]
         }
         // this.data = { wpm: this.props.WPMArray, acc: this.props.ACCArray, dem: this.props.DEM }
     }
-    componentDidUpdate(prevProps, prevState) {
-        if (prevProps !== this.props || prevState !== this.state) {
+    componentDidUpdate(prevProps) {
+        console.log('props',this.props)
+        if (prevProps !== this.props) {
+            this.updateState()
             
-            this.WPMData = {
-                labels: [1,2,3,4,5,6,7,8,9,10],
-
+        // debugger
+    }
+}
+    updateState = () =>{
+        console.log('state has been set')
+        this.setState({
+            WPMData : {
+                labels: ['1%','2%','3%','4%','5%','6%','7%','8%','9%','10%'],
                 datasets: [
                     {
                         label: 'WPM',
@@ -39,23 +52,20 @@ export default class Charts extends Component {
                     }
                 ]
             },
-                this.ACCData = {
-                    labels: [1,2,3,4,5,6,7,8,9,10],
+              ACCData : {
+                    labels: ['1%','2%','3%','4%','5%','6%','7%','8%','9%','10%'],
                     datasets: [
                         {
                             label: 'Accuracy',
                             data:
-                                [10,5,60,75,90,15,25,36,9,100]
-
+                                // [10,5,60,75,90,15,25,36,9,100]
+                            this.props.ACCArray
                         }]
-
                 }
-        }
-        // debugger
+        })
     }
-
     render() {
-        console.log('hard')
+        console.log('props', this.props)
         // console.log('Charts Props:', this.props)
         // debugger
         return (

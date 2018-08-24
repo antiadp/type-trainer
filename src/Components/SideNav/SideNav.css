@@ -1,5 +1,5 @@
 .nav-wrapper{
-    border:1px solid red;
+    /* border:1px solid red; */
     width:20%;
     height:100%;
     position: absolute;
@@ -22,7 +22,7 @@
 }
 .login{
     grid-area: login-button;
-    border:1px solid green;
+    /* border:1px solid green; */
     display:flex;
     justify-content: center;
     align-items:center;
@@ -34,7 +34,7 @@
 }
 .script-wrapper{
     grid-area: scripts;
-    border:1px solid brown;
+    /* border:1px solid brown; */
     display:flex;
     flex-direction: column;
     justify-content: space-around;
@@ -79,7 +79,7 @@ img {
   
   /* Color/shape of burger icon bars */
   .bm-burger-bars {
-    background: #373a47;
+    background: #d5d6d2;
   }
   
   /* Position and sizing of clickable cross button */
@@ -95,7 +95,7 @@ img {
   
   /* General sidebar styles */
   .bm-menu {
-    background: #a5a5af;
+    background: #2f2e33;
     padding: 2.5em 1.5em 0;
     font-size: 1.15em;
     border-radius: 20px;
@@ -104,7 +104,7 @@ img {
   
   /* Morph shape necessary with bubble or elastic */
   .bm-morph-shape {
-    fill: #373a47;
+    fill: #d5d6d2;
   }
   
   /* Wrapper for item list */
