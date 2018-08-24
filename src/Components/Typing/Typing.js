@@ -42,12 +42,10 @@ class Typing extends Component {
 				backgroundColor: 'blue',
 				borderColor: 'red',
 				BorderWidth: 5
-			},
-
-			spanArray: []
+			}
 		};
 	}
-	componentDidUpdate(prevProps) {
+	componentDidUpdate(prevProps, prevState) {
 		if (prevProps !== this.props) {
 			this.onComponentMount();
 			switch (this.props.language) {
@@ -67,6 +65,9 @@ class Typing extends Component {
 					this.setState({ langugae: 1 });
 			}
 		}
+		if (prevState.id !== this.state.id) {
+			this.onComponentMount();
+		}
 	}
 	componentDidMount() {
 		this.onComponentMount();
@@ -79,11 +80,15 @@ class Typing extends Component {
 			});
 
 			this.setState({ snippetAscii: snippetArray });
+			console.log('snippetAscii', this.state.snippetAscii);
 			let lettersArray = [];
 
 			for (let i = 0; i < snippetArray.length; i++) {
 				if (snippetArray[i] === 10) {
-					lettersArray.push(<br />);
+					lettersArray.splice(i, 1, <br />);
+				}
+				if (snippetArray[i] === 9) {
+					lettersArray.splice(i, 1, '     ');
 				}
 				lettersArray.push(String.fromCharCode(snippetArray[i]));
 			}
@@ -103,11 +108,10 @@ class Typing extends Component {
 			});
 
 			let userInputArray = [];
-			// let styleArray = [];
-
 			for (let i = 0; i < value.length; i++) {
 				userInputArray.push(value.charCodeAt(i));
 			}
+			this.setState({ asciiArray: userInputArray });
 		}
 	};
 
@@ -190,29 +194,31 @@ class Typing extends Component {
 		});
 	};
 	changeSnippet = (el) => {
-		if (el === 'up') {
-			if (el === this.state.languageCount - 1) {
-				this.setState({
-					id: 0
-				});
-			} else {
-				this.setState({
-					id: this.state.id + 1
-				});
-			}
-		}
-		if (el === 'down') {
-			if (this.state.id === 0) {
-				this.setState({ id: this.state.languageCount.length - 1 });
-			} else {
-				this.setState({
-					id: this.state.id - 1
-				});
-			}
-		}
-	};
+        console.log('button', el, this.state.id)
+        if (el === 'up') {
+            if (this.state.id === this.state.languageCount - 1) {
+                this.setState({
+                    id: 0
+                });
+            } else {
+                this.setState({
+                    id: (+this.state.id + 1)
+                })
+            }
+        }
+        if (el === 'down') {
+            if (this.state.id === 0) {
+                this.setState({ id: this.state.languageCount - 1 })
+            } else {
+                this.setState({
+                    id: (+this.state.id - 1)
+                })
+            }
+        }
+    };
 
 	render() {
+		console.log('asciiArray', this.state.asciiArray);
 		let classes;
 		let spanDisplay = this.state.lettersArray.map((letter, i) => {
 			return (
