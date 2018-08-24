@@ -1,2 +1,5 @@
+-- select * from snippets
+-- where id = 21;
 select * from snippets
-where id = 21;
+where snippet_language = $1
+order by id asc;

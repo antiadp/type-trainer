@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Metrics from '../Metrics/Metrics';
 import Charts from '../Charts/Charts';
+import classNames from 'classnames';
 import axios from 'axios';
 
 class Typing extends Component {
@@ -8,34 +9,50 @@ class Typing extends Component {
 		super();
 		this.state = {
 			input: '',
-			asciiArray: [ 32 ],
-			lettersArray: [ ' ' ],
-            timerBool: false,
-            snippetAscii: []
+			asciiArray: [],
+			lettersArray: [],
+			timerBool: false,
+			snippetAscii: [],
+			correct: 'correct',
+			incorrect: 'incorrect'
 		};
 	}
 
 	componentDidMount() {
-		axios.get('/api/get-snippet').then((res) => {
+		axios.get(`/api/get-snippet/${1}`).then((res) => {
+			console.log('res.data',res.data)
 			let snippet = res.data[0].snippet;
 			let snippetArray = snippet.split(',').map((current) => {
 				return Number(current);
 			});
 
-            this.setState({snippetAscii: snippetArray})
-			let lettersArray = [];
+			this.setState({ snippetAscii: snippetArray });
+			// let lettersArray = [];
 
-			for (let i = 0; i < snippetArray.length; i++) {
-				// if (snippetArray[i] === 10) {
-				// 	lettersArray.push(<br />);
-				// }
-				lettersArray.push(String.fromCharCode(snippetArray[i]));
-			}
-            // letterArray is an array of character strings from the snippet script
-			this.setState({
-				lettersArray: lettersArray
-            });
+			// for (let i = 0; i < snippetArray.length; i++) {
+			// 	// if (snippetArray[i] === 10) {
+			// 	// 	lettersArray.push(<br />);
+			// 	// }
+			// 	lettersArray.push(String.fromCharCode(snippetArray[i]));
+			// }
+			// // letterArray is an array of character strings from the snippet script
+			// this.setState({
+			// 	lettersArray: lettersArray
+			// });
 		});
+	}
+	componentDidUpdate = (prevState) => {
+		let {asciiArray, snippetAscii} = this.state;
+		let indexCompare = asciiArray.length-1;
+		let classNames;
+		if(prevState.asciiArray !== asciiArray){
+			if(asciiArray[indexCompare] === snippetAscii[indexCompare] ){
+				classNames = 'correct';
+			} else {
+				classNames = 'incorrect';
+			}
+			this.mapToSpanArray(classNames, indexCompare)
+		}
 	}
 	// updateUserInput is converting user input to ascii chars and pushing them into asciiArray
 	updateUserInput = (value) => {
@@ -45,13 +62,26 @@ class Typing extends Component {
 			});
 			let tempArray = [];
 			for (let i = 0; i < value.length; i++) {
+				// this.mapToSnippet(value.charCodeAt(i));
 				tempArray.push(value.charCodeAt(i));
 			}
-            //  asciiArray is an array of ascii nums
+			//  asciiArray is an array of ascii nums
 			this.setState({
-                asciiArray: tempArray
+				asciiArray: tempArray
 			});
 		}
+	};
+	mapToSpanArray = (classNames, indexCompare) => {
+		const { snippetAscii, asciiArray } = this.state;
+		let classes = classNames;
+		let spanArray = snippetAscii.map((char, i) =>{
+			let letter = String.fromCharCode(char)
+			return (
+				<span key={i} className={classes}>{letter}</span>
+			)
+		})
+		console.log('spanArray',spanArray)
+		return spanArray
 	};
 
 	clearMe = () => {
@@ -69,27 +99,33 @@ class Typing extends Component {
 	};
 
 	render() {
-		let classes;
-		let snippetWithSpan = this.state.lettersArray.map((letter, i) => {
-			return (
-				<span key={i} className={classes}>{letter}</span>
-			);
-    });
-        // joined is the snippet script string
-        // let joined = this.state.lettersArray.join('');
+		// 	let classes = classNames({
+		// 		typed: 'typed',
+		// 		untyped: 'untyped',
+		// 		correct: 'typed correct',
+		// 	});
+		// 	let snippetWithSpan = this.state.snippetAscii.map((char, i) => {
+		// 		let letter = String.fromCharCode(char)
+		// 		return (
+		// 			<span key={i} className={classes}>{letter}</span>
+		// 		);
+		// });
+		// joined is the snippet script string
+		// let joined = this.state.lettersArray.join('');
 
 		return (
 			<div className="typing-wrapper">
 				<Metrics
-					userInputAscii = {this.state.asciiArray}
-					snippetAscii = {this.state.snippetAscii}
-					toggleReadOnly = {this.toggleReadOnly}
+					userInputAscii={this.state.asciiArray}
+					snippetAscii={this.state.snippetAscii}
+					toggleReadOnly={this.toggleReadOnly}
 				/>
 
 				<textarea
 					value={this.state.input}
 					onChange={(e) => {
 						this.updateUserInput(e.target.value);
+						this.mapToSnippet(e.target.value);
 					}}
 					data-gramm_editor="false"
 					autoComplete="off"
@@ -109,7 +145,7 @@ class Typing extends Component {
 
 				<div className="display-wrapper">
 					<div className="DisplayText">
-						<div id="snippetDisplay">{snippetWithSpan}</div>
+						<div id="snippetDisplay">{this.mapToSpanArray()}</div>
 					</div>
 				</div>
 				<br />

@@ -75,9 +75,10 @@ module.exports = {
 
 	//snippets
 	getSnippet: (req, res) => {
+		let {id} = req.params;
 		req.app
 			.get('db')
-			.get_snippet()
+			.get_snippet(id)
 			.then((response) => {
 				res.status(200).send(response);
 			})
