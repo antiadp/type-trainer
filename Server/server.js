@@ -49,7 +49,7 @@ app.get('/api/logout', ctrl.logout);
 app.get('/api/all-results', ctrl.getAllResults);
 
 //typing endpoint
-app.get('/api/get-snippet', ctrl.getSnippet)
+app.get('/api/get-snippet/:id', ctrl.getSnippet);
 
 
 

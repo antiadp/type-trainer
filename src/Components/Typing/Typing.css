@@ -28,3 +28,20 @@
     position:relative;
     z-index: -200;
 }
+.buttonWrapper{
+    display:grid;
+    grid-template-areas: '. . button1 language button2 . .'
+}
+
+#previous{
+    grid-area: button1
+}
+#language{
+    grid-area: language
+}
+#next{
+    grid-area:button2
+}
+.button{
+    
+}

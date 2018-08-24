@@ -10,12 +10,13 @@ class Typing extends Component {
 		this.ACCArray = []
 		this.DEM = 0
 		this.state = {
-			language:'',
-			id:0,
+			language: 1,
+			languageCount:5,
+			id: 0,
 			input: '',
-			asciiArray: [ ],
-			lettersArray: [ ' ' ],
-            timerBool: false,
+			asciiArray: [],
+			lettersArray: [' '],
+			timerBool: false,
 			snippetAscii: [],
 			DEM: 0,
 			WPMData: {
@@ -39,38 +40,46 @@ class Typing extends Component {
 							this.ACCArray
 
 					}],
-					color:'green',
-					backgroundColor:'blue',
-					borderColor:'red',
-					BorderWidth:5
+				color: 'green',
+				backgroundColor: 'blue',
+				borderColor: 'red',
+				BorderWidth: 5
 
 			},
 
 			spanArray: []
 		};
 	}
-
-	componentDidMount() {
-		switch (this.props.language){
-			case 'HTML':
-			this.setState({language:1})
-			break
-			case 'CSS':
-			this.setState({language:2})
-			break
-			case 'JavaScript':
-			this.setState({language:3})
-			break
-			case 'Special Characters':
-			this.setState({language:4})
-			break
-			default:
-			this.setState({langugae:1})
+	componentDidUpdate(prevProps){
+		if(prevProps !== this.props){
+			this.onComponentMount()
+			switch (this.props.language) {
+				case 'HTML':
+					this.setState({ language: 1 })
+					break
+				case 'CSS':
+					this.setState({ language: 2 })
+					break
+				case 'JavaScript':
+					this.setState({ language: 3 })
+					break
+				case 'Special Characters':
+					this.setState({ language: 4 })
+					break
+				default:
+					this.setState({ langugae: 1 })
+			}
 		}
-		axios.get(`/api/get-snippet/${this.state.language}/${this.state.id}`).then((res) => {
-			let snippet = res.data[0].snippet;
-			//here i'm going to want to take the length of the snippet and make sure that if they click next snippet it will cycle back to the first one....
-			let snippetArray = snippet.split(',').map((current) => {
+	}
+	
+	componentDidMount() {
+		this.onComponentMount()
+	}
+	onComponentMount(){
+		axios.get(`/api/get-snippet/${+this.state.language}`).then((res) => {
+
+			let currentSnippet = res.data[this.state.id].snippet;
+			let snippetArray = currentSnippet.split(',').map((current) => {
 				return Number(current);
 			});
 
@@ -78,16 +87,16 @@ class Typing extends Component {
 			let lettersArray = [];
 
 			for (let i = 0; i < snippetArray.length; i++) {
-				// if (snippetArray[i] === 10) {
-				// 	lettersArray.push(<br />);
-				// }
 				lettersArray.push(String.fromCharCode(snippetArray[i]));
 			}
 			// letterArray is an array of character strings from the snippet script
 			this.setState({
-				lettersArray: lettersArray
+				lettersArray: lettersArray,
+				languageCount:res.data.length
 			});
+			console.log('lettersArray',this.state.lettersArray)
 		});
+		
 	}
 	// updateUserInput is converting user input to ascii chars and pushing them into asciiArray
 	updateUserInput = (value) => {
@@ -98,25 +107,25 @@ class Typing extends Component {
 
 			let userInputArray = [];
 			// let styleArray = [];
-			
+
 			for (let i = 0; i < value.length; i++) {
-			 userInputArray.push(value.charCodeAt(i));
+				userInputArray.push(value.charCodeAt(i));
 			}
 
 			//THERE ARE SO MANY PROBLEMS HERE I DON'T KNOW WHAT TO DO WITH THEM.
 			//MUTATING STATE DIRECTLY... CHANGING THE ITEM AFTER THE CHECKED ITEM. ETC.
-            //  asciiArray is an array of ascii nums that the user has input
-            //     asciiArray: userInputArray
+			//  asciiArray is an array of ascii nums that the user has input
+			//     asciiArray: userInputArray
 
 			// for(let i = 0; i < userInputArray.length; i++){
 
-				
+
 			// 		if(i > 0){
 			// 			// this.setState({
 			// 			// })
 			// 			this.state.untypedSpanArray[i + 1] === '<span class=cursor></span>'
 			// 		}
-				
+
 
 			// 	if(userInputArray[i] === this.state.snippetAscii[i]){
 			// 		// console.log(i, 'is the same')
@@ -178,42 +187,63 @@ class Typing extends Component {
 						data:
 							ACCPassed
 					}],
-					color:'green',
-					backgroundColor:'blue',
-					borderColor:'red',
-					BorderWidth:5
+				color: 'green',
+				backgroundColor: 'blue',
+				borderColor: 'red',
+				BorderWidth: 5
 			},
 			DEM: dem
 		})
 	}
 
-	createUntypedArray = () => {
-		let classes = 'untyped';
-		let untypedSpanArray = this.state.lettersArray.map((letter, i) => {
-			return (
-				<span key={i} className={classes}>{letter}</span>
-			);
-		});
+	// createUntypedArray = () => {
+	// 	let classes = 'untyped';
+	// 	let untypedSpanArray = this.state.lettersArray.map((letter, i) => {
+	// 		return (
+	// 			<span key={i+'key'} className={classes}>{letter}</span>
+	// 		);
+	// 	});
 
-		this.setState({
-			spanArray: untypedSpanArray
-		})
+	// 	this.setState({
+	// 		spanArray: untypedSpanArray
+	// 	})
+	// }
+	changeSnippet = (el) =>{
+		if (el === 'up'){
+			if (el === this.state.languageCount-1){
+				this.setState({
+					id:0
+				})
+			} else {
 
-
-
+				this.setState({
+					id:this.state.id+1
+				})
+				}
+		} 
+		if (el === 'down'){
+			if(this.state.id === 0){
+				this.setState({id:this.state.languageCount.length-1})
+			} else {
+				this.setState({
+					id:this.state.id-1
+				})
+			}
+			
+		}
 	}
 
 	render() {
 
-        // joined is the snippet script string 
+		// joined is the snippet script string 
 		// let joined = this.state.lettersArray.join('');
-		
-		let spans = this.state.spanArray.map((current, index) => {
-			return(
-				current
-			)
-		})
-        
+
+		// let spans = this.state.spanArray.map((current, index) => {
+		// 	return (
+		// 		current
+		// 	)
+		// })
+		console.log('spanArray ', this.state.spanArray)
 		return (
 			<div className="typing-wrapper">
 				<Metrics
@@ -246,13 +276,18 @@ class Typing extends Component {
 
 				<div className="display-wrapper">
 					<div className="DisplayText">
-						<div id="snippetDisplay">{spans}</div>
+						<div id="snippetDisplay">{this.state.spanArray}</div>
 					</div>
 				</div>
 				<br />
-				<button>Go Back one Snippet</button>
-				{this.props.language}
-				<button>Next Snippet</button>
+				<div className="buttonWrapper">
+					<button id="previous" className = 'button' onClick = {()=>this.changeSnippet('up')}>Previous Snippet</button>
+					<p id = "language">
+					{this.props.language}
+					</p>
+
+					<button id="next" className = 'button' onClick = {()=>{this.changeSnippet('down')}}>Next Snippet</button>
+				</div>
 				{this.state.timerBool ?
 					<div className="charts">
 						{/* <Charts WPMArray = {this.WPMArray} ACCArray = {this.ACCArray} DEM = {this.DEM} /> */}
