@@ -13,9 +13,9 @@ class Typing extends Component {
 			language:'',
 			id:0,
 			input: '',
-			asciiArray: [32],
-			lettersArray: [' '],
-			timerBool: false,
+			asciiArray: [ ],
+			lettersArray: [ ' ' ],
+            timerBool: false,
 			snippetAscii: [],
 			DEM: 0,
 			WPMData: {
@@ -46,6 +46,7 @@ class Typing extends Component {
 
 			},
 
+			spanArray: []
 		};
 	}
 
@@ -94,14 +95,40 @@ class Typing extends Component {
 			this.setState({
 				input: value
 			});
-			let tempArray = [];
+
+			let userInputArray = [];
+			// let styleArray = [];
+			
 			for (let i = 0; i < value.length; i++) {
-				tempArray.push(value.charCodeAt(i));
+			 userInputArray.push(value.charCodeAt(i));
 			}
-			//  asciiArray is an array of ascii nums
-			this.setState({
-				asciiArray: tempArray
-			});
+
+			//THERE ARE SO MANY PROBLEMS HERE I DON'T KNOW WHAT TO DO WITH THEM.
+			//MUTATING STATE DIRECTLY... CHANGING THE ITEM AFTER THE CHECKED ITEM. ETC.
+            //  asciiArray is an array of ascii nums that the user has input
+            //     asciiArray: userInputArray
+
+			// for(let i = 0; i < userInputArray.length; i++){
+
+				
+			// 		if(i > 0){
+			// 			// this.setState({
+			// 			// })
+			// 			this.state.untypedSpanArray[i + 1] === '<span class=cursor></span>'
+			// 		}
+				
+
+			// 	if(userInputArray[i] === this.state.snippetAscii[i]){
+			// 		// console.log(i, 'is the same')
+			// 		this.state.spanArray[i] = '<span class=correct></span>'
+			// 	}else if(userInputArray[i] !== this.state.snippetAscii[i]){
+			// 		// console.log(i, 'not the same')
+			// 		this.state.spanArray[i] = '<span class=incorrect></span>'
+			// 	}
+
+			// 	console.log('spanArray', this.state.spanArray)
+			// }
+
 		}
 	};
 
@@ -112,6 +139,7 @@ class Typing extends Component {
 			asciiArray: ''
 		});
 	};
+
 	toggleReadOnly = () => {
 		// console.log('Read Only fired');
 		this.setState({
@@ -159,16 +187,33 @@ class Typing extends Component {
 		})
 	}
 
-	render() {
-		let classes;
-		let snippetWithSpan = this.state.lettersArray.map((letter, i) => {
+	createUntypedArray = () => {
+		let classes = 'untyped';
+		let untypedSpanArray = this.state.lettersArray.map((letter, i) => {
 			return (
 				<span key={i} className={classes}>{letter}</span>
 			);
 		});
-		// joined is the snippet script string 
-		// let joined = this.state.lettersArray.join('');
 
+		this.setState({
+			spanArray: untypedSpanArray
+		})
+
+
+
+	}
+
+	render() {
+
+        // joined is the snippet script string 
+		// let joined = this.state.lettersArray.join('');
+		
+		let spans = this.state.spanArray.map((current, index) => {
+			return(
+				current
+			)
+		})
+        
 		return (
 			<div className="typing-wrapper">
 				<Metrics
@@ -201,7 +246,7 @@ class Typing extends Component {
 
 				<div className="display-wrapper">
 					<div className="DisplayText">
-						<div id="snippetDisplay">{snippetWithSpan}</div>
+						<div id="snippetDisplay">{spans}</div>
 					</div>
 				</div>
 				<br />
