@@ -1,27 +1,75 @@
 import React, { Component } from 'react';
 import Metrics from '../Metrics/Metrics';
-import Charts from '../Charts/Charts';
+import { Line } from 'react-chartjs-2'
 import axios from 'axios';
 
 class Typing extends Component {
 	constructor(props) {
 		super();
-		this.WPMArray=[]
-		this.ACCArray=[]
-		this.DEM=0
+		this.WPMArray = []
+		this.ACCArray = []
+		this.DEM = 0
 		this.state = {
+			language:'',
+			id:0,
 			input: '',
 			asciiArray: [ ],
 			lettersArray: [ ' ' ],
             timerBool: false,
 			snippetAscii: [],
+			DEM: 0,
+			WPMData: {
+				labels: ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%'],
+				datasets: [
+					{
+						label: 'WPM',
+						data:
+							// this.props.WPMArray
+							this.WPMArray
+					}
+				],
+			},
+			ACCData: {
+				labels: ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%'],
+				datasets: [
+					{
+						label: 'Accuracy',
+						data:
+							// this.props.ACCArray
+							this.ACCArray
+
+					}],
+					color:'green',
+					backgroundColor:'blue',
+					borderColor:'red',
+					BorderWidth:5
+
+			},
+
 			spanArray: []
 		};
 	}
 
 	componentDidMount() {
-		axios.get('/api/get-snippet').then((res) => {
+		switch (this.props.language){
+			case 'HTML':
+			this.setState({language:1})
+			break
+			case 'CSS':
+			this.setState({language:2})
+			break
+			case 'JavaScript':
+			this.setState({language:3})
+			break
+			case 'Special Characters':
+			this.setState({language:4})
+			break
+			default:
+			this.setState({langugae:1})
+		}
+		axios.get(`/api/get-snippet/${this.state.language}/${this.state.id}`).then((res) => {
 			let snippet = res.data[0].snippet;
+			//here i'm going to want to take the length of the snippet and make sure that if they click next snippet it will cycle back to the first one....
 			let snippetArray = snippet.split(',').map((current) => {
 				return Number(current);
 			});
@@ -49,34 +97,37 @@ class Typing extends Component {
 			});
 
 			let userInputArray = [];
-			let styleArray = [];
+			// let styleArray = [];
 			
 			for (let i = 0; i < value.length; i++) {
 			 userInputArray.push(value.charCodeAt(i));
 			}
+
+			//THERE ARE SO MANY PROBLEMS HERE I DON'T KNOW WHAT TO DO WITH THEM.
+			//MUTATING STATE DIRECTLY... CHANGING THE ITEM AFTER THE CHECKED ITEM. ETC.
             //  asciiArray is an array of ascii nums that the user has input
-			// this.setState({
             //     asciiArray: userInputArray
-			// });
 
-			for(let i = 0; i < userInputArray.length; i++){
+			// for(let i = 0; i < userInputArray.length; i++){
 
 				
-					if(i > 0){
-						this.state.untypedSpanArray[i + 1] = '<span class=cursor></span>'
-					}
+			// 		if(i > 0){
+			// 			// this.setState({
+			// 			// })
+			// 			this.state.untypedSpanArray[i + 1] === '<span class=cursor></span>'
+			// 		}
 				
 
-				if(userInputArray[i] == this.state.snippetAscii[i]){
-					// console.log(i, 'is the same')
-					this.state.spanArray[i] = '<span class=correct></span>'
-				}else if(userInputArray[i] !== this.state.snippetAscii[i]){
-					// console.log(i, 'not the same')
-					this.state.spanArray[i] = '<span class=incorrect></span>'
-				}
+			// 	if(userInputArray[i] === this.state.snippetAscii[i]){
+			// 		// console.log(i, 'is the same')
+			// 		this.state.spanArray[i] = '<span class=correct></span>'
+			// 	}else if(userInputArray[i] !== this.state.snippetAscii[i]){
+			// 		// console.log(i, 'not the same')
+			// 		this.state.spanArray[i] = '<span class=incorrect></span>'
+			// 	}
 
-				console.log('spanArray', this.state.spanArray)
-			}
+			// 	console.log('spanArray', this.state.spanArray)
+			// }
 
 		}
 	};
@@ -97,23 +148,43 @@ class Typing extends Component {
 	};
 	passChartMetrics = (wpm, acc, dem) => {
 		console.log('chartMetrics Fired')
-		
-		let WPM10Percent = Math.floor(wpm.length / 10)
-		let WPMTemp = [wpm[WPM10Percent], wpm[(WPM10Percent * 2)], wpm[(WPM10Percent * 3)], wpm[(WPM10Percent * 4)], wpm[(WPM10Percent * 5)], wpm[(WPM10Percent * 6)], wpm[(WPM10Percent * 7)], wpm[(WPM10Percent * 8)], wpm[(WPM10Percent * 9)], wpm[wpm.length-1]]
-		let WPMPassed = WPMTemp.map(e=>{return Math.round(e)})
 
-		let ACC10Percent = Math.floor(acc.length /10)
-		let ACCTemp = [acc[ACC10Percent], acc[(ACC10Percent*2)], acc[(ACC10Percent*3)], acc[(ACC10Percent*4)], acc[(ACC10Percent*5)], acc[(ACC10Percent*6)], acc[(ACC10Percent*7)], acc[(ACC10Percent*8)], acc[(ACC10Percent*9)], acc[acc.length-1]]
-		let ACCPassed = ACCTemp.map(e=>{return Math.round(e*100)})
-		// debugger
-		this.WPMArray = WPMPassed
-		this.ACCArray = ACCPassed
-		this.DEM = dem
-		// this.setState({
-		// 	WPMArray:WPMPassed,
-		// 	ACCArray:ACCPassed,
-		// 	DEM:dem
-		// })
+		let WPM10Percent = Math.floor(wpm.length / 10)
+		let WPMTemp = [wpm[WPM10Percent], wpm[(WPM10Percent * 2)], wpm[(WPM10Percent * 3)], wpm[(WPM10Percent * 4)], wpm[(WPM10Percent * 5)], wpm[(WPM10Percent * 6)], wpm[(WPM10Percent * 7)], wpm[(WPM10Percent * 8)], wpm[(WPM10Percent * 9)], wpm[wpm.length - 1]]
+		let WPMPassed = WPMTemp.map(e => { return Math.round(e) })
+
+		let ACC10Percent = Math.floor(acc.length / 10)
+		let ACCTemp = [acc[ACC10Percent], acc[(ACC10Percent * 2)], acc[(ACC10Percent * 3)], acc[(ACC10Percent * 4)], acc[(ACC10Percent * 5)], acc[(ACC10Percent * 6)], acc[(ACC10Percent * 7)], acc[(ACC10Percent * 8)], acc[(ACC10Percent * 9)], acc[acc.length - 1]]
+		let ACCPassed = ACCTemp.map(e => { return Math.round(e * 100) })
+
+		this.setState({
+
+			WPMData: {
+				labels: ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%'],
+				datasets: [
+					{
+						label: 'WPM',
+						data:
+							// this.props.WPMArray
+							WPMPassed
+					}
+				]
+			},
+			ACCData: {
+				labels: ['10%', '20%', '30%', '40%', '50%', '60%', '7%', '80%', '90%', '100%'],
+				datasets: [
+					{
+						label: 'Accuracy',
+						data:
+							ACCPassed
+					}],
+					color:'green',
+					backgroundColor:'blue',
+					borderColor:'red',
+					BorderWidth:5
+			},
+			DEM: dem
+		})
 	}
 
 	createUntypedArray = () => {
@@ -179,16 +250,33 @@ class Typing extends Component {
 					</div>
 				</div>
 				<br />
+				<button>Go Back one Snippet</button>
 				{this.props.language}
+				<button>Next Snippet</button>
+				{this.state.timerBool ?
+					<div className="charts">
+						{/* <Charts WPMArray = {this.WPMArray} ACCArray = {this.ACCArray} DEM = {this.DEM} /> */}
+						<div className="chartsWrapper">
+							<div className="chart chartWPM">
+								<Line
+									data={this.state.WPMData}
+									width={100}
+									height={30}
+								/>
+							</div>
+							<div className="chart chartACC">
+								<Line
+									data={this.state.ACCData}
+									width={100}
+									height={30}
+								/>
+							</div>
+						</div>
+					</div>
+					: <div></div>
 
-				{(this.state.snippetAscii.length === this.state.asciiArray.length)?
-				<div className="charts">
-					<Charts WPMArray = {this.WPMArray} ACCArray = {this.ACCArray} DEM = {this.DEM} />
-				</div>
-				:<div></div>
-				
 				}
-				
+
 			</div>
 		);
 	}
