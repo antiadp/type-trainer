@@ -72,18 +72,20 @@ module.exports = {
 				console.log(err);
 			});
 	},
+	
 
 	//snippets
 	getSnippet: (req, res) => {
-		req.app
-			.get('db')
-			.get_snippet()
-			.then((response) => {
-				res.status(200).send(response);
-			})
-			.catch((err) => {
-				res.status(500).send({ errorMessage: 'This is why we cant have nice getSnippet.' });
-				console.log(err);
-			});
-	}
+        let {id} = req.params;
+        const dbi = req.app.get('db');
+            dbi.get_snippet(+id)
+            .then((response) => {
+                console.log('response',response)
+                res.status(200).send(response);
+            })
+            .catch((err) => {
+                res.status(500).send({ errorMessage: 'This is why we cant have nice getSnippet.' });
+                console.log(err);
+            });
+    }
 };

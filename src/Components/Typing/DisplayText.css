@@ -1,20 +1,24 @@
 
 @import url('https://fonts.googleapis.com/css?family=Stalinist+One');
+textarea {
+    color: transparent;
+}
 .DisplayText{
     top:100px;
+    color: white;
     /* border:3px dotted yellow; */
     width:60%;
     min-width:60%;
     max-width:60%;
-    height:150px;
-    min-height:150px;
-    max-height:150px;
+    height:250px;
+    min-height:250px;
+    max-height:250px;
     position: absolute;
     align-self:center;
-    z-index:-10;   
-    padding-left: 1px;    
+    z-index:-10;
+    padding-left: 1.5px;
     text-align:left;
-    padding-top:4px;
+    padding-top:7px;
     /* border:1px solid */
     box-shadow: 1px 1px 20px;
     border-radius: 5px;
@@ -33,11 +37,31 @@
     padding: 0px;
 }
 #snippetDisplay{
-    font-family:'Stalinist One';
+    font-family:'consolas';
     text-align: left;
-    font-size:50%;
+    font-size:80%;
     margin:0px;
     position:relative;
     top:-1px;
-    color:rgba(0, 0, 0, 0.267);
+    /* color:rgba(0, 0, 0, 0.267); */
 }
+#snippetDisplay .untyped {
+    color: white;
+}
+#snippetDisplay .correct {
+    color: #aaffaa;
+}
+#snippetDisplay .incorrect {
+    color: #ffaaaa;
+}
+#snippetDisplay .current {
+    animation:blinkingText 0.8s infinite;
+}
+@keyframes blinkingText{
+    0%{		color: #afafaf;	}
+	49%{	color: transparent;	}
+	50%{	color: transparent;	}
+	99%{	color:transparent;	}
+	100%{	color: #afafaf;	}
+}
+

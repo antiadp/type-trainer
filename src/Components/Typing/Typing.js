@@ -1,43 +1,99 @@
 import React, { Component } from 'react';
 import Metrics from '../Metrics/Metrics';
-import Charts from '../Charts/Charts';
+import { Line } from 'react-chartjs-2';
 import axios from 'axios';
 
 class Typing extends Component {
 	constructor(props) {
 		super();
-		this.WPMArray=[]
-		this.ACCArray=[]
-		this.DEM=0
+		this.WPMArray = [];
+		this.ACCArray = [];
+		this.DEM = 0;
 		this.state = {
+			language: 1,
+			languageCount: 5,
+			id: 0,
 			input: '',
-			asciiArray: [32],
-			lettersArray: [' '],
+			asciiArray: [],
+			lettersArray: [ ' ' ],
 			timerBool: false,
 			snippetAscii: [],
-		
+			DEM: 0,
+			WPMData: {
+				labels: [ '10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%' ],
+				datasets: [
+					{
+						label: 'WPM',
+						// this.props.WPMArray
+						data: this.WPMArray
+					}
+				]
+			},
+			ACCData: {
+				labels: [ '10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%' ],
+				datasets: [
+					{
+						label: 'Accuracy',
+						// this.props.ACCArray
+						data: this.ACCArray
+					}
+				],
+				color: 'green',
+				backgroundColor: 'blue',
+				borderColor: 'red',
+				BorderWidth: 5
+			}
 		};
 	}
-
+	componentDidUpdate(prevProps, prevState) {
+		if (prevProps !== this.props) {
+			this.onComponentMount();
+			switch (this.props.language) {
+				case 'HTML':
+					this.setState({ language: 1 });
+					break;
+				case 'CSS':
+					this.setState({ language: 2 });
+					break;
+				case 'JavaScript':
+					this.setState({ language: 3 });
+					break;
+				case 'Special Characters':
+					this.setState({ language: 4 });
+					break;
+				default:
+					this.setState({ langugae: 1 });
+			}
+		}
+		if (prevState.id !== this.state.id) {
+			this.onComponentMount();
+		}
+	}
 	componentDidMount() {
-		axios.get('/api/get-snippet').then((res) => {
-			let snippet = res.data[0].snippet;
-			let snippetArray = snippet.split(',').map((current) => {
+		this.onComponentMount();
+	}
+	onComponentMount() {
+		axios.get(`/api/get-snippet/${+this.state.language}`).then((res) => {
+			let currentSnippet = res.data[this.state.id].snippet;
+			let snippetArray = currentSnippet.split(',').map((current) => {
 				return Number(current);
 			});
-
-			this.setState({ snippetAscii: snippetArray })
+			//snippetAscii is the snippet as an array of ascii characters
+			this.setState({ snippetAscii: snippetArray });
+			console.log('snippetArray', snippetArray);
 			let lettersArray = [];
+			lettersArray = snippetArray.map((char, i) => {
+				if (char === 10) {
+					char = <br />;
+				}
+				return String.fromCharCode(char);
+			});
 
-			for (let i = 0; i < snippetArray.length; i++) {
-				// if (snippetArray[i] === 10) {
-				// 	lettersArray.push(<br />);
-				// }
-				lettersArray.push(String.fromCharCode(snippetArray[i]));
-			}
+			console.log('lettersArray', lettersArray);
 			// letterArray is an array of character strings from the snippet script
 			this.setState({
-				lettersArray: lettersArray
+				lettersArray: lettersArray,
+				languageCount: res.data.length
 			});
 		});
 	}
@@ -47,14 +103,12 @@ class Typing extends Component {
 			this.setState({
 				input: value
 			});
-			let tempArray = [];
+
+			let userInputArray = [];
 			for (let i = 0; i < value.length; i++) {
-				tempArray.push(value.charCodeAt(i));
+				userInputArray.push(value.charCodeAt(i));
 			}
-			//  asciiArray is an array of ascii nums
-			this.setState({
-				asciiArray: tempArray
-			});
+			this.setState({ asciiArray: userInputArray });
 		}
 	};
 
@@ -65,6 +119,7 @@ class Typing extends Component {
 			asciiArray: ''
 		});
 	};
+
 	toggleReadOnly = () => {
 		// console.log('Read Only fired');
 		this.setState({
@@ -72,35 +127,118 @@ class Typing extends Component {
 		});
 	};
 	passChartMetrics = (wpm, acc, dem) => {
-		console.log('chartMetrics Fired')
-		
-		let WPM10Percent = Math.floor(wpm.length / 10)
-		let WPMTemp = [wpm[WPM10Percent], wpm[(WPM10Percent * 2)], wpm[(WPM10Percent * 3)], wpm[(WPM10Percent * 4)], wpm[(WPM10Percent * 5)], wpm[(WPM10Percent * 6)], wpm[(WPM10Percent * 7)], wpm[(WPM10Percent * 8)], wpm[(WPM10Percent * 9)], wpm[wpm.length-1]]
-		let WPMPassed = WPMTemp.map(e=>{return Math.round(e)})
+		console.log('chartMetrics Fired');
 
-		let ACC10Percent = Math.floor(acc.length /10)
-		let ACCTemp = [acc[ACC10Percent], acc[(ACC10Percent*2)], acc[(ACC10Percent*3)], acc[(ACC10Percent*4)], acc[(ACC10Percent*5)], acc[(ACC10Percent*6)], acc[(ACC10Percent*7)], acc[(ACC10Percent*8)], acc[(ACC10Percent*9)], acc[acc.length-1]]
-		let ACCPassed = ACCTemp.map(e=>{return Math.round(e*100)})
-		// debugger
-		this.WPMArray = WPMPassed
-		this.ACCArray = ACCPassed
-		this.DEM = dem
-		// this.setState({
-		// 	WPMArray:WPMPassed,
-		// 	ACCArray:ACCPassed,
-		// 	DEM:dem
-		// })
-	}
+		let WPM10Percent = Math.floor(wpm.length / 10);
+		let WPMTemp = [
+			wpm[WPM10Percent],
+			wpm[WPM10Percent * 2],
+			wpm[WPM10Percent * 3],
+			wpm[WPM10Percent * 4],
+			wpm[WPM10Percent * 5],
+			wpm[WPM10Percent * 6],
+			wpm[WPM10Percent * 7],
+			wpm[WPM10Percent * 8],
+			wpm[WPM10Percent * 9],
+			wpm[wpm.length - 1]
+		];
+		let WPMPassed = WPMTemp.map((e) => {
+			return Math.round(e);
+		});
+
+		let ACC10Percent = Math.floor(acc.length / 10);
+		let ACCTemp = [
+			acc[ACC10Percent],
+			acc[ACC10Percent * 2],
+			acc[ACC10Percent * 3],
+			acc[ACC10Percent * 4],
+			acc[ACC10Percent * 5],
+			acc[ACC10Percent * 6],
+			acc[ACC10Percent * 7],
+			acc[ACC10Percent * 8],
+			acc[ACC10Percent * 9],
+			acc[acc.length - 1]
+		];
+		let ACCPassed = ACCTemp.map((e) => {
+			return Math.round(e * 100);
+		});
+
+		this.setState({
+			WPMData: {
+				labels: [ '10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%' ],
+				datasets: [
+					{
+						label: 'WPM',
+						// this.props.WPMArray
+						data: WPMPassed
+					}
+				]
+			},
+			ACCData: {
+				labels: [ '10%', '20%', '30%', '40%', '50%', '60%', '7%', '80%', '90%', '100%' ],
+				datasets: [
+					{
+						label: 'Accuracy',
+						data: ACCPassed
+					}
+				],
+				color: 'green',
+				backgroundColor: 'blue',
+				borderColor: 'red',
+				BorderWidth: 5
+			},
+			DEM: dem
+		});
+	};
+	changeSnippet = (el) => {
+		console.log('button', el, this.state.id);
+		if (el === 'up') {
+			if (this.state.id === this.state.languageCount - 1) {
+				this.setState({
+					id: 0
+				});
+			} else {
+				this.setState({
+					id: +this.state.id + 1
+				});
+			}
+		}
+		if (el === 'down') {
+			if (this.state.id === 0) {
+				this.setState({ id: this.state.languageCount - 1 });
+			} else {
+				this.setState({
+					id: +this.state.id - 1
+				});
+			}
+		}
+	};
 
 	render() {
-		let classes;
-		let snippetWithSpan = this.state.lettersArray.map((letter, i) => {
+		let spanDisplay = this.state.snippetAscii.map((char, i) => {
+			let { asciiArray } = this.state;
+			let textClass = '';
+			let letter = String.fromCharCode(char);
+
+			if (i === asciiArray.length) {
+				textClass = 'current';
+			} else if (!asciiArray[i]) {
+				textClass = 'untyped';
+			} else if (char === asciiArray[i]) {
+				textClass = 'correct';
+			} else {
+				textClass = 'incorrect';
+				letter = String.fromCharCode(asciiArray[i]);
+			}
+			if (char === 10) {
+				return <br />;
+			}
 			return (
-				<span key={i} className={classes}>{letter}</span>
+				<span key={i} className={textClass}>
+					{letter}
+				</span>
 			);
 		});
-		// joined is the snippet script string 
-		// let joined = this.state.lettersArray.join('');
 
 		return (
 			<div className="typing-wrapper">
@@ -134,20 +272,41 @@ class Typing extends Component {
 
 				<div className="display-wrapper">
 					<div className="DisplayText">
-						<div id="snippetDisplay">{snippetWithSpan}</div>
+						<div id="snippetDisplay">{spanDisplay}</div>
 					</div>
 				</div>
 				<br />
-				{this.props.language}
+				<div className="buttonWrapper">
+					<button id="previous" className="button" onClick={() => this.changeSnippet('up')}>
+						Previous Snippet
+					</button>
+					<p id="language">{this.props.language}</p>
 
-				{(this.state.snippetAscii.length === this.state.asciiArray.length)?
-				<div className="charts">
-					<Charts WPMArray = {this.WPMArray} ACCArray = {this.ACCArray} DEM = {this.DEM} />
+					<button
+						id="next"
+						className="button"
+						onClick={() => {
+							this.changeSnippet('down');
+						}}
+					>
+						Next Snippet
+					</button>
 				</div>
-				:<div></div>
-				
-				}
-				
+				{this.state.timerBool ? (
+					<div className="charts">
+						{/* <Charts WPMArray = {this.WPMArray} ACCArray = {this.ACCArray} DEM = {this.DEM} /> */}
+						<div className="chartsWrapper">
+							<div className="chart chartWPM">
+								<Line data={this.state.WPMData} width={100} height={30} />
+							</div>
+							<div className="chart chartACC">
+								<Line data={this.state.ACCData} width={100} height={30} />
+							</div>
+						</div>
+					</div>
+				) : (
+					<div />
+				)}
 			</div>
 		);
 	}

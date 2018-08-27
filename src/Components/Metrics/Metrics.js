@@ -51,13 +51,12 @@ class Metrics extends Component {
             wpm = (((this.props.userInputAscii.length - this.allErrors) / 5) / ((minutesElapsed)))
         }
         if (this.props.userInputAscii.length === this.props.snippetAscii.length) {
-            // debugger
         }
         this.setState({
             WPM: Math.round(wpm)
         })
         this.WPMArray.push(wpm)
-        // debugger
+ 
     }
 
     CPM = () => {
@@ -84,14 +83,12 @@ class Metrics extends Component {
             ACC: Math.round(acc * 100)
         })
         this.ACCArray.push(acc)
-        // debugger
+
     }
     DEM = () => {
         var dem = (this.state.WPM - this.allErrors) * this.state.ACC
         return Math.round(dem)
-        // this.setState({
-        //     DEM: Math.round(dem)
-        // })
+
     }
 
     endOfSnippet = () => {

@@ -4,19 +4,17 @@
     width:60%;
     min-width:60%;
     max-width:60%;
-    height:150px;
-    min-height:150px;
-    max-height:150px;
+    height:250px;
+    min-height:250px;
+    max-height:250px;
     background-color: rgba(0, 0, 0, 0.329);
-    z-index: 10;
-    color:rgb(0, 0, 0);
-    /* text-align: left; */
-    font-family:'Stalinist One';
+    /* z-index: 10; */
+    /* color:rgb(0, 0, 0); */
+    /* font-family:'Stalinist One'; */
     text-align: left;
-    font-size:50%;
-    position:relative;
-    z-index: 200;
-    /* padding-left:2px */
+    /* font-size:80%; */
+    /* position:relative; */
+    /* z-index: 200; */
     border:none;
     border-radius: 5px;
 
@@ -27,4 +25,18 @@
 .typing-wraper{
     position:relative;
     z-index: -200;
+}
+.buttonWrapper{
+    display:grid;
+    grid-template-areas: '. . button1 language button2 . .'
+}
+
+#previous{
+    grid-area: button1
+}
+#language{
+    grid-area: language
+}
+#next{
+    grid-area:button2
 }
