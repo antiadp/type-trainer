@@ -78,26 +78,23 @@ class Typing extends Component {
 			let snippetArray = currentSnippet.split(',').map((current) => {
 				return Number(current);
 			});
-
+			//snippetAscii is the snippet as an array of ascii characters
 			this.setState({ snippetAscii: snippetArray });
-			console.log('snippetAscii', this.state.snippetAscii);
+			console.log('snippetArray', snippetArray);
 			let lettersArray = [];
+			lettersArray = snippetArray.map((char, i) => {
+				if (char === 10) {
+					char = <br />;
+				}
+				return String.fromCharCode(char);
+			});
 
-			for (let i = 0; i < snippetArray.length; i++) {
-				if (snippetArray[i] === 10) {
-					lettersArray.splice(i, 1, <br />);
-				}
-				if (snippetArray[i] === 9) {
-					lettersArray.splice(i, 1, '     ');
-				}
-				lettersArray.push(String.fromCharCode(snippetArray[i]));
-			}
+			console.log('lettersArray', lettersArray);
 			// letterArray is an array of character strings from the snippet script
 			this.setState({
 				lettersArray: lettersArray,
 				languageCount: res.data.length
 			});
-			console.log('lettersArray', this.state.lettersArray);
 		});
 	}
 	// updateUserInput is converting user input to ascii chars and pushing them into asciiArray
@@ -194,39 +191,55 @@ class Typing extends Component {
 		});
 	};
 	changeSnippet = (el) => {
-        console.log('button', el, this.state.id)
-        if (el === 'up') {
-            if (this.state.id === this.state.languageCount - 1) {
-                this.setState({
-                    id: 0
-                });
-            } else {
-                this.setState({
-                    id: (+this.state.id + 1)
-                })
-            }
-        }
-        if (el === 'down') {
-            if (this.state.id === 0) {
-                this.setState({ id: this.state.languageCount - 1 })
-            } else {
-                this.setState({
-                    id: (+this.state.id - 1)
-                })
-            }
-        }
-    };
+		console.log('button', el, this.state.id);
+		if (el === 'up') {
+			if (this.state.id === this.state.languageCount - 1) {
+				this.setState({
+					id: 0
+				});
+			} else {
+				this.setState({
+					id: +this.state.id + 1
+				});
+			}
+		}
+		if (el === 'down') {
+			if (this.state.id === 0) {
+				this.setState({ id: this.state.languageCount - 1 });
+			} else {
+				this.setState({
+					id: +this.state.id - 1
+				});
+			}
+		}
+	};
 
 	render() {
-		console.log('asciiArray', this.state.asciiArray);
-		let classes;
-		let spanDisplay = this.state.lettersArray.map((letter, i) => {
+		let spanDisplay = this.state.snippetAscii.map((char, i) => {
+			let { asciiArray } = this.state;
+			let textClass = '';
+			let letter = String.fromCharCode(char);
+
+			if (i === asciiArray.length) {
+				textClass = 'current';
+			} else if (!asciiArray[i]) {
+				textClass = 'untyped';
+			} else if (char === asciiArray[i]) {
+				textClass = 'correct';
+			} else {
+				textClass = 'incorrect';
+				letter = String.fromCharCode(asciiArray[i]);
+			}
+			if (char === 10) {
+				return <br />;
+			}
 			return (
-				<span key={i} className={classes}>
+				<span key={i} className={textClass}>
 					{letter}
 				</span>
 			);
 		});
+
 		return (
 			<div className="typing-wrapper">
 				<Metrics
