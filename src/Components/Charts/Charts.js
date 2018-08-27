@@ -24,8 +24,8 @@ export default class Charts extends Component {
 
                 }]
         }
-        // this.data = { wpm: this.props.WPMArray, acc: this.props.ACCArray, dem: this.props.DEM }
     }
+
     componentDidUpdate(prevProps, prevState) {
         if (prevProps !== this.props || prevState !== this.state) {
             
