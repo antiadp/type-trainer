@@ -8,15 +8,13 @@
     min-height:250px;
     max-height:250px;
     background-color: rgba(0, 0, 0, 0.329);
-    z-index: 10;
-    color:rgb(0, 0, 0);
-    /* text-align: left; */
-    font-family:'Stalinist One';
+    /* z-index: 10; */
+    /* color:rgb(0, 0, 0); */
+    /* font-family:'Stalinist One'; */
     text-align: left;
-    font-size:80%;
-    position:relative;
-    z-index: 200;
-    /* padding-left:2px */
+    /* font-size:80%; */
+    /* position:relative; */
+    /* z-index: 200; */
     border:none;
     border-radius: 5px;
 
@@ -41,7 +39,4 @@
 }
 #next{
     grid-area:button2
-}
-.button{
-    
 }
