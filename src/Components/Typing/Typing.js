@@ -15,7 +15,7 @@ class Typing extends Component {
 			id: 0,
 			input: '',
 			asciiArray: [],
-			lettersArray: [ ' ' ],
+			// lettersArray: [ ' ' ],
 			timerBool: false,
 			snippetAscii: [],
 			DEM: 0,
@@ -83,9 +83,6 @@ class Typing extends Component {
 			console.log('snippetArray', snippetArray);
 			let lettersArray = [];
 			lettersArray = snippetArray.map((char, i) => {
-				if (char === 10) {
-					char = <br />;
-				}
 				return String.fromCharCode(char);
 			});
 
@@ -230,8 +227,8 @@ class Typing extends Component {
 				textClass = 'incorrect';
 				letter = String.fromCharCode(asciiArray[i]);
 			}
-			if (char === 10) {
-				return <br />;
+			if(char === 9){
+				this.state.snippetAscii.splice(i, 1)
 			}
 			return (
 				<span key={i} className={textClass}>

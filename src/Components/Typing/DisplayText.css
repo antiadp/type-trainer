@@ -55,10 +55,10 @@ textarea {
     color: #ffaaaa;
 }
 #snippetDisplay .current {
-    animation:blinkingText 0.8s infinite;
+    animation:blinkingText 0.7s infinite;
 }
 @keyframes blinkingText{
-    0%{		color: #afafaf;	}
+    0%{		color: black;	}
 	49%{	color: transparent;	}
 	50%{	color: transparent;	}
 	99%{	color:transparent;	}

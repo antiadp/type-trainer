@@ -72,7 +72,6 @@ module.exports = {
 				console.log(err);
 			});
 	},
-	
 
 	//snippets
 	getSnippet: (req, res) => {
@@ -80,7 +79,6 @@ module.exports = {
         const dbi = req.app.get('db');
             dbi.get_snippet(+id)
             .then((response) => {
-                console.log('response',response)
                 res.status(200).send(response);
             })
             .catch((err) => {
