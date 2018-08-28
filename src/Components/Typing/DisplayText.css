@@ -6,7 +6,6 @@ textarea {
 .DisplayText{
     top:100px;
     color: white;
-    /* border:3px dotted yellow; */
     width:60%;
     min-width:60%;
     max-width:60%;
@@ -19,7 +18,6 @@ textarea {
     padding-left: 1.5px;
     text-align:left;
     padding-top:7px;
-    /* border:1px solid */
     box-shadow: 1px 1px 20px;
     border-radius: 5px;
 }
@@ -27,7 +25,6 @@ textarea {
 .display-wrapper{
     width:100%;
     height:100%;
-    /* border:8px dashed purple; */
     position: absolute;
     top:0px;
     left:0px;

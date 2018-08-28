@@ -80,13 +80,11 @@ class Typing extends Component {
 			});
 			//snippetAscii is the snippet as an array of ascii characters
 			this.setState({ snippetAscii: snippetArray });
-			console.log('snippetArray', snippetArray);
 			let lettersArray = [];
 			lettersArray = snippetArray.map((char, i) => {
 				return String.fromCharCode(char);
 			});
 
-			console.log('lettersArray', lettersArray);
 			// letterArray is an array of character strings from the snippet script
 			this.setState({
 				lettersArray: lettersArray,
@@ -229,6 +227,9 @@ class Typing extends Component {
 			}
 			if(char === 9){
 				this.state.snippetAscii.splice(i, 1)
+			}
+			if(char === 10){
+				return <br />
 			}
 			return (
 				<span key={i} className={textClass}>
