@@ -1,0 +1,12 @@
+.profile-userInfo-img{
+  width: 70px;
+   height: 70px;
+   border-radius: 25%;
+   /* background-color: #ddd; */
+   margin-top: 10px;
+}
+
+.profile-userInfo > h2{
+  float: right;
+  padding: 40px 200px 0px 20px;
+}
