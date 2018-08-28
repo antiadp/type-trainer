@@ -38,8 +38,8 @@ class Profile extends Component {
 		return (
 			<Modal open={this.state.open} onClose={this.hideProfileModal} classNames={{ modal: 'custom-modal' }} center>
 				<div className="profile-userInfo">
+					<img src={this.props.user.img} className="profile-userInfo-img" alt="" />
 					<h2>Welcome {this.props.user.username}</h2>
-					<img src={this.props.user.img} alt="" />
 				</div>
 
 				<div className="profile-graphs">

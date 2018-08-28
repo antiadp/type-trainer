@@ -85,12 +85,14 @@ class SideNav extends Component {
 		const { user } = this.props;
 		let leaderBoard = this.state.leaderBoardRes.map((user) => {
 			return (
-				<div key={user.test_id}>
-					<img src={user.img} alt="user" />
-					<h4>{user.username}</h4>
-					<h4>
-						wpm:{user.wpm} cpm:{user.cpm} accuracy:{user.accuracy}
-					</h4>
+				<div className="nav-leaders" key={user.test_id}>
+					<img src={user.img} className="nav-leaders-img" alt="user" />
+					<div className="nav-leaders-info">
+						<h3>{user.username}</h3>
+						<h4>
+							wpm:{user.wpm} cpm:{user.cpm} accuracy:{user.accuracy}
+						</h4>
+					</div>
 				</div>
 			);
 		});
@@ -105,9 +107,9 @@ class SideNav extends Component {
 						</div>
 					)}
 					{user.user_id && (
-						<div onClick={this.showProfile}>
-							<h3>Hello {user.username}</h3>
-							<img src={user.img} alt="user" />
+						<div className="nav-user-profile" onClick={this.showProfile}>
+							<h3>Hello {user.username}!</h3>
+							<img src={user.img} className="nav-user-profile-img" alt="user" />
 						</div>
 					)}
 					<Profile show={this.state.profile} close={this.showProfile} />
@@ -178,7 +180,7 @@ class SideNav extends Component {
 						Special
 					</h4>
 				</div>
-				<div className="nav-leader-board">
+				<div className="nav-leader-board-wpr">
 					<h1>LEADERBOARD</h1>
 					{leaderBoard}
 				</div>
