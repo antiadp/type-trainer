@@ -51,8 +51,6 @@ app.get('/api/all-results', ctrl.getAllResults);
 //typing endpoint
 app.get('/api/get-snippet/:id', ctrl.getSnippet);
 
-app.post('/api/update-user-metrics', ctrl.updateUserMetrics);
-
 
 
 app.listen(SERVER_PORT, () => console.log(`Listening in on ${SERVER_PORT}`));

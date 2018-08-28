@@ -127,7 +127,7 @@ class Typing extends Component {
 		});
 	};
 	passChartMetrics = (wpm, acc, dem) => {
-		// console.log('chartMetrics Fired');
+		console.log('chartMetrics Fired');
 
 		let WPM10Percent = Math.floor(wpm.length / 10);
 		let WPMTemp = [
