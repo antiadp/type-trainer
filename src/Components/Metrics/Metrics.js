@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios'
 
 class Metrics extends Component {
     constructor() {
@@ -98,6 +99,19 @@ class Metrics extends Component {
             }
         }
 
+        
+
+        let {WPM, CPM, ACC} = this.state
+
+        console.log(WPM, CPM, ACC, 'addafda')
+
+        var date = new Date()
+        var timeStamp = date.getTime()
+
+        axios.post('/api/update-user-metrics', {wpm: WPM, cpm: CPM, acc: ACC, timeStamp}).then(res => {
+            console.log('front end update')
+        })
+
         this.WPM();
         this.CPM();
         this.ACC();
@@ -107,7 +121,7 @@ class Metrics extends Component {
 
     passChartMetrics = (dem) =>{
         this.props.passChartMetrics(this.WPMArray, this.ACCArray, dem)
-        console.log('Metrics Passed')
+        // console.log('Metrics Passed')
     }
 
 

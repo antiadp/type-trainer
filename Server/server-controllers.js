@@ -80,12 +80,33 @@ module.exports = {
         const dbi = req.app.get('db');
             dbi.get_snippet(+id)
             .then((response) => {
-                console.log('response',response)
+                // console.log('response',response)
                 res.status(200).send(response);
             })
             .catch((err) => {
                 res.status(500).send({ errorMessage: 'This is why we cant have nice getSnippet.' });
                 console.log(err);
             });
-    }
+	},
+
+
+	updateUserMetrics: (req, res) => {
+		let {cpm, wpm, acc, timeStamp} = req.body;
+
+		const dbi = req.app.get('db');
+		dbi
+			.update_user_metrics(wpm, cpm, acc, req.session.user.user_id, timeStamp)
+			.then((results) => {
+				res.status(200).send(results);
+			})
+			.catch((err) => {
+				res.status(500).send({ errorMessage: 'This is why we cant have nice getAllResults.' });
+				console.log(err);
+			});
+		
+        
+	}
+
+	
+	
 };
