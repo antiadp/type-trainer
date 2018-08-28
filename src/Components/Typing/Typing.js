@@ -16,7 +16,7 @@ class Typing extends Component {
 			input: '',
 			asciiArray: [],
 			lettersArray: [ ' ' ],
-			timerBool: false,
+			finishBool: false,
 			snippetAscii: [],
 			DEM: 0,
 			WPMData: {
@@ -99,7 +99,7 @@ class Typing extends Component {
 	}
 	// updateUserInput is converting user input to ascii chars and pushing them into asciiArray
 	updateUserInput = (value) => {
-		if (!this.state.timerBool) {
+		if (!this.state.finishBool) {
 			this.setState({
 				input: value
 			});
@@ -120,10 +120,11 @@ class Typing extends Component {
 		});
 	};
 
+
 	toggleReadOnly = () => {
 		// console.log('Read Only fired');
 		this.setState({
-			timerBool: true
+			finishBool: true
 		});
 	};
 	passChartMetrics = (wpm, acc, dem) => {
@@ -212,6 +213,11 @@ class Typing extends Component {
 				});
 			}
 		}
+		this.setState({
+			input:'',
+			// asciiArray:[],
+			finishBool:false,
+		})
 	};
 
 	render() {
@@ -263,9 +269,9 @@ class Typing extends Component {
 					rows="10"
 					placeholder={this.state.placeholder}
 					maxLength="500"
-					readOnly={this.state.timerBool}
-					onCopy={this.clearInput}
-					onDrag={this.clearInput}
+					readOnly={this.state.finishBool}
+					onCopy={this.clearMe}
+					onDrag={this.clearMe}
 					onDrop={this.clearInput}
 					onPaste={this.clearInput}
 				/>
@@ -292,7 +298,7 @@ class Typing extends Component {
 						Next Snippet
 					</button>
 				</div>
-				{this.state.timerBool ? (
+				{this.state.finishBool ? (
 					<div className="charts">
 						{/* <Charts WPMArray = {this.WPMArray} ACCArray = {this.ACCArray} DEM = {this.DEM} /> */}
 						<div className="chartsWrapper">
