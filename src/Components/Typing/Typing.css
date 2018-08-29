@@ -17,12 +17,13 @@
     /* z-index: 200; */
     border:none;
     border-radius: 5px;
+    margin-top:30px;
 
 }
 .script{
     cursor:default;
 }
-.typing-wraper{
+.typing-wrapper{
     position:relative;
     z-index: -200;
 }
