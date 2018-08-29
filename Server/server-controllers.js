@@ -79,7 +79,7 @@ module.exports = {
         const dbi = req.app.get('db');
             dbi.get_snippet(+id)
             .then((response) => {
-                res.status(200).send(response);
+				res.status(200).send(response);
             })
             .catch((err) => {
                 res.status(500).send({ errorMessage: 'This is why we cant have nice getSnippet.' });

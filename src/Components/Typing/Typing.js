@@ -51,19 +51,20 @@ class Typing extends Component {
 
 	componentDidUpdate(prevProps, prevState) {
 		if (prevProps.language !== this.props.language) {
-			console.log('language changed.')
+			// console.log('language changed.')
+			// console.log('language', this.props.language)
 			switch (this.props.language) {
 				case 'HTML':
 					this.setState({ language: 1 });
-					console.log('language changed to HTML ')
+					// console.log('language changed to HTML ')
 					break;
 					case 'CSS':
 					this.setState({ language: 2 });
-					console.log('language changed to CSS ')
+					// console.log('language changed to CSS ')
 					break;
 					case 'JavaScript':
 					this.setState({ language: 3 });
-					console.log('language changed to JavaScript ')
+					// console.log('language changed to JavaScript ')
 					break;
 				case 'Special':
 				this.setState({ language: 4 });
@@ -74,6 +75,7 @@ class Typing extends Component {
 			this.clearMe()
 			this.onComponentMount()
 			this.selectText()
+			// this.onComponentMount()
 		}
 		if (prevState.id !== this.state.id) {
 			this.onComponentMount();
@@ -98,11 +100,12 @@ class Typing extends Component {
 				languageCount: res.data.length
 			});
 		});
-		this.textRef.current.focus()
+		console.log('snippet id', this.state.id)
+		// this.refs.createRef()
+		// WHEN THIS RUNS WE NEED TO SELECT THE TEXT BOX UNDER THE PROTECTING DIV. AND ON CLICK FOR THE PROTECTING DIV
+		
 	}
-	// updateUserInput is converting user input to ascii chars and pushing them into asciiArray
 	updateUserInput = (value) => {
-		console.log('value', value)
 		if (!this.state.finishBool) {
 			this.setState({
 				input: value
@@ -113,13 +116,14 @@ class Typing extends Component {
 			}
 			this.setState({ asciiArray: userInputArray });
 		}
-	};
+	}; 
 
 	clearMe = (e) => {
 		this.setState({
 			input: '',
 			finishBool: false,
-		}, console.log('state =\'', this.state.input,"'"));
+		}
+	);
 	};
 
 	preventPaste = (e) => {
@@ -256,7 +260,7 @@ class Typing extends Component {
 					passChartMetrics={this.passChartMetrics}
 				/>
 				<div className="display-wrapper">
-					<div className="DisplayText">
+					<div className="DisplayText" onClick={this.selectText}>
 						<div id="snippetDisplay">{spanDisplay}</div>
 					</div>
 				</div>
@@ -279,7 +283,7 @@ class Typing extends Component {
 					onPaste={this.preventPaste}
 					value={this.state.input}
 					maxinput='500'
-					unselectable='on'
+					unselectable='true'
 					ref={this.textRef}
 				/>
 
