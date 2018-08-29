@@ -58,11 +58,11 @@ class Typing extends Component {
 				case 'JavaScript':
 					this.setState({ language: 3 });
 					break;
-				case 'Special Characters':
-					this.setState({ language: 4 });
+				case 'Special':
+				this.setState({ language: 4 });
 					break;
 				default:
-					this.setState({ langugae: 1 });
+					this.setState({ language: 1 });
 			}
 		}
 		if (prevState.id !== this.state.id) {
