@@ -112,13 +112,15 @@ class SideNav extends Component {
 							<img src={user.img} className="nav-user-profile-img" alt="user" />
 						</div>
 					)}
+
+
 					<Profile show={this.state.profile} close={this.showProfile} />
 					<Modal
 						open={this.state.open}
 						onClose={this.hideLoginModal}
 						classNames={{ modal: 'custom-modal' }}
 						center
-					>
+						>
 						<div className="side-nav-login-modal">
 							<div className="login-input">
 								<input
@@ -126,7 +128,7 @@ class SideNav extends Component {
 									placeholder="username"
 									className="loginReg-username-input"
 									type="text"
-								/>
+									/>
 							</div>
 							<div className="login-input">
 								<input
@@ -134,7 +136,7 @@ class SideNav extends Component {
 									placeholder="password"
 									className="loginReg-password-input"
 									type="password"
-								/>
+									/>
 							</div>
 							<div className="modal-btn">
 								<button onClick={this.handleLoginRegRequest}>Login / Register</button>
@@ -147,12 +149,13 @@ class SideNav extends Component {
 				</div>
 
 				<div className="script-wrapper">
+				<hr/>
 					<h4
 						onClick={() => {
 							this.setLanguage('HTML');
 						}}
 						className="script"
-					>
+						>
 						HTML
 					</h4>
 					<h4
@@ -179,6 +182,7 @@ class SideNav extends Component {
 					>
 						Special
 					</h4>
+					<hr/>
 				</div>
 				<div className="nav-leader-board-wpr">
 					<h1>LEADERBOARD</h1>
@@ -186,7 +190,7 @@ class SideNav extends Component {
 				</div>
 				{user.user_id && (
 					<div className="logout">
-						<button onClick={this.logout}>Logout</button>
+						<button onClick={this.logout} className="logout-button">Logout</button>
 					</div>
 				)}
 			</div>
