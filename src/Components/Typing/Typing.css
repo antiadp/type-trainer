@@ -8,13 +8,7 @@
     min-height:250px;
     max-height:250px;
     background-color: rgba(0, 0, 0, 0.329);
-    /* z-index: 10; */
-    /* color:rgb(0, 0, 0); */
-    /* font-family:'Stalinist One'; */
     text-align: left;
-    /* font-size:80%; */
-    /* position:relative; */
-    /* z-index: 200; */
     border:none;
     border-radius: 5px;
     margin-top:30px;
@@ -40,7 +34,6 @@
     background-color: transparent;
     border: 2px solid #d5d6d2;
     border-radius: 50px;
-    /* font-family: 'Open Sans'; */
     color: #d5d6d2;
     font-weight: 400;
     font-size: 1.0em;
@@ -61,4 +54,10 @@
     grid-area:button2;
     align-self: center;
     justify-self: center;
+}
+.button{
+    background-color: #3a5199;
+    border:none;
+    height:30px;
+    font-family: 'Stalinist One'
 }
