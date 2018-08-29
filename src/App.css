@@ -1,14 +1,23 @@
 .App {
   text-align: center;
   height:99vh;
+  position:relative;
+  z-index: -2000;
   
+}
+#root{
+  position:relative;
+  z-index: -2000;
 }
 
 body{
   height:100vh;
-  
+  position:relative;
+  z-index: -2000;
 }
 
 html{
   background-image: linear-gradient(99deg, #2a3f7b, #516198 90%);
+  position:relative;
+  z-index: -2000;
 }
