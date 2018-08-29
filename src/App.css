@@ -1,24 +1,14 @@
 .App {
   text-align: center;
   height:99vh;
-  /* border:5px solid yellow; */
-  /* position: relative;
-  z-index: -2200; */
   
 }
 
 body{
   height:100vh;
-  /* border:2px solid rebeccapurple; */
   
 }
 
 html{
-  background-image: linear-gradient(99deg, #3a5199, #ffffff 90%);
-  
+  background-image: linear-gradient(99deg, #2a3f7b, #516198 90%);
 }
-/* #id{
-  position:relative;
-  z-index:-2000;
-} */
-

@@ -24,7 +24,6 @@ class Typing extends Component {
 				datasets: [
 					{
 						label: 'WPM',
-						// this.props.WPMArray
 						data: this.WPMArray
 					}
 				]
@@ -34,7 +33,6 @@ class Typing extends Component {
 				datasets: [
 					{
 						label: 'Accuracy',
-						// this.props.ACCArray
 						data: this.ACCArray
 					}
 				],
@@ -54,7 +52,6 @@ class Typing extends Component {
 	componentDidUpdate(prevProps, prevState) {
 		if (prevProps.language !== this.props.language) {
 			console.log('language changed.')
-			// this.onComponentMount();
 			switch (this.props.language) {
 				case 'HTML':
 					this.setState({ language: 1 });
@@ -91,7 +88,6 @@ class Typing extends Component {
 		axios.get(`/api/get-snippet/${+this.state.language}`).then((res) => {
 			let currentSnippet = res.data[this.state.id].snippet;
 			let snippetArray = currentSnippet.split(',').map((current) => {
-				// console.log('currentlanguage', current)
 				return Number(current);
 			});
 			this.setState({ snippetAscii: snippetArray });
@@ -128,7 +124,7 @@ class Typing extends Component {
 		this.setState({
 			input: '',
 			finishBool: false,
-		}, console.log('state =\'', this.state.input,"\'"));
+		}, console.log('state =\'', this.state.input,"'"));
 	};
 
 	preventPaste = (e) => {
@@ -136,13 +132,11 @@ class Typing extends Component {
 	}
 
 	toggleReadOnly = () => {
-		// console.log('Read Only fired');
 		this.setState({
 			finishBool: true
 		});
 	};
 	passChartMetrics = (wpm, acc, dem) => {
-		// console.log('chartMetrics Fired');
 
 		let WPM10Percent = Math.floor(wpm.length / 10);
 		let WPMTemp = [
@@ -184,7 +178,6 @@ class Typing extends Component {
 				datasets: [
 					{
 						label: 'WPM',
-						// this.props.WPMArray
 						data: WPMPassed
 					}
 				]
@@ -206,7 +199,6 @@ class Typing extends Component {
 		});
 	};
 	changeSnippet = (el) => {
-		// console.log('button', el, this.state.id);
 		if (el === 'up') {
 			if (this.state.id === this.state.languageCount - 1) {
 				this.setState({
@@ -281,7 +273,6 @@ class Typing extends Component {
 					id="text-input"
 					cols="30"
 					rows="10"
-					// placeholder={this.state.placeholder}
 					maxLength="500"
 					readOnly={this.state.finishBool}
 					onCopy={this.preventPaste}
@@ -314,7 +305,6 @@ class Typing extends Component {
 				</div>
 				{this.state.finishBool ? (
 					<div className="charts">
-						{/* <Charts WPMArray = {this.WPMArray} ACCArray = {this.ACCArray} DEM = {this.DEM} /> */}
 						<div className="chartsWrapper">
 							<div className="chart chartWPM">
 								<Line data={this.state.WPMData} width={100} height={30} />

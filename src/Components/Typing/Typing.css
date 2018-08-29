@@ -11,17 +11,13 @@
     text-align: left;
     border:none;
     border-radius: 5px;
-    -webkit-user-drag: none;
-    -webkit-user-select: none;
-    user-select: none;
-    position: relative;
-    z-index: -50;
+    margin-top:30px;
 
 }
 .script{
     cursor:default;
 }
-.typing-wraper{
+.typing-wrapper{
     position:relative;
     z-index: -200;
 }
@@ -30,14 +26,34 @@
     grid-template-areas: '. . button1 language button2 . .'
 }
 
+.button{
+    width: 215px;
+    height: 60px;
+    margin-top: 20px;
+    position: relative;
+    background-color: transparent;
+    border: 2px solid #d5d6d2;
+    border-radius: 50px;
+    color: #d5d6d2;
+    font-weight: 400;
+    font-size: 1.0em;
+    cursor: pointer;
+    overflow: hidden;
+}
+
 #previous{
-    grid-area: button1
+    grid-area: button1;
+    align-self: center;
+    justify-self: center;
+
 }
 #language{
     grid-area: language
 }
 #next{
-    grid-area:button2
+    grid-area:button2;
+    align-self: center;
+    justify-self: center;
 }
 .button{
     background-color: #3a5199;
