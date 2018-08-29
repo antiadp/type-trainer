@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        import React, { Component } from 'react';
 
 class Metrics extends Component {
     constructor() {
@@ -21,6 +21,17 @@ class Metrics extends Component {
     componentDidUpdate(prevProps) {
         if (prevProps.userInputAscii !== this.props.userInputAscii) {
             this.everyLetter()
+        }
+        if (prevProps.snippetAscii !== this.props.snippetAscii) {
+            this.setState({                                                                                 
+                WPM: 0,
+                CPM: 0,
+                ACC: 100,
+                DEM: 0,
+            })
+            this.allErrors = 0;
+            this.endErrors = 0;
+            this.currentTime = [];
         }
     }
 
@@ -52,11 +63,16 @@ class Metrics extends Component {
         }
         if (this.props.userInputAscii.length === this.props.snippetAscii.length) {
         }
+        if(wpm.isNaN || wpm === Infinity || wpm === -Infinity || wpm <=0){
+            // console.log('wpm1',wpm)
+            wpm = 0
+            // console.log('wpm2',wpm)
+        }
         this.setState({
             WPM: Math.round(wpm)
         })
         this.WPMArray.push(wpm)
- 
+
     }
 
     CPM = () => {
@@ -78,6 +94,11 @@ class Metrics extends Component {
             acc = (this.props.userInputAscii.length - this.allErrors) / this.props.userInputAscii.length
         } else if (this.props.userInputAscii.length === this.props.snippetAscii.length) {
             acc = (this.props.userInputAscii.length - this.endErrors) / this.props.userInputAscii.length
+        }
+        if(acc.isNaN || acc === Infinity || acc === -Infinity || acc <= 0){
+            // console.log('acc1', acc)
+            acc = 0
+            // console.log('acc2', acc)
         }
         this.setState({
             ACC: Math.round(acc * 100)
@@ -105,9 +126,9 @@ class Metrics extends Component {
 
     }
 
-    passChartMetrics = (dem) =>{
+    passChartMetrics = (dem) => {
         this.props.passChartMetrics(this.WPMArray, this.ACCArray, dem)
-        console.log('Metrics Passed')
+        // console.log('Metrics Passed')
     }
 
 

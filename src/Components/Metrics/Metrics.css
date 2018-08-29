@@ -5,31 +5,24 @@
     grid-template-areas:'. CPM WPM ACC .';
     flex-direction: row;
     justify-content: space-around;
-    /* border:1px solid pink; */
     height:100px;
     color: silver;
 }
 
 .WPM{
-    /* border:1px solid pink; */
     grid-area: WPM;
     cursor:default;
-    /* padding:30px; */
 
 }
 
 .CPM{
-    /* border:1px solid pink; */
     grid-area:CPM;
     cursor:default;
-    /* padding:30px; */
 }
 
 .ACC{
-    /* border:1px solid pink; */
     grid-area:ACC;
     cursor:default;
-    /* padding:30px; */
 }
 
 .Metric{

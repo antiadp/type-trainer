@@ -33,7 +33,7 @@ export default class Charts extends Component {
         // this.data = { wpm: this.props.WPMArray, acc: this.props.ACCArray, dem: this.props.DEM }
     }
     componentDidUpdate(prevProps) {
-        console.log('props',this.props)
+        // console.log('props',this.props)
         if (prevProps !== this.props) {
             this.updateState()
             
@@ -41,7 +41,7 @@ export default class Charts extends Component {
     }
 }
     updateState = () =>{
-        console.log('state has been set')
+        // console.log('state has been set')
         this.setState({
             WPMData : {
                 labels: ['1%','2%','3%','4%','5%','6%','7%','8%','9%','10%'],
@@ -65,7 +65,7 @@ export default class Charts extends Component {
         })
     }
     render() {
-        console.log('props', this.props)
+        // console.log('props', this.props)
         // console.log('Charts Props:', this.props)
         // debugger
         return (
