@@ -81,7 +81,8 @@ module.exports = {
             dbi.get_snippet(+id)
             .then((response) => {
                 // console.log('response',response)
-                res.status(200).send(response);
+				res.status(200).send(response);
+				// console.log(response)
             })
             .catch((err) => {
                 res.status(500).send({ errorMessage: 'This is why we cant have nice getSnippet.' });

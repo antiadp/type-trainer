@@ -33,7 +33,7 @@ textarea {
     left:0px;
     display:flex;
     justify-content:center;
-    z-index:-10;
+    z-index:-100;
     padding: 0px;
 }
 #snippetDisplay{

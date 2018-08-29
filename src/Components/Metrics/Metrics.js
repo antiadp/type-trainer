@@ -113,15 +113,28 @@ class Metrics extends Component {
     }
 
     endOfSnippet = () => {
-        for (let i = 0; i <= this.props.userInputAscii; i++) {
+        
+        console.log('end of snippet before for loop')
+        // debugger
+        // 
+        for (let i = 0; i <= this.props.userInputAscii.length; i++) {
+            // console.log(i)
+            // debugger
             if (this.props.userInputAscii[i] !== this.props.snippetAscii[i]) {
+                // console.log(this.props.userInputAscii[i])
                 this.endErrors++
+                // console.log('endErrs',this.endErrors)
+            } else {
+                console.log('else statement')
             }
+
         }
+        
 
         this.WPM();
         this.CPM();
         this.ACC();
+        console.log('EndErrs after for loop',this.endErrors)
         this.passChartMetrics(this.DEM());
 
     }
