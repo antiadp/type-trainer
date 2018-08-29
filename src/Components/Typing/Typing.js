@@ -226,15 +226,15 @@ class Typing extends Component {
 				letter = String.fromCharCode(asciiArray[i]);
 			}
 			if(char === 9){
-				this.state.snippetAscii.splice(i, 1)
+				return <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			}
 			if(char === 10){
 				return <br />
 			}
 			return (
-				<span key={i} className={textClass}>
+				<div key={i} className={textClass}>
 					{letter}
-				</span>
+				</div>
 			);
 		});
 

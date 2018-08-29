@@ -41,19 +41,24 @@ textarea {
     margin:0px;
     position:relative;
     top:-1px;
+    display: inline;
     /* color:rgba(0, 0, 0, 0.267); */
 }
 #snippetDisplay .untyped {
     color: white;
+    display: inline;
 }
 #snippetDisplay .correct {
     color: #aaffaa;
+    display: inline;
 }
 #snippetDisplay .incorrect {
     color: #ffaaaa;
+    display: inline;
 }
 #snippetDisplay .current {
     animation:blinkingText 0.7s infinite;
+    display: inline;
 }
 @keyframes blinkingText{
     0%{		color: black;	}
