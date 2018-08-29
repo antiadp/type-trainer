@@ -15,12 +15,12 @@ class Typing extends Component {
 			id: 0,
 			input: '',
 			asciiArray: [],
-			lettersArray: [ ' ' ],
+			lettersArray: [' '],
 			finishBool: false,
 			snippetAscii: [],
 			DEM: 0,
 			WPMData: {
-				labels: [ '10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%' ],
+				labels: ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%'],
 				datasets: [
 					{
 						label: 'WPM',
@@ -30,7 +30,7 @@ class Typing extends Component {
 				]
 			},
 			ACCData: {
-				labels: [ '10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%' ],
+				labels: ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%'],
 				datasets: [
 					{
 						label: 'Accuracy',
@@ -44,26 +44,41 @@ class Typing extends Component {
 				BorderWidth: 5
 			}
 		};
+		this.textRef = React.createRef()
+
 	}
+	selectText = () =>{
+		this.textRef= React.createRef()
+	}
+
 	componentDidUpdate(prevProps, prevState) {
-		if (prevProps !== this.props) {
-			this.onComponentMount();
+		if (prevProps.language !== this.props.language) {
+			console.log('language changed.')
+			// this.onComponentMount();
 			switch (this.props.language) {
 				case 'HTML':
 					this.setState({ language: 1 });
+					console.log('language changed to HTML ')
 					break;
-				case 'CSS':
+					case 'CSS':
 					this.setState({ language: 2 });
+					console.log('language changed to CSS ')
 					break;
-				case 'JavaScript':
+					case 'JavaScript':
 					this.setState({ language: 3 });
+					console.log('language changed to JavaScript ')
 					break;
-				case 'Special Characters':
+					case 'Special Characters':
 					this.setState({ language: 4 });
+					console.log('language changed to Special Characters ')
 					break;
-				default:
+					default:
 					this.setState({ langugae: 1 });
+					console.log('language changed back to HTML')
 			}
+			this.clearMe()
+			this.onComponentMount()
+			this.selectText()
 		}
 		if (prevState.id !== this.state.id) {
 			this.onComponentMount();
@@ -76,11 +91,10 @@ class Typing extends Component {
 		axios.get(`/api/get-snippet/${+this.state.language}`).then((res) => {
 			let currentSnippet = res.data[this.state.id].snippet;
 			let snippetArray = currentSnippet.split(',').map((current) => {
+				// console.log('currentlanguage', current)
 				return Number(current);
 			});
-			//snippetAscii is the snippet as an array of ascii characters
 			this.setState({ snippetAscii: snippetArray });
-			console.log('snippetArray', snippetArray);
 			let lettersArray = [];
 			lettersArray = snippetArray.map((char, i) => {
 				if (char === 10) {
@@ -88,22 +102,20 @@ class Typing extends Component {
 				}
 				return String.fromCharCode(char);
 			});
-
-			console.log('lettersArray', lettersArray);
-			// letterArray is an array of character strings from the snippet script
 			this.setState({
 				lettersArray: lettersArray,
 				languageCount: res.data.length
 			});
 		});
+		this.textRef.current.focus()
 	}
 	// updateUserInput is converting user input to ascii chars and pushing them into asciiArray
 	updateUserInput = (value) => {
+		console.log('value', value)
 		if (!this.state.finishBool) {
 			this.setState({
 				input: value
 			});
-
 			let userInputArray = [];
 			for (let i = 0; i < value.length; i++) {
 				userInputArray.push(value.charCodeAt(i));
@@ -112,14 +124,16 @@ class Typing extends Component {
 		}
 	};
 
-	clearMe = () => {
-		console.log('No pasting allowed');
+	clearMe = (e) => {
 		this.setState({
 			input: '',
-			asciiArray: ''
-		});
+			finishBool: false,
+		}, console.log('state =\'', this.state.input,"\'"));
 	};
 
+	preventPaste = (e) => {
+		e.preventDefault()
+	}
 
 	toggleReadOnly = () => {
 		// console.log('Read Only fired');
@@ -128,7 +142,7 @@ class Typing extends Component {
 		});
 	};
 	passChartMetrics = (wpm, acc, dem) => {
-		console.log('chartMetrics Fired');
+		// console.log('chartMetrics Fired');
 
 		let WPM10Percent = Math.floor(wpm.length / 10);
 		let WPMTemp = [
@@ -166,7 +180,7 @@ class Typing extends Component {
 
 		this.setState({
 			WPMData: {
-				labels: [ '10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%' ],
+				labels: ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%'],
 				datasets: [
 					{
 						label: 'WPM',
@@ -176,7 +190,7 @@ class Typing extends Component {
 				]
 			},
 			ACCData: {
-				labels: [ '10%', '20%', '30%', '40%', '50%', '60%', '7%', '80%', '90%', '100%' ],
+				labels: ['10%', '20%', '30%', '40%', '50%', '60%', '7%', '80%', '90%', '100%'],
 				datasets: [
 					{
 						label: 'Accuracy',
@@ -192,7 +206,7 @@ class Typing extends Component {
 		});
 	};
 	changeSnippet = (el) => {
-		console.log('button', el, this.state.id);
+		// console.log('button', el, this.state.id);
 		if (el === 'up') {
 			if (this.state.id === this.state.languageCount - 1) {
 				this.setState({
@@ -213,11 +227,8 @@ class Typing extends Component {
 				});
 			}
 		}
-		this.setState({
-			input:'',
-			// asciiArray:[],
-			finishBool:false,
-		})
+		this.clearMe()
+		this.onComponentMount()
 	};
 
 	render() {
@@ -237,7 +248,7 @@ class Typing extends Component {
 				letter = String.fromCharCode(asciiArray[i]);
 			}
 			if (char === 10) {
-				return <br />;
+				return <br key={i + 'i'} />;
 			}
 			return (
 				<span key={i} className={textClass}>
@@ -254,9 +265,12 @@ class Typing extends Component {
 					toggleReadOnly={this.toggleReadOnly}
 					passChartMetrics={this.passChartMetrics}
 				/>
-
+				<div className="display-wrapper">
+					<div className="DisplayText">
+						<div id="snippetDisplay">{spanDisplay}</div>
+					</div>
+				</div>
 				<textarea
-					value={this.state.input}
 					onChange={(e) => {
 						this.updateUserInput(e.target.value);
 					}}
@@ -267,20 +281,20 @@ class Typing extends Component {
 					id="text-input"
 					cols="30"
 					rows="10"
-					placeholder={this.state.placeholder}
+					// placeholder={this.state.placeholder}
 					maxLength="500"
 					readOnly={this.state.finishBool}
-					onCopy={this.clearMe}
-					onDrag={this.clearMe}
-					onDrop={this.clearInput}
-					onPaste={this.clearInput}
+					onCopy={this.preventPaste}
+					onDrag={this.preventPaste}
+					onDrop={this.preventPaste}
+					onPaste={this.preventPaste}
+					value={this.state.input}
+					maxinput='500'
+					unselectable='on'
+					ref={this.textRef}
 				/>
 
-				<div className="display-wrapper">
-					<div className="DisplayText">
-						<div id="snippetDisplay">{spanDisplay}</div>
-					</div>
-				</div>
+
 				<br />
 				<div className="buttonWrapper">
 					<button id="previous" className="button" onClick={() => this.changeSnippet('up')}>
@@ -311,8 +325,8 @@ class Typing extends Component {
 						</div>
 					</div>
 				) : (
-					<div />
-				)}
+						<div />
+					)}
 			</div>
 		);
 	}

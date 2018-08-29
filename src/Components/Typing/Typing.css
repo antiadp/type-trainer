@@ -8,15 +8,14 @@
     min-height:250px;
     max-height:250px;
     background-color: rgba(0, 0, 0, 0.329);
-    /* z-index: 10; */
-    /* color:rgb(0, 0, 0); */
-    /* font-family:'Stalinist One'; */
     text-align: left;
-    /* font-size:80%; */
-    /* position:relative; */
-    /* z-index: 200; */
     border:none;
     border-radius: 5px;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    user-select: none;
+    position: relative;
+    z-index: -50;
 
 }
 .script{
@@ -39,4 +38,10 @@
 }
 #next{
     grid-area:button2
+}
+.button{
+    background-color: #3a5199;
+    border:none;
+    height:30px;
+    font-family: 'Stalinist One'
 }
