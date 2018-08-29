@@ -6,8 +6,6 @@ class Metrics extends Component {
         this.allErrors = 0;
         this.endErrors = 0;
         this.currentTime = [];
-        // this.timeToComplete = this.currentTime[this.currentTime.length -1] - this.currentTime[0]; 
-        // debugger
         this.WPMArray = []
         this.ACCArray = []
         this.state = {
@@ -52,7 +50,6 @@ class Metrics extends Component {
     }
 
     WPM = () => {
-        // check multiplying by 60000 for wpm computation ??
         var wpm;
         var timeElapsed = this.currentTime[this.currentTime.length - 1] - this.currentTime[0]
         var minutesElapsed = timeElapsed / 60000
@@ -64,9 +61,7 @@ class Metrics extends Component {
         if (this.props.userInputAscii.length === this.props.snippetAscii.length) {
         }
         if(wpm.isNaN || wpm === Infinity || wpm === -Infinity || wpm <=0){
-            // console.log('wpm1',wpm)
             wpm = 0
-            // console.log('wpm2',wpm)
         }
         this.setState({
             WPM: Math.round(wpm)
@@ -96,9 +91,7 @@ class Metrics extends Component {
             acc = (this.props.userInputAscii.length - this.endErrors) / this.props.userInputAscii.length
         }
         if(acc.isNaN || acc === Infinity || acc === -Infinity || acc <= 0){
-            // console.log('acc1', acc)
             acc = 0
-            // console.log('acc2', acc)
         }
         this.setState({
             ACC: Math.round(acc * 100)
@@ -115,15 +108,10 @@ class Metrics extends Component {
     endOfSnippet = () => {
         
         console.log('end of snippet before for loop')
-        // debugger
-        // 
+        
         for (let i = 0; i <= this.props.userInputAscii.length; i++) {
-            // console.log(i)
-            // debugger
             if (this.props.userInputAscii[i] !== this.props.snippetAscii[i]) {
-                // console.log(this.props.userInputAscii[i])
                 this.endErrors++
-                // console.log('endErrs',this.endErrors)
             } else {
                 console.log('else statement')
             }
@@ -146,7 +134,6 @@ class Metrics extends Component {
 
 
     render() {
-        // console.log(this.props.userInputAscii)
         return (
             <div className="metrics-wrapper">
                 <div className="WPM">

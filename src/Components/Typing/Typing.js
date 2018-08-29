@@ -111,7 +111,6 @@ class Typing extends Component {
 		
 	}
 	updateUserInput = (value) => {
-		// console.log('value', value)
 		if (!this.state.finishBool) {
 			this.setState({
 				input: value
