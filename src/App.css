@@ -14,8 +14,9 @@ body{
 }
 
 html{
-  background-image: linear-gradient(99deg, #3a5199, #ffffff 90%);
-  
+  background-image: linear-gradient(99deg, #2a3f7b, #516198 90%);
+  /* background: rgb(47,46,51);
+  background: linear-gradient(90deg, rgba(47,46,51,1) 0%, rgba(29,28,84,1) 21%, rgba(9,9,121,1) 55%, rgba(149,150,152,1) 82%); */
 }
 /* #id{
   position:relative;
