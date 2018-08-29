@@ -1,25 +1,23 @@
 .App {
   text-align: center;
   height:99vh;
-  /* border:5px solid yellow; */
-  /* position: relative;
-  z-index: -2200; */
+  position:relative;
+  z-index: -2000;
   
+}
+#root{
+  position:relative;
+  z-index: -2000;
 }
 
 body{
   height:100vh;
-  /* border:2px solid rebeccapurple; */
-  
+  position:relative;
+  z-index: -2000;
 }
 
 html{
   background-image: linear-gradient(99deg, #2a3f7b, #516198 90%);
-  /* background: rgb(47,46,51);
-  background: linear-gradient(90deg, rgba(47,46,51,1) 0%, rgba(29,28,84,1) 21%, rgba(9,9,121,1) 55%, rgba(149,150,152,1) 82%); */
-}
-/* #id{
   position:relative;
-  z-index:-2000;
-} */
-
+  z-index: -2000;
+}
