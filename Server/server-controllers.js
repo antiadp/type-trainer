@@ -101,7 +101,7 @@ module.exports = {
 		dbi.update_user_metrics(req.session.user.user_id, wpm, cpm, acc, dem, timeStamp)
 			.then(res => {
 				console.log('backend fired')
-				res.sendStatus(200)
+				res.sendStatus(200);
 			})
 	}
 };
