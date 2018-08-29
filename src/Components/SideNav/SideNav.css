@@ -53,7 +53,15 @@ hr {
     font-weight: 400;
     font-size: 1.0em;
     cursor: pointer;
+    transition: all 0.4s;
 }
+
+#login-button:hover{
+    color: white;
+    border-color: white;
+    background-color: #5c5a69;
+}
+
 .script-wrapper{
     /* border: fuchsia 2px solid; */
     grid-area: scripts;
@@ -87,6 +95,13 @@ hr {
     font-weight: 400;
     font-size: 1.0em;
     cursor: pointer;
+    transition: all 0.4s;
+}
+
+.logout-button:hover{
+    color: white;
+    border-color: white;
+    background-color: #5c5a69;
 }
 
 .nav-user-profile-img {
@@ -292,4 +307,11 @@ hr {
     font-size: 1.0em;
     cursor: pointer;
     margin: 20px;
+    transition: all 0.4s;
+}
+
+.modal-btn-login:hover{
+    color: white;
+    border-color: #171718;
+    background-color: #6a6878;
 }
