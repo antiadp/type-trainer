@@ -38,7 +38,7 @@ textarea {
 #snippetDisplay{
     font-family:'consolas';
     text-align: left;
-    font-size:1.1em;
+    font-size: 1.2em;
     margin:0px;
     position:relative;
     top:-1px;
@@ -61,13 +61,11 @@ textarea {
     display: inline;
 }
 #snippetDisplay .current {
-    animation:blinkingText 0.7s infinite;
-    display: inline;
+    animation:blinkingText 0.6s infinite;
 }
 @keyframes blinkingText{
-    0%{		color: black;	}
-	49%{	color: transparent;	}
-	50%{	color: transparent;	}
-	100%{	color: #afafaf;	}
+    0%{		color: #7364c7;	}
+	50%{	color: #a499e1;	}
+	100%{	color: white;	}
 }
 
