@@ -62,6 +62,7 @@ textarea {
 }
 #snippetDisplay .current {
     animation:blinkingText 0.6s infinite;
+    display: inline;
 }
 @keyframes blinkingText{
     0%{		color: #7364c7;	}
