@@ -1,5 +1,4 @@
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        import React, { Component } from 'react';
-
+import React, { Component } from 'react';
 import axios from 'axios'
 
 class Metrics extends Component {
@@ -10,6 +9,7 @@ class Metrics extends Component {
         this.currentTime = [];
         this.WPMArray = []
         this.ACCArray = []
+        // this.DEM=0
         this.state = {
             WPM: 0,
             CPM: 0,
@@ -102,8 +102,12 @@ class Metrics extends Component {
 
     }
     DEM = () => {
-        var dem = (this.state.WPM - this.allErrors) * this.state.ACC
-        return Math.round(dem)
+        var dem = (this.state.CPM - this.allErrors) * this.state.ACC
+        console.log(dem)
+        this.setState({DEM:dem})
+        console.log(this.state.DEM)
+        debugger
+        return dem
         
 
     }
@@ -125,6 +129,7 @@ class Metrics extends Component {
         this.WPM();
         this.CPM();
         this.ACC();
+        this.DEM()
         let {WPM, CPM, ACC, DEM} = this.state
         // console.log(WPM, CPM, ACC, DEM)
 
@@ -132,8 +137,8 @@ class Metrics extends Component {
             console.log('front end update works')
         })
 
-        this.passChartMetrics(this.DEM());
-
+        this.passChartMetrics(this.state.DEM);
+        debugger
     }
 
     passChartMetrics = (dem) => {
@@ -142,6 +147,7 @@ class Metrics extends Component {
 
 
     render() {
+        // console.log('dem',this.state.DEM)
         return (
             <div className="metrics-wrapper">
                 <div className="WPM">

@@ -84,13 +84,14 @@ class SideNav extends Component {
 	render() {
 		const { user } = this.props;
 		let leaderBoard = this.state.leaderBoardRes.map((user) => {
+			// console.log(user)
 			return (
 				<div className="nav-leaders" key={user.test_id}>
 					<img src={user.img} className="nav-leaders-img" alt="user" />
 					<div className="nav-leaders-info">
 						<h3>{user.username}</h3>
 						<h4>
-							wpm:{user.wpm} cpm:{user.cpm} accuracy:{user.accuracy}
+							wpm:{user.wpm} dem:{user.dem} accuracy:{user.accuracy}
 						</h4>
 					</div>
 				</div>
