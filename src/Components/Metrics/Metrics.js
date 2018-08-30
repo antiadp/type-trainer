@@ -9,12 +9,11 @@ class Metrics extends Component {
         this.currentTime = [];
         this.WPMArray = []
         this.ACCArray = []
-        // this.DEM=0
+        this.FinalDEM
         this.state = {
             WPM: 0,
             CPM: 0,
             ACC: 100,
-            DEM: 0
         }
     }
 
@@ -27,7 +26,6 @@ class Metrics extends Component {
                 WPM: 0,
                 CPM: 0,
                 ACC: 100,
-                DEM: 0,
             })
             this.allErrors = 0;
             this.endErrors = 0;
@@ -104,8 +102,8 @@ class Metrics extends Component {
     DEM = () => {
         var dem = (this.state.CPM - this.allErrors) * this.state.ACC
         console.log(dem)
-        this.setState({DEM:dem})
-        console.log(this.state.DEM)
+        this.FinalDEM = dem
+        console.log(this.FinalDEM)
         debugger
         return dem
         
@@ -130,14 +128,14 @@ class Metrics extends Component {
         this.CPM();
         this.ACC();
         this.DEM()
-        let {WPM, CPM, ACC, DEM} = this.state
+        let {WPM, CPM, ACC} = this.state
         // console.log(WPM, CPM, ACC, DEM)
 
-        axios.post('/api/update-user-metrics', {wpm: WPM, cpm: CPM, acc:ACC, dem: DEM}).then(res => {
+        axios.post('/api/update-user-metrics', {wpm: WPM, cpm: CPM, acc:ACC, dem: this.FinalDEM}).then(res => {
             console.log('front end update works')
         })
 
-        this.passChartMetrics(this.state.DEM);
+        this.passChartMetrics(this.FinalDEM);
         debugger
     }
 

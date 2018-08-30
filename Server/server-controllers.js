@@ -91,16 +91,17 @@ module.exports = {
 		const dbi = req.app.get('db');
 
 		let {wpm, cpm, acc, dem} = req.body
+		console.log('dem',dem)
 
 		var date = new Date()
         var timeStamp = date.getTime()
 
-		console.log('user id', req.session.user.user_id)
+		// console.log('user id', req.session.user.user_id)
 
 		dbi.update_user_metrics(req.session.user.user_id, wpm, cpm, acc, dem, timeStamp)
 			.then(res => {
 				console.log('backend fired')
-				res.sendStatus(200);
+				res.status(200).send(res.data);
 			})
 	}
 };
