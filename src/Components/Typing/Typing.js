@@ -43,29 +43,24 @@ class Typing extends Component {
 				BorderWidth: 5
 			}
 		};
-		this.textRef = React.createRef()
+		this.textRef = React.createRef();
 
 	}
 	selectText = () => {
-		this.textRef = React.createRef()
+		this.textRef.current.focus();
 	}
 
 	componentDidUpdate(prevProps, prevState) {
 		if (prevProps.language !== this.props.language) {
-			// console.log('language changed.')
-			// console.log('language', this.props.language)
 			switch (this.props.language) {
 				case 'HTML':
 					this.setState({ language: 1 });
-					// console.log('language changed to HTML ')
 					break;
 				case 'CSS':
 					this.setState({ language: 2 });
-					// console.log('language changed to CSS ')
 					break;
 				case 'JavaScript':
 					this.setState({ language: 3 });
-					// console.log('language changed to JavaScript ')
 					break;
 				case 'Special':
 					this.setState({ language: 4 });
@@ -74,12 +69,18 @@ class Typing extends Component {
 					this.setState({ language: 1 });
 			}
 			this.clearMe()
-			this.onComponentMount()
-			this.selectText()
+			// setTimeout(this.onComponentMount(),500)
+			// this.selectText()
 			// this.onComponentMount()
 		}
 		if (prevState.id !== this.state.id) {
-			this.onComponentMount();
+			// this.onComponentMount();
+			this.clearMe()
+		}
+		if(prevState.language !== this.state.language){
+			console.log('language',this.state.language)
+			// this.onComponentMount()
+			this.clearMe()
 		}
 	}
 	componentDidMount() {
@@ -100,6 +101,8 @@ class Typing extends Component {
 				lettersArray: lettersArray,
 				languageCount: res.data.length
 			});
+			console.log('currentSnippet', this.state.snippetAscii)
+			this.selectText()
 		});
 		// this.refs.createRef()
 		// WHEN THIS RUNS WE NEED TO SELECT THE TEXT BOX UNDER THE PROTECTING DIV. AND ON CLICK FOR THE PROTECTING DIV
@@ -121,12 +124,12 @@ class Typing extends Component {
 		}
 	};
 
-	clearMe = (e) => {
+	clearMe = () => {
 		this.setState({
 			input: '',
 			finishBool: false,
-		}
-		);
+		});
+		this.onComponentMount()
 	};
 
 	preventPaste = (e) => {
@@ -250,7 +253,7 @@ class Typing extends Component {
 				return <br key={i + 'enter'} className={textClass} />;
 			}
 			if (char === 10 && asciiArray.length[i - 1]) {
-				console.log('HHHHHEEEEEEEYYYYYYY', i)
+				// console.log('HHHHHEEEEEEEYYYYYYY', i)
 			}
 			if (char === 32) {
 				textClass += ' spaceKey';
