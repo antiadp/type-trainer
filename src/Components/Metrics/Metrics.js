@@ -103,6 +103,7 @@ class Metrics extends Component {
     }
     DEM = () => {
         var dem = (this.state.WPM - this.allErrors) * this.state.ACC
+        this.setState({DEM: dem})
         return Math.round(dem)
         
 
