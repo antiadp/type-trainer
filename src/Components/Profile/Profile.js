@@ -36,7 +36,7 @@ class Profile extends Component {
 
 	render() {
 		return (
-			<Modal open={this.state.open} onClose={this.hideProfileModal} classNames={{ modal: 'custom-modal' }} center>
+			<Modal open={this.state.open} onClose={this.hideProfileModal} className={{ modal: 'custom-modal' }} center>
 				<div className="profile-userInfo">
 					<img src={this.props.user.img} className="profile-userInfo-img" alt="" />
 					<h2>Welcome {this.props.user.username}</h2>
