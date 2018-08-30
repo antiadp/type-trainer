@@ -7,9 +7,9 @@ class Metrics extends Component {
         this.allErrors = 0;
         this.endErrors = 0;
         this.currentTime = [];
-        this.WPMArray = []
-        this.ACCArray = []
-        this.FinalDEM
+        this.WPMArray = [];
+        this.ACCArray = [];
+        this.FinalDEM = 0;
         this.state = {
             WPM: 0,
             CPM: 0,
