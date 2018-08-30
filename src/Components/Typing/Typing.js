@@ -12,7 +12,7 @@ class Typing extends Component {
 		this.DEM = 0;
 		this.state = {
 			language: 1,
-			languageCount: 5,
+			languageCount: 4,
 			id: 0,
 			input: '',
 			asciiArray: [],
@@ -46,8 +46,8 @@ class Typing extends Component {
 		this.textRef = React.createRef()
 
 	}
-	selectText = () =>{
-		this.textRef= React.createRef()
+	selectText = () => {
+		this.textRef = React.createRef()
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -59,21 +59,19 @@ class Typing extends Component {
 					this.setState({ language: 1 });
 					// console.log('language changed to HTML ')
 					break;
-					case 'CSS':
+				case 'CSS':
 					this.setState({ language: 2 });
 					// console.log('language changed to CSS ')
 					break;
-					case 'JavaScript':
+				case 'JavaScript':
 					this.setState({ language: 3 });
 					// console.log('language changed to JavaScript ')
 					break;
-					case 'Special':
+				case 'Special':
 					this.setState({ language: 4 });
-					// console.log('language changed to Special Characters ')
 					break;
-					default:
-					this.setState({ langugae: 1 });
-					// console.log('language changed back to HTML')
+				default:
+					this.setState({ language: 1 });
 			}
 			this.clearMe()
 			this.onComponentMount()
@@ -96,9 +94,6 @@ class Typing extends Component {
 			this.setState({ snippetAscii: snippetArray });
 			let lettersArray = [];
 			lettersArray = snippetArray.map((char, i) => {
-				if (char === 10) {
-					char = <br />;
-				}
 				return String.fromCharCode(char);
 			});
 			this.setState({
@@ -106,10 +101,9 @@ class Typing extends Component {
 				languageCount: res.data.length
 			});
 		});
-		console.log('snippet id', this.state.id)
 		// this.refs.createRef()
 		// WHEN THIS RUNS WE NEED TO SELECT THE TEXT BOX UNDER THE PROTECTING DIV. AND ON CLICK FOR THE PROTECTING DIV
-		
+
 	}
 	updateUserInput = (value) => {
 		if (!this.state.finishBool) {
@@ -118,18 +112,21 @@ class Typing extends Component {
 			});
 			let userInputArray = [];
 			for (let i = 0; i < value.length; i++) {
+				if (value.charCodeAt(i) === 9) {
+					userInputArray.push(<span>&nbsp;</span>)
+				}
 				userInputArray.push(value.charCodeAt(i));
 			}
 			this.setState({ asciiArray: userInputArray });
 		}
-	}; 
+	};
 
 	clearMe = (e) => {
 		this.setState({
 			input: '',
 			finishBool: false,
 		}
-	);
+		);
 	};
 
 	preventPaste = (e) => {
@@ -207,11 +204,11 @@ class Typing extends Component {
 		if (el === 'up') {
 			if (this.state.id === this.state.languageCount - 1) {
 				this.setState({
-					id: 0
+					id: 0,
 				});
 			} else {
 				this.setState({
-					id: +this.state.id + 1
+					id: +this.state.id + 1,
 				});
 			}
 		}
@@ -244,13 +241,24 @@ class Typing extends Component {
 				textClass = 'incorrect';
 				letter = String.fromCharCode(asciiArray[i]);
 			}
+			if (char === 9) {
+				textClass += ' tab'
+				return <span key={i + 'tab'} className={textClass}>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			}
 			if (char === 10) {
-				return <br key={i + 'i'} />;
+				textClass += ' enterKey';
+				return <br key={i + 'enter'} className={textClass} />;
+			}
+			if (char === 10 && asciiArray.length[i - 1]) {
+				console.log('HHHHHEEEEEEEYYYYYYY', i)
+			}
+			if (char === 32) {
+				textClass += ' spaceKey';
 			}
 			return (
-				<span key={i} className={textClass}>
+				<div key={i} className={textClass}>
 					{letter}
-				</span>
+				</div>
 			);
 		});
 
@@ -291,20 +299,21 @@ class Typing extends Component {
 				/>
 
 				<br />
-
-				<div className="buttonWrapper">
-					<button id="previous" 
-									className="button" 
-									onClick={() => this.changeSnippet('up')}>
-									Previous Snippet</button>
-
 					<p className="language-selection" id="language">You are currently practicing {this.props.language}</p>
+				<div className="wrapper-wrapper">
+					<div className="buttonWrapper">
+						<button id="previous" 
+										className="button" 
+										onClick={() => this.changeSnippet('up')}>
+										Previous Snippet</button>
 
-					<button	id="next"
-									className="button"
-									onClick={() => {this.changeSnippet('down')}}>
-									Next Snippet</button>
-				</div>
+
+						<button	id="next"
+										className="button"
+										onClick={() => {this.changeSnippet('down')}}>
+										Next Snippet</button>
+					</div>
+				</div>	
 
 				{this.state.finishBool ? (
 					<div className="charts">

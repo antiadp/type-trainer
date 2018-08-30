@@ -23,28 +23,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {/* <button
-          style={
-            this.state.menu ? (
-              { 'textAlign': 'left', position: 'absolute', left: 'calc(20% + 5px)', 'zIndex': 10 }
-            ) : (
-                { 'textAlign': 'left', position: 'absolute', left: '5px', 'zIndex': 10 }
-              )
-          }
-          onClick={() => {
-            this.setState({ menu: !this.state.menu });
-          }}
-        >
-          Toggle Menu
-				</button>
-        {this.state.menu
-          ? (<SideNav setLanguage={this.setLanguage} timer={this.state.timer} />)
-          : (<div />)} */}
-        <Menu noOverlay>
+        <Menu dispableOverlayClick >
           <SideNav setLanguage={this.setLanguage} timer={this.state.timer}/>
         </Menu>
         <Typing language = {this.state.language} />
-        {/* <h2 className="script">{this.state.language}</h2> */}
       </div>
     );
   }

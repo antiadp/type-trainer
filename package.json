@@ -31,7 +31,10 @@
     "eject": "react-scripts eject"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
-  "devDependencies": {},
+  "devDependencies": {
+    "cypress": "^3.1.0",
+    "jest": "^23.5.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/antiadp/type-trainer.git"

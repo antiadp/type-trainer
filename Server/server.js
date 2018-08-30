@@ -30,7 +30,8 @@ massive(CONNECTION_STRING).then(db => {
 
 //this keep the fake user logged in during development
 //comment out the line below to disable
-app.use(mid.bypassAuthInDevelopment)
+
+// app.use(mid.bypassAuthInDevelopment)
 
 // users endpoints
 app.get('/api/user-data', (req, res) => {
