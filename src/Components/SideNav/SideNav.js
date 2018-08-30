@@ -122,28 +122,39 @@ class SideNav extends Component {
 						center
 						>
 						<div className="side-nav-login-modal">
+
 							<div className="login-input">
-								<input
-									onChange={(e) => this.handleUsernameChange(e.target.value)}
-									placeholder="username"
-									className="loginReg-username-input"
-									type="text"
-									/>
+								<label for="inp" class="inp">
+									<input
+										onChange={(e) => this.handleUsernameChange(e.target.value)}
+										placeholder="&nbsp;"
+										class="loginReg-username-input"
+										type="text"
+										id="inp1"
+										/>
+									<span class="label">Username</span>
+									<span class="border"></span>
+								</label>	
+
+								<label for="inp" class="inp">
+									<input
+										onChange={(e) => this.handlePasswordChange(e.target.value)}
+										placeholder="&nbsp;"
+										class="loginReg-password-input"
+										type="password"
+										id="inp2"
+										/>
+									<span class="label">Password</span>
+									<span class="border"></span>
+								</label>
 							</div>
-							<div className="login-input">
-								<input
-									onChange={(e) => this.handlePasswordChange(e.target.value)}
-									placeholder="password"
-									className="loginReg-password-input"
-									type="password"
-									/>
-							</div>
+
 							<div className="modal-btn">
-								<button onClick={this.handleLoginRegRequest}>Login / Register</button>
+								<button onClick={this.handleLoginRegRequest}
+												className="modal-btn-login">
+												Login / Register</button>
 							</div>
-							<div className="modal-btn">
-								<button onClick={this.hideLoginModal}>Cancel</button>
-							</div>
+
 						</div>
 					</Modal>
 				</div>
