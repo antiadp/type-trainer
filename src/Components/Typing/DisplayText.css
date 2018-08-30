@@ -9,9 +9,9 @@ textarea {
     width:60%;
     min-width:60%;
     max-width:60%;
-    height:250px;
+    height:275px;
     min-height:250px;
-    max-height:250px;
+    max-height:275px;
     position: absolute;
     align-self:center;
     z-index:1000;
@@ -38,7 +38,7 @@ textarea {
 #snippetDisplay{
     font-family:'consolas';
     text-align: left;
-    font-size:100%;
+    font-size:1.1em;
     margin:0px;
     position:relative;
     top:-1px;
@@ -55,6 +55,9 @@ textarea {
 }
 #snippetDisplay .incorrect {
     color: #ffaaaa;
+    display: inline;
+}
+#snippetDisplay .enterKey {
     display: inline;
 }
 #snippetDisplay .current {

@@ -11,7 +11,7 @@ class Typing extends Component {
 		this.DEM = 0;
 		this.state = {
 			language: 1,
-			languageCount: 5,
+			languageCount: 4,
 			id: 0,
 			input: '',
 			asciiArray: [],
@@ -103,7 +103,7 @@ class Typing extends Component {
 		console.log('snippet id', this.state.id)
 		// this.refs.createRef()
 		// WHEN THIS RUNS WE NEED TO SELECT THE TEXT BOX UNDER THE PROTECTING DIV. AND ON CLICK FOR THE PROTECTING DIV
-		
+
 	}
 	updateUserInput = (value) => {
 		if (!this.state.finishBool) {
@@ -112,11 +112,14 @@ class Typing extends Component {
 			});
 			let userInputArray = [];
 			for (let i = 0; i < value.length; i++) {
+				if(value.charCodeAt(i) === 9){
+					userInputArray.push( <span>&nbsp;</span>)
+				}
 				userInputArray.push(value.charCodeAt(i));
 			}
 			this.setState({ asciiArray: userInputArray });
 		}
-	}; 
+	};
 
 	clearMe = (e) => {
 		this.setState({
@@ -201,11 +204,11 @@ class Typing extends Component {
 		if (el === 'up') {
 			if (this.state.id === this.state.languageCount - 1) {
 				this.setState({
-					id: 0
+					id: 0,
 				});
 			} else {
 				this.setState({
-					id: +this.state.id + 1
+					id: +this.state.id + 1,
 				});
 			}
 		}
@@ -239,10 +242,18 @@ class Typing extends Component {
 				letter = String.fromCharCode(asciiArray[i]);
 			}
 			if(char === 9){
-				return <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				textClass += ' tab'
+				return <span key={i + 'tab'} className={textClass}>&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			}
 			if (char === 10) {
-				return <br key={i + 'i'} />;
+				textClass += ' enterKey';
+				return <br key={i + 'enter'} className={textClass} />;
+			}
+			if (char === 10 && asciiArray.length[i-1]) {
+				console.log('HHHHHEEEEEEEYYYYYYY',i)
+			}
+			if(char === 32){
+				textClass += ' spaceKey';
 			}
 			return (
 				<div key={i} className={textClass}>
