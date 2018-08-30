@@ -105,7 +105,6 @@ class Typing extends Component {
 				languageCount: res.data.length
 			});
 		});
-		console.log('snippet id', this.state.id)
 		// this.refs.createRef()
 		// WHEN THIS RUNS WE NEED TO SELECT THE TEXT BOX UNDER THE PROTECTING DIV. AND ON CLICK FOR THE PROTECTING DIV
 		
