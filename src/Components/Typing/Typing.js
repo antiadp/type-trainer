@@ -45,8 +45,8 @@ class Typing extends Component {
 		this.textRef = React.createRef()
 
 	}
-	selectText = () =>{
-		this.textRef= React.createRef()
+	selectText = () => {
+		this.textRef = React.createRef()
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -58,16 +58,16 @@ class Typing extends Component {
 					this.setState({ language: 1 });
 					// console.log('language changed to HTML ')
 					break;
-					case 'CSS':
+				case 'CSS':
 					this.setState({ language: 2 });
 					// console.log('language changed to CSS ')
 					break;
-					case 'JavaScript':
+				case 'JavaScript':
 					this.setState({ language: 3 });
 					// console.log('language changed to JavaScript ')
 					break;
 				case 'Special':
-				this.setState({ language: 4 });
+					this.setState({ language: 4 });
 					break;
 				default:
 					this.setState({ language: 1 });
@@ -111,8 +111,8 @@ class Typing extends Component {
 			});
 			let userInputArray = [];
 			for (let i = 0; i < value.length; i++) {
-				if(value.charCodeAt(i) === 9){
-					userInputArray.push( <span>&nbsp;</span>)
+				if (value.charCodeAt(i) === 9) {
+					userInputArray.push(<span>&nbsp;</span>)
 				}
 				userInputArray.push(value.charCodeAt(i));
 			}
@@ -125,7 +125,7 @@ class Typing extends Component {
 			input: '',
 			finishBool: false,
 		}
-	);
+		);
 	};
 
 	preventPaste = (e) => {
@@ -240,7 +240,7 @@ class Typing extends Component {
 				textClass = 'incorrect';
 				letter = String.fromCharCode(asciiArray[i]);
 			}
-			if(char === 9){
+			if (char === 9) {
 				textClass += ' tab'
 				return <span key={i + 'tab'} className={textClass}>&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			}
@@ -248,10 +248,10 @@ class Typing extends Component {
 				textClass += ' enterKey';
 				return <br key={i + 'enter'} className={textClass} />;
 			}
-			if (char === 10 && asciiArray.length[i-1]) {
-				console.log('HHHHHEEEEEEEYYYYYYY',i)
+			if (char === 10 && asciiArray.length[i - 1]) {
+				console.log('HHHHHEEEEEEEYYYYYYY', i)
 			}
-			if(char === 32){
+			if (char === 32) {
 				textClass += ' spaceKey';
 			}
 			return (
@@ -299,21 +299,23 @@ class Typing extends Component {
 
 
 				<br />
-				<div className="buttonWrapper">
-					<button id="previous" className="button" onClick={() => this.changeSnippet('up')}>
-						Previous Snippet
+				<div className="wrapper-wrapper">
+					<div className="buttonWrapper">
+						<button id="previous" className="button" onClick={() => this.changeSnippet('up')}>
+							Previous Snippet
 					</button>
-					<p id="language">{this.props.language}</p>
+						<p id="language">{this.props.language}</p>
 
-					<button
-						id="next"
-						className="button"
-						onClick={() => {
-							this.changeSnippet('down');
-						}}
-					>
-						Next Snippet
+						<button
+							id="next"
+							className="button"
+							onClick={() => {
+								this.changeSnippet('down');
+							}}
+						>
+							Next Snippet
 					</button>
+					</div>
 				</div>
 				{this.state.finishBool ? (
 					<div className="charts">

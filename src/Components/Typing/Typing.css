@@ -4,7 +4,7 @@
     width:60%;
     min-width:60%;
     max-width:60%;
-    height:275px;
+    height:220px;
     min-height:250px;
     max-height:275px;
     background-color: rgba(0, 0, 0, 0.329);
@@ -25,18 +25,25 @@
 }
 .buttonWrapper{
     display:grid;
-    grid-template-areas: '. . button1 language button2 . .'
+    grid-template-areas: 'button1 language button2';
+    width:500px;
+    align-self: center;
+
+}
+.wrapper-wrapper{
+    display:flex;
+    justify-content: center;
 }
 
 .button{
     width: 215px;
     height: 60px;
-    margin-top: 20px;
+    margin-top: 5px;
     position: relative;
     background-color: transparent;
-    border: 2px solid #d5d6d2;
+    border: 2px solid #2a3f7b;
     border-radius: 50px;
-    color: #d5d6d2;
+    color: #2a3f7b;
     font-weight: 400;
     font-size: 1.0em;
     cursor: pointer;

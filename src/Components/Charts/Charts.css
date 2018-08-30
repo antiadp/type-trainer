@@ -3,22 +3,25 @@
     margin-top: 10px;
     /* border:5px solid red; */
     width:100%;
-    position: relative;
-    /* left:-80px; */
+    position: absolute;
     height:200px;
+    bottom:-175px;
 }
 .chartsWrapper{
     display:flex;
 
 }
 .chart{
-    height:100px;
+    /* margin-top:-15px; */
+    height:80px;
     width:50%;
+    /* position: absolute; */
+    /* bottom:200px; */
 }
-.chartWPM{
+/* .chartWPM{
 
 }
 
 .chartACC{
 
-}
+} */
