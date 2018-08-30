@@ -40,7 +40,7 @@ class Metrics extends Component {
         var timeStamp = date.getTime()
         this.currentTime.push(timeStamp)
 
-        if (this.props.userInputAscii.length === this.props.snippetAscii.length) {
+        if (this.props.userInputAscii.length === this.props.snippetAscii.length && this.props.snippetAscii.length !== 0) {
             this.endOfSnippet()
             this.props.toggleReadOnly()
         } else if (this.props.userInputAscii[this.props.userInputAscii.length - 1] !== this.props.snippetAscii[this.props.userInputAscii.length - 1]) {
@@ -126,7 +126,7 @@ class Metrics extends Component {
         this.CPM();
         this.ACC();
         let {WPM, CPM, ACC, DEM} = this.state
-        console.log(WPM, CPM, ACC, DEM)
+        // console.log(WPM, CPM, ACC, DEM)
 
         axios.post('/api/update-user-metrics', {wpm: WPM, cpm: CPM, acc:ACC, dem: DEM}).then(res => {
             console.log('front end update works')
