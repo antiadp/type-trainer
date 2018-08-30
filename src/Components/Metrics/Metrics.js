@@ -104,6 +104,7 @@ class Metrics extends Component {
     DEM = () => {
         var dem = (this.state.WPM - this.allErrors) * this.state.ACC
         return Math.round(dem)
+        
 
     }
 
@@ -114,8 +115,8 @@ class Metrics extends Component {
         for (let i = 0; i <= this.props.userInputAscii.length; i++) {
             if (this.props.userInputAscii[i] !== this.props.snippetAscii[i]) {
                 this.endErrors++
-            } else {
-                console.log('else statement')
+            // } else {
+            //     console.log('else statement')
             }
 
         }
@@ -124,7 +125,6 @@ class Metrics extends Component {
         this.WPM();
         this.CPM();
         this.ACC();
-        // console.log('EndErrs after for loop',this.endErrors)
         let {WPM, CPM, ACC, DEM} = this.state
         console.log(WPM, CPM, ACC, DEM)
 
@@ -138,7 +138,6 @@ class Metrics extends Component {
 
     passChartMetrics = (dem) => {
         this.props.passChartMetrics(this.WPMArray, this.ACCArray, dem)
-        // console.log('Metrics Passed')
     }
 
 
