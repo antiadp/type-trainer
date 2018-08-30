@@ -78,6 +78,15 @@ hr {
 
 .script-wrapper > h4{
     margin: -2px 0px -2px 25px;
+    color: #d5d6d2;
+    transition: all 0.4s;
+}
+
+.script-wrapper > h4:hover{
+    color: white;
+    letter-spacing: 2px;
+    font-weight: bold;
+    font-size: 1.0em;
 }
 
 .logout{
@@ -177,6 +186,11 @@ hr {
     flex-direction: column;
     padding-top: 4px;
     padding-left: 10px;
+}
+
+.nav-leaders-info > h3{
+    letter-spacing: 1px;
+    font-weight: bold;
 }
 
 

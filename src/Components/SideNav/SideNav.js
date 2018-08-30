@@ -90,7 +90,7 @@ class SideNav extends Component {
 					<div className="nav-leaders-info">
 						<h3>{user.username}</h3>
 						<h4>
-							wpm:{user.wpm} cpm:{user.cpm} accuracy:{user.accuracy}
+							WPM: {user.wpm}  CPM: {user.cpm}  Acc: {user.accuracy}
 						</h4>
 					</div>
 				</div>

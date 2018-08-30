@@ -31,7 +31,7 @@
 .button{
     width: 215px;
     height: 60px;
-    margin-top: 20px;
+    margin-top: 40px;
     position: relative;
     background-color: transparent;
     border: 2px solid #d5d6d2;
@@ -58,6 +58,13 @@
     justify-self: center;
 
 }
+
+.language-selection{
+    color: #d5d6d2;
+    margin-top: 20px;
+    font-size: 1.1em;
+}
+
 #language{
     grid-area: language
 }
