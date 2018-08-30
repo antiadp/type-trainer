@@ -72,7 +72,6 @@ module.exports = {
 				console.log(err);
 			});
 	},
-	
 
 	//snippets
 	getSnippet: (req, res) => {
