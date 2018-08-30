@@ -72,7 +72,6 @@ module.exports = {
 				console.log(err);
 			});
 	},
-	
 
 	//snippets
 	getSnippet: (req, res) => {
@@ -86,5 +85,22 @@ module.exports = {
                 res.status(500).send({ errorMessage: 'This is why we cant have nice getSnippet.' });
                 console.log(err);
             });
-    }
+	},
+	
+	updateUserMetrics: (req, res) => {
+		const dbi = req.app.get('db');
+
+		let {wpm, cpm, acc, dem} = req.body
+
+		var date = new Date()
+        var timeStamp = date.getTime()
+
+		console.log('user id', req.session.user.user_id)
+
+		dbi.update_user_metrics(req.session.user.user_id, wpm, cpm, acc, dem, timeStamp)
+			.then(res => {
+				console.log('backend fired')
+				res.sendStatus(200);
+			})
+	}
 };

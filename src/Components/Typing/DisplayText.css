@@ -6,13 +6,12 @@ textarea {
 .DisplayText{
     top:100px;
     color: white;
-    /* border:3px dotted yellow; */
     width:60%;
     min-width:60%;
     max-width:60%;
-    height:250px;
+    height:275px;
     min-height:250px;
-    max-height:250px;
+    max-height:275px;
     position: absolute;
     align-self:center;
     z-index:1000;
@@ -39,25 +38,35 @@ textarea {
 #snippetDisplay{
     font-family:'consolas';
     text-align: left;
-    font-size:100%;
+    font-size:1.1em;
     margin:0px;
     position:relative;
     top:-1px;
+    display: inline;
+    /* color:rgba(0, 0, 0, 0.267); */
 }
 #snippetDisplay .untyped {
     color: white;
+    display: inline;
 }
 #snippetDisplay .correct {
     color: #aaffaa;
+    display: inline;
 }
 #snippetDisplay .incorrect {
     color: #ffaaaa;
+    display: inline;
+}
+#snippetDisplay .enterKey {
+    display: inline;
 }
 #snippetDisplay .current {
-    animation:blinkingText 0.5s infinite;
+    animation:blinkingText 0.7s infinite;
+    display: inline;
 }
 @keyframes blinkingText{
-    0%{		color: #afafaf;	}
+    0%{		color: black;	}
+	49%{	color: transparent;	}
 	50%{	color: transparent;	}
 	100%{	color: #afafaf;	}
 }
