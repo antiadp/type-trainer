@@ -124,7 +124,7 @@ class SideNav extends Component {
 						<div className="side-nav-login-modal">
 
 							<div className="login-input">
-								<label for="inp" className="inp">
+								<label className="inp">
 									<input
 										onChange={(e) => this.handleUsernameChange(e.target.value)}
 										placeholder="&nbsp;"
@@ -134,9 +134,9 @@ class SideNav extends Component {
 										/>
 									<span className="label">Username</span>
 									<span className="border"></span>
-								</label>	
+								</label>
 
-								<label for="inp" className="inp">
+								<label className="inp">
 									<input
 										onChange={(e) => this.handlePasswordChange(e.target.value)}
 										placeholder="&nbsp;"
