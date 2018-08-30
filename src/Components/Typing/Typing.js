@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Metrics from '../Metrics/Metrics';
 import { Line } from 'react-chartjs-2';
 import axios from 'axios';
+import reducer from '../../ducks/reducer';
 
 class Typing extends Component {
 	constructor(props) {
@@ -215,7 +216,7 @@ class Typing extends Component {
 						data: ACCPassed
 					}
 				],
-				color: 'green',
+				color: 'rgba(200, 0, 0, 0.1)',
 				backgroundColor: 'blue',
 				borderColor: 'red',
 				BorderWidth: 5
@@ -321,26 +322,23 @@ class Typing extends Component {
 					ref={this.textRef}
 				/>
 
-
 				<br />
+					<p className="language-selection" id="language">You are currently practicing {this.props.language}</p>
 				<div className="wrapper-wrapper">
 					<div className="buttonWrapper">
-						<button id="previous" className="button" onClick={() => this.changeSnippet('up')}>
-							Previous Snippet
-					</button>
-						<p id="language">{this.props.language}</p>
+						<button id="previous" 
+										className="button" 
+										onClick={() => this.changeSnippet('up')}>
+										Previous Snippet</button>
 
-						<button
-							id="next"
-							className="button"
-							onClick={() => {
-								this.changeSnippet('down');
-							}}
-						>
-							Next Snippet
-					</button>
+
+						<button	id="next"
+										className="button"
+										onClick={() => {this.changeSnippet('down')}}>
+										Next Snippet</button>
 					</div>
-				</div>
+				</div>	
+
 				{this.state.finishBool ? (
 					<div className="charts">
 						<div className="chartsWrapper">

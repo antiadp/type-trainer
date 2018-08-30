@@ -101,24 +101,15 @@ class Metrics extends Component {
     }
     DEM = () => {
         var dem = (this.state.CPM - this.allErrors) * this.state.ACC
-        console.log(dem)
         this.FinalDEM = dem
-        console.log(this.FinalDEM)
-        debugger
         return dem
-        
-
     }
 
     endOfSnippet = () => {
         
-        // console.log('end of snippet before for loop')
-        
         for (let i = 0; i <= this.props.userInputAscii.length; i++) {
             if (this.props.userInputAscii[i] !== this.props.snippetAscii[i]) {
                 this.endErrors++
-            // } else {
-            //     console.log('else statement')
             }
 
         }
