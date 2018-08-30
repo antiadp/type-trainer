@@ -62,6 +62,8 @@ hr {
     background-color: #5c5a69;
 }
 
+.login-button:focus {outline:0;}
+
 .script-wrapper{
     /* border: fuchsia 2px solid; */
     grid-area: scripts;
@@ -103,6 +105,8 @@ hr {
     border-color: white;
     background-color: #5c5a69;
 }
+
+.logout-button:focus {outline:0;}
 
 .nav-user-profile-img {
     width: 70px;
@@ -315,3 +319,5 @@ hr {
     border-color: #171718;
     background-color: #6a6878;
 }
+
+.modal-btn-login:focus {outline:0;}

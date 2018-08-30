@@ -41,7 +41,16 @@
     font-size: 1.0em;
     cursor: pointer;
     overflow: hidden;
+    transition: all 0.4s;
 }
+
+.button:hover{
+    color: white;
+    border-color: white;
+    background-color: #5869a2;
+}
+
+.button:focus {outline:0;}
 
 #previous{
     grid-area: button1;
