@@ -22,7 +22,7 @@
 .nav-user-profile{
     width: 70%;
     margin-top: 30px;
-    /* border: red 2px solid; */
+    cursor: pointer;
 }
 
 hr { 
@@ -80,6 +80,7 @@ hr {
     margin: -2px 0px -2px 25px;
     color: #d5d6d2;
     transition: all 0.4s;
+    cursor: pointer;
 }
 
 .script-wrapper > h4:hover{
@@ -141,6 +142,19 @@ hr {
     border-radius: 20px;
     background-color: whitesmoke;
 }
+
+/* this styles the login modal */
+.styles_modal__gNwvD {
+    max-width: 800px;
+    height: 300px;
+    position: relative;
+    padding: 1.2rem;
+    background: whitesmoke;
+    background-clip: padding-box;
+    box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.25);
+    border-radius: 25px;
+}
+
 .side-nav-login-modal {
     margin: 40px 125px;
 }
@@ -149,7 +163,8 @@ hr {
     
 }
 .modal-btn {
-    margin: 20px auto;
+    text-align: center;
+    margin-top: 15px;
 }
 .click{
     z-index: 10;
