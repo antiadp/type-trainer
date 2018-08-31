@@ -127,7 +127,7 @@ class Metrics extends Component {
         })
 
         this.passChartMetrics(this.FinalDEM);
-        debugger
+        // debugger
     }
 
     passChartMetrics = (dem) => {

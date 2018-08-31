@@ -57,15 +57,15 @@ export default class Charts extends Component {
                 <div className="chart chartWPM">
                     <Line
                         data={this.WPMData}
-                        width={100}
-                        height={30}
+                        width={1}
+                        height={1}
                     />
                 </div>
                 <div className="chart chartACC">
                     <Line
                         data={this.ACCData}
                         width={100}
-                        height={30}
+                        height={20}
                     />
                 </div>
             </div>
