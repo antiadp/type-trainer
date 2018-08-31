@@ -9,17 +9,15 @@ class Typing extends Component {
 		super();
 		this.WPMArray = [];
 		this.ACCArray = [];
-		this.DEM = 0;
 		this.state = {
 			language: 1,
 			languageCount: 4,
 			id: 0,
 			input: '',
 			asciiArray: [],
-			lettersArray: [' '],
+			lettersArray: [' '], // we don't have to have this. it is only useful for debugging
 			finishBool: false,
 			snippetAscii: [],
-			DEM: 0,
 			WPMData: {
 				labels: ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%'],
 				datasets: [
@@ -69,17 +67,15 @@ class Typing extends Component {
 					this.setState({ language: 1 });
 			}
 			this.clearMe()
-			// setTimeout(this.onComponentMount(),500)
-			// this.selectText()
-			// this.onComponentMount()
+		
 		}
 		if (prevState.id !== this.state.id) {
-			// this.onComponentMount();
+
 			this.clearMe()
 		}
 		if(prevState.language !== this.state.language){
 			console.log('language',this.state.language)
-			// this.onComponentMount()
+
 			this.clearMe()
 		}
 	}
@@ -101,7 +97,7 @@ class Typing extends Component {
 				lettersArray: lettersArray,
 				languageCount: res.data.length
 			});
-			console.log('currentSnippet', this.state.snippetAscii)
+			// console.log('currentSnippet', this.state.snippetAscii)
 			this.selectText()
 		});
 		// this.refs.createRef()
@@ -127,7 +123,32 @@ class Typing extends Component {
 	clearMe = () => {
 		this.setState({
 			input: '',
+			asciiArray: [],
+			// lettersArray: [],
 			finishBool: false,
+			snippetAscii: [],
+			WPMData: {
+				labels: ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%'],
+				datasets: [
+					{
+						label: 'WPM',
+						data: this.WPMArray
+					}
+				]
+			},
+			ACCData: {
+				labels: ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%'],
+				datasets: [
+					{
+						label: 'Accuracy',
+						data: this.ACCArray
+					}
+				],
+				color: 'green',
+				backgroundColor: 'blue',
+				borderColor: 'red',
+				BorderWidth: 5
+			}
 		});
 		this.onComponentMount()
 	};
@@ -200,7 +221,6 @@ class Typing extends Component {
 				borderColor: 'red',
 				BorderWidth: 5
 			},
-			DEM: dem
 		});
 	};
 	changeSnippet = (el) => {
@@ -229,6 +249,7 @@ class Typing extends Component {
 	};
 
 	render() {
+		// console.log(this.state.finishBool)
 		let spanDisplay = this.state.snippetAscii.map((char, i) => {
 			let { asciiArray } = this.state;
 			let textClass = '';
@@ -297,7 +318,7 @@ class Typing extends Component {
 					onPaste={this.preventPaste}
 					value={this.state.input}
 					maxinput='500'
-					unselectable='true'
+					// unselectable='true'
 					ref={this.textRef}
 				/>
 

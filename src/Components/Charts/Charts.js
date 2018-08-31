@@ -50,21 +50,22 @@ export default class Charts extends Component {
             }
         })
     }
+    
     render() {
         return (
             <div className="chartsWrapper">
                 <div className="chart chartWPM">
                     <Line
                         data={this.WPMData}
-                        width={100}
-                        height={10}
+                        width={1}
+                        height={1}
                     />
                 </div>
                 <div className="chart chartACC">
                     <Line
                         data={this.ACCData}
                         width={100}
-                        height={10}
+                        height={20}
                     />
                 </div>
             </div>
