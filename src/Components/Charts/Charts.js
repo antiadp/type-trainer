@@ -50,6 +50,7 @@ export default class Charts extends Component {
             }
         })
     }
+    
     render() {
         return (
             <div className="chartsWrapper">
@@ -57,14 +58,14 @@ export default class Charts extends Component {
                     <Line
                         data={this.WPMData}
                         width={100}
-                        height={10}
+                        height={30}
                     />
                 </div>
                 <div className="chart chartACC">
                     <Line
                         data={this.ACCData}
                         width={100}
-                        height={10}
+                        height={30}
                     />
                 </div>
             </div>
