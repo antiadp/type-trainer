@@ -2,23 +2,22 @@ import React, { Component } from 'react';
 import Metrics from '../Metrics/Metrics';
 import { Line } from 'react-chartjs-2';
 import axios from 'axios';
+import reducer from '../../ducks/reducer';
 
 class Typing extends Component {
 	constructor(props) {
 		super();
 		this.WPMArray = [];
 		this.ACCArray = [];
-		this.DEM = 0;
 		this.state = {
 			language: 1,
 			languageCount: 4,
 			id: 0,
 			input: '',
 			asciiArray: [],
-			lettersArray: [' '],
+			lettersArray: [' '], // we don't have to have this. it is only useful for debugging
 			finishBool: false,
 			snippetAscii: [],
-			DEM: 0,
 			WPMData: {
 				labels: ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%'],
 				datasets: [
@@ -42,29 +41,24 @@ class Typing extends Component {
 				BorderWidth: 5
 			}
 		};
-		this.textRef = React.createRef()
+		this.textRef = React.createRef();
 
 	}
 	selectText = () => {
-		this.textRef = React.createRef()
+		this.textRef.current.focus();
 	}
 
 	componentDidUpdate(prevProps, prevState) {
 		if (prevProps.language !== this.props.language) {
-			// console.log('language changed.')
-			// console.log('language', this.props.language)
 			switch (this.props.language) {
 				case 'HTML':
 					this.setState({ language: 1 });
-					// console.log('language changed to HTML ')
 					break;
 				case 'CSS':
 					this.setState({ language: 2 });
-					// console.log('language changed to CSS ')
 					break;
 				case 'JavaScript':
 					this.setState({ language: 3 });
-					// console.log('language changed to JavaScript ')
 					break;
 				case 'Special':
 					this.setState({ language: 4 });
@@ -73,12 +67,16 @@ class Typing extends Component {
 					this.setState({ language: 1 });
 			}
 			this.clearMe()
-			this.onComponentMount()
-			this.selectText()
-			// this.onComponentMount()
+		
 		}
 		if (prevState.id !== this.state.id) {
-			this.onComponentMount();
+
+			this.clearMe()
+		}
+		if(prevState.language !== this.state.language){
+			console.log('language',this.state.language)
+
+			this.clearMe()
 		}
 	}
 	componentDidMount() {
@@ -99,6 +97,8 @@ class Typing extends Component {
 				lettersArray: lettersArray,
 				languageCount: res.data.length
 			});
+			// console.log('currentSnippet', this.state.snippetAscii)
+			this.selectText()
 		});
 		// this.refs.createRef()
 		// WHEN THIS RUNS WE NEED TO SELECT THE TEXT BOX UNDER THE PROTECTING DIV. AND ON CLICK FOR THE PROTECTING DIV
@@ -120,12 +120,37 @@ class Typing extends Component {
 		}
 	};
 
-	clearMe = (e) => {
+	clearMe = () => {
 		this.setState({
 			input: '',
+			asciiArray: [],
+			// lettersArray: [],
 			finishBool: false,
-		}
-		);
+			snippetAscii: [],
+			WPMData: {
+				labels: ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%'],
+				datasets: [
+					{
+						label: 'WPM',
+						data: this.WPMArray
+					}
+				]
+			},
+			ACCData: {
+				labels: ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%'],
+				datasets: [
+					{
+						label: 'Accuracy',
+						data: this.ACCArray
+					}
+				],
+				color: 'green',
+				backgroundColor: 'blue',
+				borderColor: 'red',
+				BorderWidth: 5
+			}
+		});
+		this.onComponentMount()
 	};
 
 	preventPaste = (e) => {
@@ -191,12 +216,11 @@ class Typing extends Component {
 						data: ACCPassed
 					}
 				],
-				color: 'green',
+				color: 'rgba(200, 0, 0, 0.1)',
 				backgroundColor: 'blue',
 				borderColor: 'red',
 				BorderWidth: 5
 			},
-			DEM: dem
 		});
 	};
 	changeSnippet = (el) => {
@@ -225,6 +249,7 @@ class Typing extends Component {
 	};
 
 	render() {
+		// console.log(this.state.finishBool)
 		let spanDisplay = this.state.snippetAscii.map((char, i) => {
 			let { asciiArray } = this.state;
 			let textClass = '';
@@ -249,7 +274,7 @@ class Typing extends Component {
 				return <br key={i + 'enter'} className={textClass} />;
 			}
 			if (char === 10 && asciiArray.length[i - 1]) {
-				console.log('HHHHHEEEEEEEYYYYYYY', i)
+				// console.log('HHHHHEEEEEEEYYYYYYY', i)
 			}
 			if (char === 32) {
 				textClass += ' spaceKey';
@@ -293,30 +318,27 @@ class Typing extends Component {
 					onPaste={this.preventPaste}
 					value={this.state.input}
 					maxinput='500'
-					unselectable='true'
+					// unselectable='true'
 					ref={this.textRef}
 				/>
 
-
 				<br />
+					<p className="language-selection" id="language">You are currently practicing {this.props.language}</p>
 				<div className="wrapper-wrapper">
 					<div className="buttonWrapper">
-						<button id="previous" className="button" onClick={() => this.changeSnippet('up')}>
-							Previous Snippet
-					</button>
-						<p id="language">{this.props.language}</p>
+						<button id="previous" 
+										className="button" 
+										onClick={() => this.changeSnippet('up')}>
+										Previous Snippet</button>
 
-						<button
-							id="next"
-							className="button"
-							onClick={() => {
-								this.changeSnippet('down');
-							}}
-						>
-							Next Snippet
-					</button>
+
+						<button	id="next"
+										className="button"
+										onClick={() => {this.changeSnippet('down')}}>
+										Next Snippet</button>
 					</div>
-				</div>
+				</div>	
+
 				{this.state.finishBool ? (
 					<div className="charts">
 						<div className="chartsWrapper">

@@ -1,5 +1,4 @@
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        import React, { Component } from 'react';
-
+import React, { Component } from 'react';
 import axios from 'axios'
 
 class Metrics extends Component {
@@ -8,13 +7,13 @@ class Metrics extends Component {
         this.allErrors = 0;
         this.endErrors = 0;
         this.currentTime = [];
-        this.WPMArray = []
-        this.ACCArray = []
+        this.WPMArray = [];
+        this.ACCArray = [];
+        this.FinalDEM = 0;
         this.state = {
             WPM: 0,
             CPM: 0,
             ACC: 100,
-            DEM: 0
         }
     }
 
@@ -27,7 +26,6 @@ class Metrics extends Component {
                 WPM: 0,
                 CPM: 0,
                 ACC: 100,
-                DEM: 0,
             })
             this.allErrors = 0;
             this.endErrors = 0;
@@ -40,7 +38,7 @@ class Metrics extends Component {
         var timeStamp = date.getTime()
         this.currentTime.push(timeStamp)
 
-        if (this.props.userInputAscii.length === this.props.snippetAscii.length) {
+        if (this.props.userInputAscii.length === this.props.snippetAscii.length && this.props.snippetAscii.length !== 0) {
             this.endOfSnippet()
             this.props.toggleReadOnly()
         } else if (this.props.userInputAscii[this.props.userInputAscii.length - 1] !== this.props.snippetAscii[this.props.userInputAscii.length - 1]) {
@@ -102,16 +100,12 @@ class Metrics extends Component {
 
     }
     DEM = () => {
-        var dem = (this.state.WPM - this.allErrors) * this.state.ACC
-        this.setState({DEM: dem})
-        return Math.round(dem)
-
-
+        var dem = (this.state.CPM - this.allErrors) * this.state.ACC
+        this.FinalDEM = dem
+        return dem
     }
 
     endOfSnippet = () => {
-
-
         for (let i = 0; i <= this.props.userInputAscii.length; i++) {
             if (this.props.userInputAscii[i] !== this.props.snippetAscii[i]) {
                 this.endErrors++
@@ -123,15 +117,15 @@ class Metrics extends Component {
         this.WPM();
         this.CPM();
         this.ACC();
-        let {WPM, CPM, ACC, DEM} = this.state
-        console.log(WPM, CPM, ACC, DEM)
+        this.DEM()
+        let {WPM, CPM, ACC} = this.state
 
-        axios.post('/api/update-user-metrics', {wpm: WPM, cpm: CPM, acc:ACC, dem: DEM}).then(res => {
+        axios.post('/api/update-user-metrics', {wpm: WPM, cpm: CPM, acc:ACC, dem: this.FinalDEM}).then(res => {
             console.log('front end update works')
         })
 
-        this.passChartMetrics(this.DEM());
-
+        this.passChartMetrics(this.FinalDEM);
+        debugger
     }
 
     passChartMetrics = (dem) => {

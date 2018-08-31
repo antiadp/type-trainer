@@ -68,35 +68,35 @@ module.exports = {
 				res.status(200).send(results);
 			})
 			.catch((err) => {
-				res.status(500).send({ errorMessage: 'This is why we cant have nice getAllResults.' });
+				res.status(500).send({ errorMessage: 'This is why we cant have nice getAllResults.'});
 				console.log(err);
 			});
 	},
 
 	//snippets
 	getSnippet: (req, res) => {
-        let {id} = req.params;
-        const dbi = req.app.get('db');
-            dbi.get_snippet(+id)
-            .then((response) => {
-				res.status(200).send(response);
-            })
-            .catch((err) => {
-                res.status(500).send({ errorMessage: 'This is why we cant have nice getSnippet.' });
-                console.log(err);
-            });
-	},
-	
-	updateUserMetrics: (req, res) => {
-		var date = new Date()
-        var timeStamp = date.getTime()
-		
-		let {wpm, cpm, acc, dem} = req.body		
-		
+		let { id } = req.params;
 		const dbi = req.app.get('db');
-		dbi.update_user_metrics(req.session.user.user_id, wpm, cpm, acc, dem, timeStamp)
-			.then(res => {
-				console.log('res.data',res.data)
+		dbi
+			.get_snippet(+id)
+			.then((response) => {
+				res.status(200).send(response);
+			})
+			.catch((err) => {
+				res.status(500).send({ errorMessage: 'This is why we cant have nice getSnippet.' });
+				console.log(err);
+			});
+	},
+
+	updateUserMetrics: (req, res) => {
+		const dbi = req.app.get('db');
+		let { wpm, cpm, acc, dem } = req.body;
+		var date = new Date();
+		var timeStamp = date.getTime();
+		dbi
+			.update_user_metrics(req.session.user.user_id, wpm, cpm, acc, dem, timeStamp)
+			.then((res) => {
+				console.log('backend fired');
 				res.status(200).send(res.data);
 			})
 			.catch((err) => {
