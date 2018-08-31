@@ -23,7 +23,7 @@ class Metrics extends Component {
             this.everyLetter()
         }
         if (prevProps.snippetAscii !== this.props.snippetAscii) {
-            this.setState({                                                                                 
+            this.setState({
                 WPM: 0,
                 CPM: 0,
                 ACC: 100,
@@ -105,23 +105,20 @@ class Metrics extends Component {
         var dem = (this.state.WPM - this.allErrors) * this.state.ACC
         this.setState({DEM: dem})
         return Math.round(dem)
-        
+
 
     }
 
     endOfSnippet = () => {
-        
-        // console.log('end of snippet before for loop')
-        
+
+
         for (let i = 0; i <= this.props.userInputAscii.length; i++) {
             if (this.props.userInputAscii[i] !== this.props.snippetAscii[i]) {
                 this.endErrors++
-            // } else {
-            //     console.log('else statement')
             }
 
         }
-        
+
 
         this.WPM();
         this.CPM();

@@ -96,7 +96,8 @@ module.exports = {
 		const dbi = req.app.get('db');
 		dbi.update_user_metrics(req.session.user.user_id, wpm, cpm, acc, dem, timeStamp)
 			.then(res => {
-				res.sendStatus(200);
+				console.log('res.data',res.data)
+				res.status(200).send(res.data);
 			})
 			.catch((err) => {
 				res.status(500).send({ errorMessage: 'This is why we cant have nice updateUserMetrics.' });
