@@ -10,7 +10,7 @@ class Profile extends Component {
 		super();
 		this.state = {
 			open: false,
-			tipOfDay: 'Keep your fingers relaxed.',
+			// tipOfDay: 'Keep your fingers relaxed.',
 			wpmHist: {},
 			accHist: {}
 		};
@@ -46,10 +46,10 @@ class Profile extends Component {
 					<div><Charts /></div>
 				</div>
 
-				<div className="profile-tips">
+				{/* <div className="profile-tips">
 					<h3>Tip Of The Day</h3>
 					{this.state.tipOfDay}
-				</div>
+				</div> */}
 			</Modal>
 		);
 	}
