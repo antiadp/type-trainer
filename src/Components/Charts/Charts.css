@@ -2,19 +2,32 @@
     /* margin: 80px; */
     margin-top: 10px;
     /* border:5px solid red; */
-    width:100%;
+    width:98%;
     position: absolute;
-    height:200px;
-    bottom:-175px;
+    height:150px;
+    margin: 0px 20px;
+    /* padding-left:50px; */
+    /* bottom:-140px; */
+    justify-content: space-around;
+    display:flex;
+    /* border: 1px solid red; */
+    bottom:-120px;
+
 }
 .chartsWrapper{
     display:flex;
+    justify-content: space-around;
+    width:100%;
+    /* border: 1px solid yellow; */
+    height:150px;
+
 
 }
 .chart{
     /* margin-top:-15px; */
-    height:80px;
-    width:50%;
+    height:50%;
+    width:40%;
+    /* border:1px solid green; */
     /* position: absolute; */
     /* bottom:200px; */
 }
@@ -25,3 +38,4 @@
 .chartACC{
 
 } */
+/* #root > div > div.typing-wrapper > div.charts > div > div.chart.chartACC > div */

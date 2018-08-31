@@ -10,7 +10,7 @@ class Profile extends Component {
 		super();
 		this.state = {
 			open: false,
-			tipOfDay: 'Keep your fingers relaxed',
+			tipOfDay: 'Keep your fingers relaxed.',
 			wpmHist: {},
 			accHist: {}
 		};
