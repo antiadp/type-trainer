@@ -1,6 +1,4 @@
 const axios = require('axios');
-// const findUser = require('./../../db/find_user.sql');
-// const allUsers = require('./../../db/get_all_users.sql');
 //jest doesn't use ES6 imports so we use module.export
 let uniqueUser = 0;
 module.exports = {

@@ -84,7 +84,6 @@ class SideNav extends Component {
 	render() {
 		const { user } = this.props;
 		let leaderBoard = this.state.leaderBoardRes.map((user) => {
-			// console.log(user)
 			return (
 				<div className="nav-leaders" key={user.test_id}>
 					<img src={user.img} className="nav-leaders-img" alt="user" />
@@ -114,16 +113,14 @@ class SideNav extends Component {
 						</div>
 					)}
 
-
 					<Profile show={this.state.profile} close={this.showProfile} />
 					<Modal
 						open={this.state.open}
 						onClose={this.hideLoginModal}
 						className={{ modal: 'custom-modal' }}
 						center
-						>
+					>
 						<div className="side-nav-login-modal">
-
 							<div className="login-input">
 								<label className="inp">
 									<input
@@ -132,9 +129,9 @@ class SideNav extends Component {
 										className="loginReg-username-input"
 										type="text"
 										id="inp1"
-										/>
+									/>
 									<span className="label">Username</span>
-									<span className="border"></span>
+									<span className="border" />
 								</label>
 
 								<label className="inp">
@@ -144,30 +141,29 @@ class SideNav extends Component {
 										className="loginReg-password-input"
 										type="password"
 										id="inp2"
-										/>
+									/>
 									<span className="label">Password</span>
-									<span className="border"></span>
+									<span className="border" />
 								</label>
 							</div>
 
 							<div className="modal-btn">
-								<button onClick={this.handleLoginRegRequest}
-												className="modal-btn-login">
-												Login / Register</button>
+								<button onClick={this.handleLoginRegRequest} className="modal-btn-login">
+									Login / Register
+								</button>
 							</div>
-
 						</div>
 					</Modal>
 				</div>
 
 				<div className="script-wrapper">
-				<hr/>
+					<hr />
 					<h4
 						onClick={() => {
 							this.setLanguage('HTML');
 						}}
 						className="script"
-						>
+					>
 						HTML
 					</h4>
 					<h4
@@ -194,7 +190,7 @@ class SideNav extends Component {
 					>
 						Special
 					</h4>
-					<hr/>
+					<hr />
 				</div>
 				<div className="nav-leader-board-wpr">
 					<h1>LEADERBOARD</h1>
@@ -202,7 +198,9 @@ class SideNav extends Component {
 				</div>
 				{user.user_id && (
 					<div className="logout">
-						<button onClick={this.logout} className="logout-button">Logout</button>
+						<button onClick={this.logout} className="logout-button">
+							Logout
+						</button>
 					</div>
 				)}
 			</div>
