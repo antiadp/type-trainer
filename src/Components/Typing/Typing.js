@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Metrics from '../Metrics/Metrics';
 import { Line } from 'react-chartjs-2';
 import axios from 'axios';
-import reducer from '../../ducks/reducer';
 
 class Typing extends Component {
 	constructor(props) {
