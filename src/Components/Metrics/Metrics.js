@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+import axios from 'axios';
+import {connect} from 'react-redux';
+import {getUser, getUserResults} from './../../ducks/reducer'
 
 class Metrics extends Component {
     constructor() {
@@ -120,12 +122,11 @@ class Metrics extends Component {
         this.DEM()
         let {WPM, CPM, ACC} = this.state
 
-        axios.post('/api/update-user-metrics', {wpm: WPM, cpm: CPM, acc:ACC, dem: this.FinalDEM}).then(res => {
-            console.log('front end update works')
-        })
+        axios.post('/api/update-user-metrics', {user_id: this.props.user.user_id, wpm: WPM, cpm: CPM, acc:ACC, dem: this.FinalDEM}).then(res => {
+            this.props.getUserResults(res.data)
+        }).catch(err=>console.log('error in Metrics', err))
 
         this.passChartMetrics(this.FinalDEM);
-        // debugger
     }
 
     passChartMetrics = (dem) => {
@@ -152,4 +153,9 @@ class Metrics extends Component {
         )
     }
 }
-export default Metrics
+const mapStateToProps = (state) => {
+	return {
+		user: state.user
+	};
+};
+export default connect(mapStateToProps, {getUser, getUserResults})(Metrics);

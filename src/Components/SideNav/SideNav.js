@@ -209,7 +209,6 @@ class SideNav extends Component {
 }
 const mapStateToProps = (state) => {
 	return {
-		testResults: state.results,
 		user: state.user
 	};
 };

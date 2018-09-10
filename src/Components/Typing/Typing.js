@@ -93,7 +93,6 @@ class Typing extends Component {
 				lettersArray: lettersArray,
 				languageCount: res.data.length
 			});
-			// console.log('currentSnippet', this.state.snippetAscii)
 			this.selectText();
 		});
 		// this.refs.createRef()

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { getUser } from './../../ducks/reducer';
+import { getUser, getUserResults } from './../../ducks/reducer';
 import Modal from 'react-responsive-modal';
 import Charts from './../Charts/Charts';
 
@@ -56,8 +56,9 @@ class Profile extends Component {
 }
 const mapStateToProps = (state) => {
 	return {
-		user: state.user
+		user: state.user,
+		userTestResults: state.results
 	};
 };
 
-export default connect(mapStateToProps, { getUser })(Profile);
+export default connect(mapStateToProps, { getUser, getUserResults})(Profile);

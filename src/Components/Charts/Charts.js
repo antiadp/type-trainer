@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { Line } from 'react-chartjs-2'
+import { connect } from 'react-redux';
+import {getUserResults} from './../../ducks/reducer';
 
-export default class Charts extends Component {
+class Charts extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -46,11 +48,11 @@ export default class Charts extends Component {
                         data:
                             this.props.ACCArray
                     }],
-              
+
             }
         })
     }
-    
+
     render() {
         return (
             <div className="chartsWrapper">
@@ -73,3 +75,9 @@ export default class Charts extends Component {
         );
     }
 }
+const mapStateToProps = (state) => {
+	return {
+		userResults: state.results
+	};
+};
+export default connect(mapStateToProps, {getUserResults})(Charts);
