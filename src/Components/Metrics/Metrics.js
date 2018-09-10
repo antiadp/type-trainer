@@ -22,7 +22,7 @@ class Metrics extends Component {
             this.everyLetter()
         }
         if (prevProps.snippetAscii !== this.props.snippetAscii) {
-            this.setState({                                                                                 
+            this.setState({
                 WPM: 0,
                 CPM: 0,
                 ACC: 100,
@@ -106,21 +106,19 @@ class Metrics extends Component {
     }
 
     endOfSnippet = () => {
-        
         for (let i = 0; i <= this.props.userInputAscii.length; i++) {
             if (this.props.userInputAscii[i] !== this.props.snippetAscii[i]) {
                 this.endErrors++
             }
 
         }
-        
+
 
         this.WPM();
         this.CPM();
         this.ACC();
         this.DEM()
         let {WPM, CPM, ACC} = this.state
-        // console.log(WPM, CPM, ACC, DEM)
 
         axios.post('/api/update-user-metrics', {wpm: WPM, cpm: CPM, acc:ACC, dem: this.FinalDEM}).then(res => {
             console.log('front end update works')
@@ -136,7 +134,6 @@ class Metrics extends Component {
 
 
     render() {
-        // console.log('dem',this.state.DEM)
         return (
             <div className="metrics-wrapper">
                 <div className="WPM">

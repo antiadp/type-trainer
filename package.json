@@ -21,19 +21,23 @@
     "react-redux": "^5.0.7",
     "react-responsive-modal": "^3.2.0",
     "react-scripts": "1.1.4",
+    "react-test-renderer": "^16.5.0",
     "redux": "^4.0.0",
     "sweetalert": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "jest",
     "eject": "react-scripts eject"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
   "devDependencies": {
     "cypress": "^3.1.0",
     "jest": "^23.5.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "repository": {
     "type": "git",
