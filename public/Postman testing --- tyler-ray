@@ -1,0 +1,299 @@
+{
+	"info": {
+		"_postman_id": "2dc7eed1-9585-4c34-acc4-c634b3e577a9",
+		"name": "Typing trainer -- J.Tyler.Ray",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "testing all results user results get",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "377af558-f094-4819-aa6e-10797048d49f",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test('Response should be an array of objects', function(){",
+							"    pm.expect(typeof pm.response.json()).to.eql('object')",
+							"}) //Test by Tyler-Ray",
+							"",
+							"pm.test('First Username should be \"tyler-ray\"', function(){",
+							"    pm.expect(pm.response.json()[0].username).to.eql('tyler-ray')",
+							"}) //Test by Tyler-Ray",
+							"",
+							"pm.test('user tyler-ray should have user_id of 36', function(){",
+							"console.log(pm.response.json()[0].username)",
+							"let user = pm.response.json()[0].username",
+							"for(let i = 0; i<pm.response.json().length; i++){",
+							"if(user === 'tyler-ray'){",
+							"    pm.expect(pm.response.json()[0].user_id).to.eql(36)",
+							"}",
+							"}",
+							"})// Test by Tyler-Ray",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3456/api/all-results",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3456",
+					"path": [
+						"api",
+						"all-results"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test get-snippets by language :1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "420bd919-d00f-4789-b54d-04ce6338aa69",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test('Should return array of objects', function(){",
+							"    pm.expect(typeof pm.response.json()).to.eql('object');",
+							"});//Test by Tyler-Ray",
+							"",
+							"pm.test('id should be of type number', function(){",
+							"    for(let i=0; i<pm.response.json().length;i++){",
+							"        pm.expect(typeof pm.response.json()[i].id).to.eql('number');",
+							"    }",
+							"})//Test by Tyler-Ray;",
+							"",
+							"pm.test('snippet_language should be of type number', function(){",
+							"    for(let i=0; i<pm.response.json().length; i++){",
+							"        pm.expect(typeof pm.response.json()[i].id).to.eql('number');",
+							"    }",
+							"}); // Test by Tyler-Ray",
+							"pm.test('returned snippet is a string', ()=>{",
+							"    for(let i=0; i<pm.response.json().length; i++){",
+							"        pm.expect(typeof pm.response.json()[i].snippet).to.eql('string')",
+							"    }",
+							"})// Test by Tyler-Ray",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3456/api/get-snippet/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3456",
+					"path": [
+						"api",
+						"get-snippet",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test get-snippets by language :2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "420bd919-d00f-4789-b54d-04ce6338aa69",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test('Should return array of objects', function(){",
+							"    pm.expect(typeof pm.response.json()).to.eql('object');",
+							"});//Test by Tyler-Ray",
+							"",
+							"pm.test('id should be of type number', function(){",
+							"    for(let i=0; i<pm.response.json().length;i++){",
+							"        pm.expect(typeof pm.response.json()[i].id).to.eql('number');",
+							"    }",
+							"})//Test by Tyler-Ray;",
+							"",
+							"pm.test('snippet_language should be of type number', function(){",
+							"    for(let i=0; i<pm.response.json().length; i++){",
+							"        pm.expect(typeof pm.response.json()[i].id).to.eql('number');",
+							"    }",
+							"}); // Test by Tyler-Ray",
+							"pm.test('returned snippet is a string', ()=>{",
+							"    for(let i=0; i<pm.response.json().length; i++){",
+							"        pm.expect(typeof pm.response.json()[i].snippet).to.eql('string')",
+							"    }",
+							"})// Test by Tyler-Ray",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3456/api/get-snippet/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3456",
+					"path": [
+						"api",
+						"get-snippet",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test get-snippets by language :3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "420bd919-d00f-4789-b54d-04ce6338aa69",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test('Should return array of objects', function(){",
+							"    pm.expect(typeof pm.response.json()).to.eql('object');",
+							"});//Test by Tyler-Ray",
+							"",
+							"pm.test('id should be of type number', function(){",
+							"    for(let i=0; i<pm.response.json().length;i++){",
+							"        pm.expect(typeof pm.response.json()[i].id).to.eql('number');",
+							"    }",
+							"})//Test by Tyler-Ray;",
+							"",
+							"pm.test('snippet_language should be of type number', function(){",
+							"    for(let i=0; i<pm.response.json().length; i++){",
+							"        pm.expect(typeof pm.response.json()[i].id).to.eql('number');",
+							"    }",
+							"}); // Test by Tyler-Ray",
+							"pm.test('returned snippet is a string', ()=>{",
+							"    for(let i=0; i<pm.response.json().length; i++){",
+							"        pm.expect(typeof pm.response.json()[i].snippet).to.eql('string')",
+							"    }",
+							"})// Test by Tyler-Ray",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3456/api/get-snippet/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3456",
+					"path": [
+						"api",
+						"get-snippet",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test get-snippets by language :4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "420bd919-d00f-4789-b54d-04ce6338aa69",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test('Should return array of objects', function(){",
+							"    pm.expect(typeof pm.response.json()).to.eql('object');",
+							"});//Test by Tyler-Ray",
+							"",
+							"pm.test('id should be of type number', function(){",
+							"    for(let i=0; i<pm.response.json().length;i++){",
+							"        pm.expect(typeof pm.response.json()[i].id).to.eql('number');",
+							"    }",
+							"})//Test by Tyler-Ray;",
+							"",
+							"pm.test('snippet_language should be of type number', function(){",
+							"    for(let i=0; i<pm.response.json().length; i++){",
+							"        pm.expect(typeof pm.response.json()[i].id).to.eql('number');",
+							"    }",
+							"}); // Test by Tyler-Ray",
+							"pm.test('returned snippet is a string', ()=>{",
+							"    for(let i=0; i<pm.response.json().length; i++){",
+							"        pm.expect(typeof pm.response.json()[i].snippet).to.eql('string')",
+							"    }",
+							"})// Test by Tyler-Ray",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3456/api/get-snippet/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3456",
+					"path": [
+						"api",
+						"get-snippet",
+						"4"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -14,11 +14,11 @@ class Typing extends Component {
 			id: 0,
 			input: '',
 			asciiArray: [],
-			lettersArray: [ ' ' ], // we don't have to have this. it is only useful for debugging
+			lettersArray: [' '], // we don't have to have this. it is only useful for debugging
 			finishBool: false,
 			snippetAscii: [],
 			WPMData: {
-				labels: [ '10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%' ],
+				labels: ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%'],
 				datasets: [
 					{
 						label: 'WPM',
@@ -27,7 +27,7 @@ class Typing extends Component {
 				]
 			},
 			ACCData: {
-				labels: [ '10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%' ],
+				labels: ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%'],
 				datasets: [
 					{
 						label: 'Accuracy',
@@ -122,7 +122,7 @@ class Typing extends Component {
 			finishBool: false,
 			snippetAscii: [],
 			WPMData: {
-				labels: [ '10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%' ],
+				labels: ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%'],
 				datasets: [
 					{
 						label: 'WPM',
@@ -131,7 +131,7 @@ class Typing extends Component {
 				]
 			},
 			ACCData: {
-				labels: [ '10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%' ],
+				labels: ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%'],
 				datasets: [
 					{
 						label: 'Accuracy',
@@ -193,7 +193,7 @@ class Typing extends Component {
 
 		this.setState({
 			WPMData: {
-				labels: [ '10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%' ],
+				labels: ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%'],
 				datasets: [
 					{
 						label: 'WPM',
@@ -202,7 +202,7 @@ class Typing extends Component {
 				]
 			},
 			ACCData: {
-				labels: [ '10%', '20%', '30%', '40%', '50%', '60%', '7%', '80%', '90%', '100%' ],
+				labels: ['10%', '20%', '30%', '40%', '50%', '60%', '7%', '80%', '90%', '100%'],
 				datasets: [
 					{
 						label: 'Accuracy',
@@ -348,8 +348,8 @@ class Typing extends Component {
 						</div>
 					</div>
 				) : (
-					<div />
-				)}
+						<div />
+					)}
 			</div>
 		);
 	}

@@ -60,7 +60,7 @@ class Metrics extends Component {
         }
         if (this.props.userInputAscii.length === this.props.snippetAscii.length) {
         }
-        if(wpm.isNaN || wpm === Infinity || wpm === -Infinity || wpm <=0){
+        if (wpm.isNaN || wpm === Infinity || wpm === -Infinity || wpm <= 0) {
             wpm = 0
         }
         this.setState({
@@ -90,7 +90,7 @@ class Metrics extends Component {
         } else if (this.props.userInputAscii.length === this.props.snippetAscii.length) {
             acc = (this.props.userInputAscii.length - this.endErrors) / this.props.userInputAscii.length
         }
-        if(acc.isNaN || acc === Infinity || acc === -Infinity || acc <= 0){
+        if (acc.isNaN || acc === Infinity || acc === -Infinity || acc <= 0) {
             acc = 0
         }
         this.setState({
@@ -118,9 +118,9 @@ class Metrics extends Component {
         this.CPM();
         this.ACC();
         this.DEM()
-        let {WPM, CPM, ACC} = this.state
+        let { WPM, CPM, ACC } = this.state
 
-        axios.post('/api/update-user-metrics', {wpm: WPM, cpm: CPM, acc:ACC, dem: this.FinalDEM}).then(res => {
+        axios.post('/api/update-user-metrics', { wpm: WPM, cpm: CPM, acc: ACC, dem: this.FinalDEM }).then(res => {
             console.log('front end update works')
         })
 

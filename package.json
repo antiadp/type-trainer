@@ -33,12 +33,12 @@
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
   "devDependencies": {
-    "cypress": "^3.1.0",
-    "jest": "^23.5.0"
+    "jest": "^23.6.0"
   },
   "jest": {
     "testEnvironment": "node"
   },
+  "test":"jest",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/antiadp/type-trainer.git"
