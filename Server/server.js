@@ -9,6 +9,7 @@ const mid = require('./middleware');
 const app = express();
 
 app.use(bodyParser.json());
+app.use( express.static( `${__dirname}/../build` ) );.
 
 const {
  SERVER_PORT,
