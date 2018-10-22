@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import Typing from './Components/Typing/Typing';
 import SideNav from './Components/SideNav/SideNav';
 import { slide as Menu } from 'react-burger-menu';
-
+import GoBack from './Components/GoBack'
 class App extends Component {
   constructor() {
     super()
@@ -23,6 +23,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+      <GoBack/>
         <Menu dispableOverlayClick >
           <SideNav setLanguage={this.setLanguage} timer={this.state.timer}/>
         </Menu>
